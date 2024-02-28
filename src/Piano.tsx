@@ -1,11 +1,11 @@
 import Key from "./Key";
 
-type Props = {
-  scaleKey: string;
-  scaleType: ScaleType;
-};
+// type Props = {
+//   scaleKey: string;
+//   scaleType: ScaleType;
+// };
 
-export default function Piano({ scaleKey, scaleType }: Props) {
+export default function Piano() {
   return (
     <div className="flex w-full max-w-xl">
       <Key note="C" fileName="C3.mp3" />
