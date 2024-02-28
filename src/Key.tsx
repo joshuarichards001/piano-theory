@@ -18,7 +18,7 @@ export default function Key({ fileName }: Props) {
 
   if (!fileName.includes("b")) {
     return (
-      <div
+      <button
         onMouseDown={onClick}
         onTouchStart={onClick}
         className={`grow-[3] h-24 bg-white active:bg-neutral-400 border-2 border-black ${
@@ -32,7 +32,7 @@ export default function Key({ fileName }: Props) {
     );
   } else {
     return (
-      <div
+      <button
         onMouseDown={onClick}
         onTouchStart={onClick}
         className="grow-[2] h-14 bg-black active:bg-neutral-600 z-10 -mx-[3%]"
