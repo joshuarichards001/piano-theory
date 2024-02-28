@@ -22,6 +22,7 @@ export default function Key({ note, fileName }: Props) {
       <div
         onMouseDown={onClick}
         onTouchStart={onClick}
+        onTouchMove={onClick}
         className={`grow-[3] h-24 bg-white active:bg-neutral-400 border-2 border-black ${
           (note === "E" || note === "B") && "border-r-0"
         } last:border-r-2`}
@@ -32,6 +33,7 @@ export default function Key({ note, fileName }: Props) {
       <div
         onMouseDown={onClick}
         onTouchStart={onClick}
+        onTouchMove={onClick}
         className="grow-[2] h-14 bg-black active:bg-neutral-600 z-10 -mx-[3%]"
       />
     );
