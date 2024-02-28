@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 
 type Props = {
-  note: string;
   fileName: string;
 };
 
-export default function Key({ note, fileName }: Props) {
+export default function Key({ fileName }: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -17,13 +16,17 @@ export default function Key({ note, fileName }: Props) {
     audio?.play();
   };
 
-  if (!note.includes("b")) {
+  if (!fileName.includes("b")) {
     return (
       <div
         onMouseDown={onClick}
         onTouchStart={onClick}
         className={`grow-[3] h-24 bg-white active:bg-neutral-400 border-2 border-black ${
-          (note === "E" || note === "B") && "border-r-0"
+          (fileName === "E3.mp3" ||
+            fileName === "B3.mp3" ||
+            fileName === "E4.mp3" ||
+            fileName === "B4.mp3") &&
+          "border-r-0"
         } last:border-r-2`}
       />
     );
