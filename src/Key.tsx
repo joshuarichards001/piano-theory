@@ -8,7 +8,7 @@ export default function Key({ type, note }: Props) {
   if (type === "white") {
     return (
       <div
-        className={`grow-[3] h-24 bg-white border-2 border-black ${
+        className={`grow-[3] h-24 bg-white border-2 border-black last:border-r-0 ${
           (note === "f" || note === "c") && "border-l-0"
         }`}
       />
