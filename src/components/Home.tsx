@@ -1,4 +1,4 @@
-import Piano from "./Piano";
+import Quiz from "./Quiz";
 
 export default function Home() {
   return (
@@ -10,14 +10,14 @@ export default function Home() {
           on the piano when you get a note right or wrong!
         </p>
         <div className="flex flex-wrap gap-3">
-          <button className="btn">Major</button>
-          <button className="btn">Natural Minor</button>
-          <button className="btn">Harmonic Minor</button>
-          <button className="btn">Melodic Minor</button>
-          <button className="btn">All Scales</button>
+          <button className="btn btn-primary">Major</button>
+          <button className="btn btn-secondary">Natural Minor</button>
+          <button className="btn btn-accent">Harmonic Minor</button>
+          <button className="btn btn-success">Melodic Minor</button>
+          <button className="btn btn-warning">All Scales</button>
         </div>
       </div>
-      <Piano />
+      <Quiz scaleType="major" />
     </div>
   );
 }

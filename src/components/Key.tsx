@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { whiteColor, whiteBorder, blackColor } from "../functions";
 
 type Props = {
   fileName: string;
+  correct: boolean;
 };
 
-export default function Key({ fileName }: Props) {
+export default function Key({ fileName, correct }: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     const audioObj = new Audio(`/notes/${fileName}`);
@@ -13,6 +16,7 @@ export default function Key({ fileName }: Props) {
   }, [fileName]);
 
   const onClick = () => {
+    setClicked(true);
     audio?.play();
   };
 
@@ -21,13 +25,7 @@ export default function Key({ fileName }: Props) {
       <button
         onMouseDown={onClick}
         onTouchStart={onClick}
-        className={`grow-[3] h-24 bg-white active:bg-neutral-400 border-2 border-black ${
-          (fileName === "E3.mp3" ||
-            fileName === "B3.mp3" ||
-            fileName === "E4.mp3" ||
-            fileName === "B4.mp3") &&
-          "border-r-0"
-        } last:border-r-2`}
+        className={`grow-[3] h-24 ${whiteColor(clicked, correct)} ${whiteBorder(fileName)}`}
       />
     );
   } else {
@@ -35,7 +33,7 @@ export default function Key({ fileName }: Props) {
       <button
         onMouseDown={onClick}
         onTouchStart={onClick}
-        className="grow-[2] h-14 bg-black active:bg-neutral-600 z-10 -mx-[3%]"
+        className={`grow-[2] h-14 ${blackColor(clicked, correct)} z-10 -mx-[3%]`}
       />
     );
   }
