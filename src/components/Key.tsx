@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react";
-import { whiteColor, whiteBorder, blackColor } from "../functions";
+import { blackColor, whiteBorder, whiteColor } from "../functions";
 
 type Props = {
+  keyIndex: number;
   fileName: string;
-  correct: boolean;
+  correct: boolean | null;
+  setPressedKeys: React.Dispatch<React.SetStateAction<number[]>>;
 };
 
-export default function Key({ fileName, correct }: Props) {
+export default function Key({
+  keyIndex,
+  fileName,
+  correct,
+  setPressedKeys,
+}: Props) {
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  const [clicked, setClicked] = useState(false);
+
+  const keyStyles = () => {
+    if (!fileName.includes("b")) {
+      return `grow-[3] h-24 ${whiteColor(correct)} ${whiteBorder(fileName)}`;
+    } else {
+      return `grow-[2] h-14 ${blackColor(correct)} z-10 -mx-[3%]`;
+    }
+  };
 
   useEffect(() => {
     const audioObj = new Audio(`/notes/${fileName}`);
@@ -16,25 +30,9 @@ export default function Key({ fileName, correct }: Props) {
   }, [fileName]);
 
   const onClick = () => {
-    setClicked(true);
+    setPressedKeys((prev) => [...prev, keyIndex]);
     audio?.play();
   };
 
-  if (!fileName.includes("b")) {
-    return (
-      <button
-        onMouseDown={onClick}
-        onTouchStart={onClick}
-        className={`grow-[3] h-24 ${whiteColor(clicked, correct)} ${whiteBorder(fileName)}`}
-      />
-    );
-  } else {
-    return (
-      <button
-        onMouseDown={onClick}
-        onTouchStart={onClick}
-        className={`grow-[2] h-14 ${blackColor(clicked, correct)} z-10 -mx-[3%]`}
-      />
-    );
-  }
+  return <button onClick={onClick} className={keyStyles()} />;
 }

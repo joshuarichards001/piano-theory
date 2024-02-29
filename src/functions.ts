@@ -1,7 +1,7 @@
 import { NOTES } from "./constants";
 
-export const whiteColor = (clicked: boolean, correct: boolean) => {
-  if (!clicked) {
+export const whiteColor = (correct: boolean | null) => {
+  if (correct === null) {
     return "bg-white";
   }
 
@@ -12,8 +12,8 @@ export const whiteColor = (clicked: boolean, correct: boolean) => {
   }
 };
 
-export const blackColor = (clicked: boolean, correct: boolean) => {
-  if (!clicked) {
+export const blackColor = (correct: boolean | null) => {
+  if (correct === null) {
     return "bg-black";
   }
 
@@ -36,4 +36,16 @@ export const whiteBorder = (fileName: string) => {
 
 export const getRandomStartNote = () => {
   return NOTES[Math.floor(Math.random() * 12)];
-}
+};
+
+export const getKeys = (startNote: string, intervals: number[]) => {
+  const scale = [];
+
+  const startNoteIndex = NOTES.indexOf(startNote);
+
+  for (let i = 0; i < intervals.length; i++) {
+    scale.push(startNoteIndex + intervals[i]);
+  }
+
+  return scale;
+};
