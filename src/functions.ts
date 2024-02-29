@@ -5,6 +5,7 @@ import {
   MINOR_7TH,
   NATURAL_MINOR_SCALE,
   NOTES,
+  OCTAVE,
 } from "./constants";
 
 export const whiteColor = (correct: boolean | null) => {
@@ -70,4 +71,18 @@ export const parseQuizToScale = (quizType: QuizType) => {
     case "dominant-7th-chord":
       return DOMINANT_7TH;
   }
+};
+
+export const createQuiz = (quizType: QuizType) => {
+  const quiz = [];
+  const shuffledOctave = [...OCTAVE]
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+
+  for (const note of shuffledOctave) {
+    quiz.push(getKeys(note + "3", parseQuizToScale(quizType)));
+  }
+
+  return quiz;
 };

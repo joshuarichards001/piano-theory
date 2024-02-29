@@ -4,20 +4,27 @@ import Key from "./Key";
 
 type Props = {
   scale: number[];
-  nextScale: () => void;
+  nextQuestion: () => void;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Piano({ scale, nextScale }: Props) {
+export default function Piano({ scale, nextQuestion, setScore }: Props) {
   const [pressedKeys, setPressedKeys] = useState<number[]>([]);
 
   useEffect(() => {
     if (pressedKeys.length === scale.length) {
-      setPressedKeys([]);
-      nextScale();
-    }
-  }, [pressedKeys, scale, nextScale]);
+      setTimeout(() => {
+        if (pressedKeys.join("") === scale.join("")) {
+          setScore((prev) => prev + 1);
+        }
 
-  const isCorrect = (keyIndex: number) => {
+        setPressedKeys([]);
+        nextQuestion();
+      }, 700);
+    }
+  }, [pressedKeys, scale, nextQuestion, setScore]);
+
+  const isCorrectKey = (keyIndex: number) => {
     if (!scale.includes(keyIndex)) {
       return null;
     }
@@ -37,7 +44,7 @@ export default function Piano({ scale, nextScale }: Props) {
           key={note}
           note={note}
           keyIndex={i}
-          correct={isCorrect(i)}
+          correct={isCorrectKey(i)}
           setPressedKeys={setPressedKeys}
         />
       ))}
