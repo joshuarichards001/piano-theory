@@ -36,9 +36,9 @@ export default function Piano({ scale, nextScale }: Props) {
         {NOTES.map((note, i) => (
           <Key
             key={note}
+            note={note}
             keyIndex={i}
             correct={isCorrect(i)}
-            fileName={`${note}.mp3`}
             setPressedKeys={setPressedKeys}
           />
         ))}

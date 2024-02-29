@@ -1,27 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MAJOR_SCALE } from "../constants";
-import { getKeys, getRandomStartNote } from "../functions";
+import { getKeys, getRandomStartNote, parseQuizToScale } from "../functions";
 import Piano from "./Piano";
 
 type Props = {
-  scaleType: ScaleType;
+  quizType: QuizType;
 };
 
-export default function Quiz({ scaleType }: Props) {
+export default function Quiz({ quizType }: Props) {
   const [startNote, setStartNote] = useState(getRandomStartNote());
+  const [scale, setScale] = useState(MAJOR_SCALE);
+
+  useEffect(() => {
+    const parsedScale = parseQuizToScale(quizType);
+    setScale(parsedScale);
+  }, [quizType]);
 
   const nextScale = () => {
     setStartNote(getRandomStartNote());
-  }
+  };
 
   return (
     <div>
       <div className="p-6">
-        <h3 className="text-5xl mb-10">
-          {startNote.replace("3", "")} {scaleType} scale
+        <h3 className="text-4xl mb-4">
+          {startNote.replace("3", "")} {quizType.replaceAll("-", " ")}
         </h3>
       </div>
-      <Piano scale={getKeys(startNote, MAJOR_SCALE)} nextScale={nextScale} />
+      <Piano scale={getKeys(startNote, scale)} nextScale={nextScale} />
     </div>
   );
 }
