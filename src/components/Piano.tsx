@@ -31,19 +31,16 @@ export default function Piano({ scale, nextScale }: Props) {
   };
 
   return (
-    <>
-      <div className="flex w-full max-w-xl">
-        {NOTES.map((note, i) => (
-          <Key
-            key={note}
-            note={note}
-            keyIndex={i}
-            correct={isCorrect(i)}
-            setPressedKeys={setPressedKeys}
-          />
-        ))}
-      </div>
-      <div className="h-20 bg-black" />
-    </>
+    <div className="flex w-full max-w-xl">
+      {NOTES.map((note, i) => (
+        <Key
+          key={note}
+          note={note}
+          keyIndex={i}
+          correct={isCorrect(i)}
+          setPressedKeys={setPressedKeys}
+        />
+      ))}
+    </div>
   );
 }
