@@ -8,27 +8,31 @@ import {
   OCTAVE,
 } from "./constants";
 
-export const whiteColor = (correct: boolean | null) => {
-  if (correct === null) {
+export const whiteColor = (keyState: KeyState) => {
+  if (keyState === "not-pressed") {
     return "bg-white";
   }
 
-  if (correct) {
+  if (keyState === "correct-pressed") {
     return "bg-green-400";
-  } else {
+  } else if (keyState === "incorrect-pressed") {
     return "bg-red-400";
+  } else if (keyState === "failed") {
+    return "bg-neutral-400";
   }
 };
 
-export const blackColor = (correct: boolean | null) => {
-  if (correct === null) {
+export const blackColor = (keyState: KeyState) => {
+  if (keyState === "not-pressed") {
     return "bg-black";
   }
 
-  if (correct) {
+  if (keyState === "correct-pressed") {
     return "bg-green-600";
-  } else {
+  } else if (keyState === "incorrect-pressed") {
     return "bg-red-600";
+  } else if (keyState === "failed") {
+    return "bg-neutral-600";
   }
 };
 

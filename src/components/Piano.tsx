@@ -24,17 +24,21 @@ export default function Piano({ scale, nextQuestion, setScore }: Props) {
     }
   }, [pressedKeys, scale, nextQuestion, setScore]);
 
-  const isCorrectKey = (keyIndex: number) => {
+  const isCorrectKey = (keyIndex: number): KeyState => {
     if (!scale.includes(keyIndex)) {
-      return null;
+      return "not-pressed";
     }
 
-    const scaleIndex = scale.indexOf(keyIndex);
-    if (scaleIndex > pressedKeys.length - 1) {
-      return null;
+    const scaleIndexOfKey = scale.indexOf(keyIndex);
+    if (scaleIndexOfKey > pressedKeys.length - 1) {
+      return "not-pressed";
     }
 
-    return pressedKeys[scaleIndex] === keyIndex;
+    if (pressedKeys[scaleIndexOfKey] === keyIndex) {
+      return "correct-pressed";
+    } else {
+      return "failed";
+    }
   };
 
   return (
@@ -44,7 +48,7 @@ export default function Piano({ scale, nextQuestion, setScore }: Props) {
           key={note}
           note={note}
           keyIndex={i}
-          correct={isCorrectKey(i)}
+          keyState={isCorrectKey(i)}
           setPressedKeys={setPressedKeys}
         />
       ))}
