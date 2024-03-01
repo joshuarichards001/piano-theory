@@ -15,7 +15,7 @@ export default function Quiz({ quizType }: Props) {
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
 
-  const noteColour = () => {
+  const quizColour = () => {
     if (quizType === "major-scale") {
       return "bg-success";
     } else if (quizType === "natural-minor-scale") {
@@ -51,7 +51,7 @@ export default function Quiz({ quizType }: Props) {
           <div className="p-6">
             <div className="flex justify-between mb-4">
               <div className="flex items-end gap-2">
-                <h3 className={`text-4xl ${noteColour()} rounded-lg px-1`}>
+                <h3 className={`text-4xl ${quizColour()} rounded-lg px-1`}>
                   {startNote.replace("3", "")}{" "}
                 </h3>
                 <h3 className="text-2xl">{quizType.replaceAll("-", " ")}</h3>
