@@ -27,7 +27,11 @@ export default function Key({
 
   return (
     <button
-      onClick={() => setPressedKeys((prev) => [...prev, keyIndex])}
+      onClick={() => {
+        if (keyState !== "failed") {
+          setPressedKeys((prev) => [...prev, keyIndex]);
+        }
+      }}
       className={keyStyles()}
     />
   );

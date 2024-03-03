@@ -90,3 +90,26 @@ export const createQuiz = (quizType: QuizType) => {
 
   return quiz;
 };
+
+export const getKeyState = (
+  keyIndex: number,
+  pressedKeys: number[],
+  scale: number[],
+): KeyState => {
+  const scaleIndex = scale.indexOf(keyIndex);
+  const pressedIndex = pressedKeys.lastIndexOf(keyIndex);
+
+  if (pressedIndex !== -1) {
+    if (scaleIndex !== -1 && scaleIndex === pressedIndex) {
+      return "correct-pressed";
+    } else if (scaleIndex === -1 || scaleIndex !== pressedIndex) {
+      return "incorrect-pressed";
+    }
+  }
+
+  if (scaleIndex !== -1 && scaleIndex < pressedKeys.length) {
+    return "failed";
+  }
+
+  return "not-pressed";
+};

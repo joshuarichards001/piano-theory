@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { NOTES } from "../constants";
+import { getKeyState } from "../functions";
 import Key from "./Key";
 
 type Props = {
@@ -24,23 +25,6 @@ export default function Piano({ scale, nextQuestion, setScore }: Props) {
     }
   }, [pressedKeys, scale, nextQuestion, setScore]);
 
-  const isCorrectKey = (keyIndex: number): KeyState => {
-    if (!scale.includes(keyIndex)) {
-      return "not-pressed";
-    }
-
-    const scaleIndexOfKey = scale.indexOf(keyIndex);
-    if (scaleIndexOfKey > pressedKeys.length - 1) {
-      return "not-pressed";
-    }
-
-    if (pressedKeys[scaleIndexOfKey] === keyIndex) {
-      return "correct-pressed";
-    } else {
-      return "failed";
-    }
-  };
-
   return (
     <div className="flex w-full max-w-xl">
       {NOTES.map((note, i) => (
@@ -48,7 +32,7 @@ export default function Piano({ scale, nextQuestion, setScore }: Props) {
           key={note}
           note={note}
           keyIndex={i}
-          keyState={isCorrectKey(i)}
+          keyState={getKeyState(i, pressedKeys, scale)}
           setPressedKeys={setPressedKeys}
         />
       ))}
