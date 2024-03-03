@@ -72,7 +72,7 @@ export default function Quiz({ quizType }: Props) {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-20 bg-black" />
+          <div className="h-10 bg-black" />
         </div>
       ) : (
         <QuizComplete score={score} numberOfQuestions={quiz.length} />
