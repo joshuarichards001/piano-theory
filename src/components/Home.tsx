@@ -5,7 +5,7 @@ export default function Home() {
   const [quizType, setQuizType] = useState<QuizType>("major-scale");
 
   return (
-    <div className="h-full flex flex-col justify-between">
+    <div className="h-full flex flex-col justify-between max-w-2xl mx-auto">
       <div className="p-6">
         <h1 className="text-4xl mb-6">Piano Theory</h1>
         <p className="mb-10">

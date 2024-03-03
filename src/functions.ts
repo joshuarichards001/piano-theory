@@ -91,16 +91,29 @@ export const parseQuizToKeys = (quizType: QuizType) => {
 
 export const createQuiz = (quizType: QuizType) => {
   const quiz = [];
-  const shuffledOctave = [...OCTAVE]
-    .map((value) => ({ value, sort: Math.random() }))
-    .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
+  const shuffledOctave = shuffle(OCTAVE);
 
   for (const note of shuffledOctave) {
     quiz.push(getKeys(note + "3", parseQuizToKeys(quizType)));
   }
 
   return quiz;
+};
+
+export const shuffle = (array: string[]) => {
+  let currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 };
 
 export const getKeyState = (
