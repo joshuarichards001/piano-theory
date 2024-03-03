@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { NOTES } from "../constants";
 import { getKeyState } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { resetKeys } from "../redux/pressedKeysSlice";
+import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import Key from "./Key";
 
 type Props = {
@@ -17,7 +17,7 @@ export default function Piano({ question, nextQuestion, setScore }: Props) {
 
   useEffect(() => {
     if (question.every((key) => pressedKeys.includes(key))) {
-      setTimeout(() => {
+      const timeout = setTimeout(() => {
         if (pressedKeys.length === question.length) {
           setScore((prev) => prev + 1);
         }
@@ -25,6 +25,8 @@ export default function Piano({ question, nextQuestion, setScore }: Props) {
         dispatch(resetKeys());
         nextQuestion();
       }, 700);
+
+      return () => clearTimeout(timeout);
     }
   }, [pressedKeys, question, nextQuestion, setScore, dispatch]);
 

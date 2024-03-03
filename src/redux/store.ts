@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { pressedKeysReducer } from "./pressedKeysSlice";
+import { pressedKeysReducer } from "./slices/pressedKeysSlice";
 
 const rootReducer = combineReducers({
   pressedKeys: pressedKeysReducer,

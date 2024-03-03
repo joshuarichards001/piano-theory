@@ -8,6 +8,18 @@ import {
   OCTAVE,
 } from "./constants";
 
+export const getKeyStyles = (note: string, keyState: KeyState) => {
+  if (!note.includes("b")) {
+    return `grow-[3] h-24 active:bg-neutral-300 ${whiteColor(
+      keyState,
+    )} ${whiteBorder(note)}`;
+  } else {
+    return `grow-[2] h-14 active:bg-neutral-700 border-2 border-black ${blackColor(
+      keyState,
+    )} z-10 -mx-[3%]`;
+  }
+};
+
 export const whiteColor = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
     return "bg-white";
@@ -106,4 +118,18 @@ export const getKeyState = (
   }
 
   return "not-pressed";
+};
+
+export const getQuizBackgroundColour = (quizType: QuizType) => {
+  if (quizType === "major-scale") {
+    return "bg-success";
+  } else if (quizType === "natural-minor-scale") {
+    return "bg-warning";
+  } else if (quizType === "major-7th-chord") {
+    return "bg-primary";
+  } else if (quizType === "minor-7th-chord") {
+    return "bg-secondary";
+  } else if (quizType === "dominant-7th-chord") {
+    return "bg-accent";
+  }
 };
