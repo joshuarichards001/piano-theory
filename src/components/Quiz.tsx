@@ -53,7 +53,11 @@ export default function Quiz({ quizType }: Props) {
                     {quizType.replaceAll("-", " ")}
                   </h3>
                   <p className="text-xs text-gray-500">
-                    {pressedKeys.filter((key) => question.includes(key)).length}
+                    {
+                      [...new Set(pressedKeys)].filter((key) =>
+                        question.includes(key),
+                      ).length
+                    }
                     /{question.length} Keys Pressed
                   </p>
                 </div>
