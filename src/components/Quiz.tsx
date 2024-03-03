@@ -36,15 +36,18 @@ export default function Quiz({ quizType }: Props) {
         <div>
           <div className="p-6">
             <div className="flex justify-between mb-4">
-              <div className="flex items-end gap-2">
+              <div className="flex items-center gap-2">
                 <h3
-                  className={`text-4xl ${getQuizBackgroundColour(
+                  className={`text-5xl ${getQuizBackgroundColour(
                     quizType,
                   )} rounded-lg px-1`}
                 >
                   {startNote.replace("3", "")}{" "}
                 </h3>
-                <h3 className="text-2xl">{quizType.replaceAll("-", " ")}</h3>
+                <div>
+                  <h3 className="text-2xl">{quizType.replaceAll("-", " ")}</h3>
+                  <p className="text-xs text-gray-500">1/13 Keys Pressed</p>
+                </div>
               </div>
               <h3 className="text-4xl">
                 {questionNumber + 1}/{quiz.length}
