@@ -49,7 +49,7 @@ export default function Quiz({ quizType }: Props) {
                   <p className="text-xs text-gray-500">1/13 Keys Pressed</p>
                 </div>
               </div>
-              <h3 className="text-4xl">
+                <h3 className="text-4xl">
                 {questionNumber + 1}/{quiz.length}
               </h3>
             </div>
@@ -59,6 +59,7 @@ export default function Quiz({ quizType }: Props) {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
+          <div className="h-20 bg-black" />
         </div>
       ) : (
         <QuizComplete score={score} numberOfQuestions={quiz.length} />
