@@ -1,29 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NOTES } from "../constants";
 import { getKeyState } from "../functions";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { resetKeys } from "../redux/pressedKeysSlice";
 import Key from "./Key";
 
 type Props = {
-  scale: number[];
+  question: number[];
   nextQuestion: () => void;
   setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Piano({ scale, nextQuestion, setScore }: Props) {
-  const [pressedKeys, setPressedKeys] = useState<number[]>([]);
+export default function Piano({ question, nextQuestion, setScore }: Props) {
+  const dispatch = useAppDispatch();
+  const pressedKeys = useAppSelector((state) => state.pressedKeys);
 
   useEffect(() => {
-    if (pressedKeys.length === scale.length) {
+    if (question.every((key) => pressedKeys.includes(key))) {
       setTimeout(() => {
-        if (pressedKeys.join("") === scale.join("")) {
+        if (pressedKeys.length === question.length) {
           setScore((prev) => prev + 1);
         }
 
-        setPressedKeys([]);
+        dispatch(resetKeys());
         nextQuestion();
       }, 700);
     }
-  }, [pressedKeys, scale, nextQuestion, setScore]);
+  }, [pressedKeys, question, nextQuestion, setScore, dispatch]);
 
   return (
     <div className="flex w-full max-w-xl">
@@ -32,8 +35,7 @@ export default function Piano({ scale, nextQuestion, setScore }: Props) {
           key={note}
           note={note}
           keyIndex={i}
-          keyState={getKeyState(i, pressedKeys, scale)}
-          setPressedKeys={setPressedKeys}
+          keyState={getKeyState(i, pressedKeys, question)}
         />
       ))}
     </div>

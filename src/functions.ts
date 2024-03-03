@@ -18,7 +18,7 @@ export const whiteColor = (keyState: KeyState) => {
   } else if (keyState === "incorrect-pressed") {
     return "bg-red-400";
   } else if (keyState === "failed") {
-    return "bg-neutral-400";
+    return "bg-green-200";
   }
 };
 
@@ -32,7 +32,7 @@ export const blackColor = (keyState: KeyState) => {
   } else if (keyState === "incorrect-pressed") {
     return "bg-red-600";
   } else if (keyState === "failed") {
-    return "bg-neutral-600";
+    return "bg-green-800";
   }
 };
 
@@ -51,18 +51,18 @@ export const getRandomStartNote = () => {
 };
 
 export const getKeys = (startNote: string, intervals: number[]) => {
-  const scale = [];
+  const keys = [];
 
   const startNoteIndex = NOTES.indexOf(startNote);
 
   for (let i = 0; i < intervals.length; i++) {
-    scale.push(startNoteIndex + intervals[i]);
+    keys.push(startNoteIndex + intervals[i]);
   }
 
-  return scale;
+  return keys;
 };
 
-export const parseQuizToScale = (quizType: QuizType) => {
+export const parseQuizToKeys = (quizType: QuizType) => {
   switch (quizType) {
     case "major-scale":
       return MAJOR_SCALE;
@@ -85,7 +85,7 @@ export const createQuiz = (quizType: QuizType) => {
     .map(({ value }) => value);
 
   for (const note of shuffledOctave) {
-    quiz.push(getKeys(note + "3", parseQuizToScale(quizType)));
+    quiz.push(getKeys(note + "3", parseQuizToKeys(quizType)));
   }
 
   return quiz;
@@ -94,21 +94,15 @@ export const createQuiz = (quizType: QuizType) => {
 export const getKeyState = (
   keyIndex: number,
   pressedKeys: number[],
-  scale: number[],
+  question: number[],
 ): KeyState => {
-  const scaleIndex = scale.indexOf(keyIndex);
-  const pressedIndex = pressedKeys.lastIndexOf(keyIndex);
+  const isKeyInQuestion = question.includes(keyIndex);
+  const isKeyInPressedKeys = pressedKeys.includes(keyIndex);
 
-  if (pressedIndex !== -1) {
-    if (scaleIndex !== -1 && scaleIndex === pressedIndex) {
-      return "correct-pressed";
-    } else if (scaleIndex === -1 || scaleIndex !== pressedIndex) {
-      return "incorrect-pressed";
-    }
-  }
-
-  if (scaleIndex !== -1 && scaleIndex < pressedKeys.length) {
-    return "failed";
+  if (isKeyInPressedKeys && isKeyInQuestion) {
+    return "correct-pressed";
+  } else if (isKeyInPressedKeys && !isKeyInQuestion) {
+    return "incorrect-pressed";
   }
 
   return "not-pressed";

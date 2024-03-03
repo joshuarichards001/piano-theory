@@ -10,8 +10,8 @@ type Props = {
 
 export default function Quiz({ quizType }: Props) {
   const quiz = createQuiz(quizType);
-  const [question, setQuestion] = useState(0);
-  const startNote = NOTES[quiz[question][0]];
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const startNote = NOTES[quiz[questionNumber][0]];
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
 
@@ -30,18 +30,18 @@ export default function Quiz({ quizType }: Props) {
   };
 
   useEffect(() => {
-    setQuestion(0);
+    setQuestionNumber(0);
     setScore(0);
     setDone(false);
   }, [quizType]);
 
   const nextQuestion = () => {
-    if (question === quiz.length - 1) {
+    if (questionNumber === quiz.length - 1) {
       setDone(true);
       return;
     }
 
-    setQuestion((prev) => prev + 1);
+    setQuestionNumber((prev) => prev + 1);
   };
 
   return (
@@ -57,12 +57,12 @@ export default function Quiz({ quizType }: Props) {
                 <h3 className="text-2xl">{quizType.replaceAll("-", " ")}</h3>
               </div>
               <h3 className="text-4xl">
-                {question + 1}/{quiz.length}
+                {questionNumber + 1}/{quiz.length}
               </h3>
             </div>
           </div>
           <Piano
-            scale={quiz[question]}
+            question={quiz[questionNumber]}
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
