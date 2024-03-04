@@ -42,7 +42,7 @@ export default function Quiz({ quizType }: Props) {
             <div className="flex justify-between mb-4">
               <div className="flex items-center gap-2">
                 <h3
-                  className={`text-2xl ${getQuizBackgroundColour(
+                  className={`text-3xl ${getQuizBackgroundColour(
                     quizType,
                   )} rounded-lg px-2`}
                 >
