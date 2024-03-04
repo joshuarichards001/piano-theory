@@ -42,14 +42,14 @@ export default function Quiz({ quizType }: Props) {
             <div className="flex justify-between mb-4">
               <div className="flex items-center gap-2">
                 <h3
-                  className={`text-4xl ${getQuizBackgroundColour(
+                  className={`text-2xl ${getQuizBackgroundColour(
                     quizType,
-                  )} rounded-lg px-1`}
+                  )} rounded-lg px-2`}
                 >
-                  {startNote.replace("3", "")}{" "}
+                  {startNote.replace("3", "").replace("/", " / ")}{" "}
                 </h3>
                 <div>
-                  <h3 className="text-2xl capitalize">
+                  <h3 className="text-base capitalize">
                     {quizType.replaceAll("-", " ")}
                   </h3>
                   <p className="text-xs text-gray-500">
@@ -62,7 +62,7 @@ export default function Quiz({ quizType }: Props) {
                   </p>
                 </div>
               </div>
-              <h3 className="text-2xl">
+              <h3 className="text-base">
                 {questionNumber + 1}/{quiz.length}
               </h3>
             </div>
