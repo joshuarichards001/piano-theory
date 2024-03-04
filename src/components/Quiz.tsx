@@ -3,13 +3,15 @@ import { NOTES } from "../constants";
 import { createQuiz, getQuizBackgroundColour } from "../functions";
 import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
-import { useAppSelector } from "../redux/hooks";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import { resetKeys } from "../redux/slices/pressedKeysSlice";
 
 type Props = {
   quizType: QuizType;
 };
 
 export default function Quiz({ quizType }: Props) {
+  const dispatch = useAppDispatch();
   const quiz = useMemo(() => createQuiz(quizType), [quizType]);
   const [questionNumber, setQuestionNumber] = useState(0);
   const question = quiz[questionNumber];
@@ -20,10 +22,11 @@ export default function Quiz({ quizType }: Props) {
   const [done, setDone] = useState(false);
 
   useEffect(() => {
+    dispatch(resetKeys());
     setQuestionNumber(0);
     setScore(0);
     setDone(false);
-  }, [quizType]);
+  }, [quizType, dispatch]);
 
   const nextQuestion = () => {
     if (questionNumber === quiz.length - 1) {
