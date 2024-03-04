@@ -25,8 +25,8 @@ export default function QuizComplete({
 
   return (
     <div className="p-6 mb-16">
-      <p className="text-2xl mb-4">{quizFeedback()}</p>
-      <p className="text-xl">
+      <p className="text-base text-gray-500 mb-2">{quizFeedback()}</p>
+      <p className="text-3xl">
         You scored {score} out of {numberOfQuestions} in a time of{" "}
         {formatTime(timer)}.
       </p>
