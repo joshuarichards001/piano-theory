@@ -1,9 +1,16 @@
+import { formatTime } from "../functions";
+
 type Props = {
   score: number;
   numberOfQuestions: number;
+  timer: number;
 };
 
-export default function QuizComplete({ score, numberOfQuestions }: Props) {
+export default function QuizComplete({
+  score,
+  numberOfQuestions,
+  timer,
+}: Props) {
   const quizFeedback = () => {
     if (score === 12) {
       return "Perfect score! Great job!";
@@ -20,7 +27,8 @@ export default function QuizComplete({ score, numberOfQuestions }: Props) {
     <div className="p-6 mb-16">
       <p className="text-2xl mb-4">{quizFeedback()}</p>
       <p className="text-xl">
-        You scored {score} out of {numberOfQuestions}.
+        You scored {score} out of {numberOfQuestions} in a time of{" "}
+        {formatTime(timer)}.
       </p>
     </div>
   );

@@ -146,3 +146,11 @@ export const getQuizBackgroundColour = (quizType: QuizType) => {
     return "bg-accent";
   }
 };
+
+export const formatTime = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+
+  return `${minutes}:${formattedSeconds}`;
+};
