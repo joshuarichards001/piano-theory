@@ -71,10 +71,7 @@ export default function Quiz() {
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="flex justify-between">
-        <button
-          className="btn btn-neutral m-6"
-          onClick={() => navigate("/")}
-        >
+        <button className="btn btn-neutral m-6" onClick={() => navigate("/")}>
           Home
         </button>
         <button>
