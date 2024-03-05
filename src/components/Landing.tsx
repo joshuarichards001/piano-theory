@@ -34,7 +34,7 @@ export default function Landing() {
           </button>
           <button
             onClick={() => navigate("minor-7th-chord")}
-            className="btn btn-secondary"
+            className="btn btn-info"
           >
             Minor 7th
           </button>

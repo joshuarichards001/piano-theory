@@ -10,9 +10,7 @@ import {
 
 export const getKeyStyles = (note: string, keyState: KeyState) => {
   if (!note.includes("♭")) {
-    return `grow-[3] h-24 ${whiteColor(
-      keyState,
-    )} ${whiteBorder(note)}`;
+    return `grow-[3] h-24 ${whiteColor(keyState)} ${whiteBorder(note)}`;
   } else {
     return `grow-[2] h-14 border-2 border-black ${blackColor(
       keyState,
@@ -141,7 +139,7 @@ export const getQuizBackgroundColour = (quizType: QuizType) => {
   } else if (quizType === "major-7th-chord") {
     return "bg-primary";
   } else if (quizType === "minor-7th-chord") {
-    return "bg-secondary";
+    return "bg-info";
   } else if (quizType === "dominant-7th-chord") {
     return "bg-accent";
   }

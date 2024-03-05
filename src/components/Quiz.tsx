@@ -70,12 +70,12 @@ export default function Quiz() {
 
   return (
     <div className="flex flex-col justify-between h-full">
-      <div className="flex justify-between">
-        <button className="btn btn-neutral m-6" onClick={() => navigate("/")}>
+      <div className="flex justify-between p-6">
+        <button className="btn btn-neutral" onClick={() => navigate("/")}>
           Home
         </button>
         <button>
-          <button className="btn btn-active m-6" onClick={restartQuiz}>
+          <button className="btn btn-active" onClick={restartQuiz}>
             Restart
           </button>
         </button>
@@ -84,7 +84,7 @@ export default function Quiz() {
         <div>
           <div className="p-6 flex gap-3 items-center">
             <h3
-              className={`text-3xl whitespace-nowrap ${getQuizBackgroundColour(
+              className={`text-3xl whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
                 quizType,
               )} rounded-lg px-2`}
             >
@@ -117,7 +117,7 @@ export default function Quiz() {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-32 bg-neutral-400" />
+          <div className="h-32 bg-base-300" />
         </div>
       ) : (
         <QuizComplete
