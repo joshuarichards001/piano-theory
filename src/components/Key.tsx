@@ -11,11 +11,14 @@ type Props = {
 export default function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
 
+  const handleInteraction = () => {
+    dispatch(addKey(keyIndex));
+  };
+
   return (
     <button
-      onTouchStart={() => {
-        dispatch(addKey(keyIndex));
-      }}
+      onTouchStart={handleInteraction}
+      onMouseDown={handleInteraction}
       className={getKeyStyles(note, keyState)}
     />
   );
