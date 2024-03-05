@@ -95,7 +95,7 @@ export default function Quiz() {
                 <h3 className="text-base capitalize font-bold">
                   {quizType.replaceAll("-", " ")}
                 </h3>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-gray-500">
                   {
                     [...new Set(pressedKeys)].filter((key) =>
                       question.includes(key),
@@ -108,7 +108,7 @@ export default function Quiz() {
                 <h3 className="text-base font-bold">
                   {questionNumber + 1}/{quiz.length}
                 </h3>
-                <p className="text-sm text-gray-400">{formatTime(timer)}</p>
+                <p className="text-sm text-gray-500">{formatTime(timer)}</p>
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function Quiz() {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-32 bg-base-300" />
+          <div className="h-40 bg-base-300" />
         </div>
       ) : (
         <QuizComplete
