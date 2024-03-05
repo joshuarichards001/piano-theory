@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { NOTES } from "../constants";
 import { createQuiz, formatTime, getQuizBackgroundColour } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -6,11 +7,10 @@ import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
 
-type Props = {
-  quizType: QuizType;
-};
+export default function Quiz() {
+  const quizType =
+    useParams<{ quizType: QuizType }>().quizType || "major-scale";
 
-export default function Quiz({ quizType }: Props) {
   const quiz = useMemo(() => createQuiz(quizType), [quizType]);
   const [questionNumber, setQuestionNumber] = useState(0);
   const question = quiz[questionNumber];
@@ -24,12 +24,20 @@ export default function Quiz({ quizType }: Props) {
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  useEffect(() => {
+  const navigate = useNavigate();
+
+  const restartQuiz = () => {
     dispatch(resetKeys());
     setQuestionNumber(0);
     setScore(0);
     setTimer(0);
     setDone(false);
+    setIsTimerRunning(false);
+  };
+
+  useEffect(() => {
+    restartQuiz();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quizType, dispatch]);
 
   useEffect(() => {
@@ -61,7 +69,20 @@ export default function Quiz({ quizType }: Props) {
   };
 
   return (
-    <div>
+    <div className="flex flex-col justify-between h-full">
+      <div className="flex justify-between">
+        <button
+          className="btn btn-neutral m-6"
+          onClick={() => navigate("/")}
+        >
+          Home
+        </button>
+        <button>
+          <button className="btn btn-active m-6" onClick={restartQuiz}>
+            Restart
+          </button>
+        </button>
+      </div>
       {!done ? (
         <div>
           <div className="p-6 flex gap-3 items-center">
@@ -74,7 +95,7 @@ export default function Quiz({ quizType }: Props) {
             </h3>
             <div className="flex justify-between w-full">
               <div>
-                <h3 className="text-base capitalize">
+                <h3 className="text-base capitalize font-bold">
                   {quizType.replaceAll("-", " ")}
                 </h3>
                 <p className="text-xs text-gray-500">
@@ -87,7 +108,7 @@ export default function Quiz({ quizType }: Props) {
                 </p>
               </div>
               <div>
-                <h3 className="text-base">
+                <h3 className="text-base font-bold">
                   {questionNumber + 1}/{quiz.length}
                 </h3>
                 <p className="text-xs text-gray-500">{formatTime(timer)}</p>

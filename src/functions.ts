@@ -9,7 +9,7 @@ import {
 } from "./constants";
 
 export const getKeyStyles = (note: string, keyState: KeyState) => {
-  if (!note.includes("b")) {
+  if (!note.includes("♭")) {
     return `grow-[3] h-24 active:bg-neutral-300 ${whiteColor(
       keyState,
     )} ${whiteBorder(note)}`;
