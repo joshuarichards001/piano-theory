@@ -10,11 +10,11 @@ import {
 
 export const getKeyStyles = (note: string, keyState: KeyState) => {
   if (!note.includes("♭")) {
-    return `grow-[3] h-24 active:bg-neutral-300 ${whiteColor(
+    return `grow-[3] h-24 ${whiteColor(
       keyState,
     )} ${whiteBorder(note)}`;
   } else {
-    return `grow-[2] h-14 active:bg-neutral-700 border-2 border-black ${blackColor(
+    return `grow-[2] h-14 border-2 border-black ${blackColor(
       keyState,
     )} z-10 -mx-[3%]`;
   }

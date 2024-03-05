@@ -13,7 +13,7 @@ export default function Key({ keyIndex, note, keyState }: Props) {
 
   return (
     <button
-      onClick={() => {
+      onTouchStart={() => {
         dispatch(addKey(keyIndex));
       }}
       className={getKeyStyles(note, keyState)}
