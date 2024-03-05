@@ -120,7 +120,7 @@ export default function Quiz() {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-10" />
+          <div className="h-32 bg-neutral-400" />
         </div>
       ) : (
         <QuizComplete
