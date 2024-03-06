@@ -74,10 +74,8 @@ export default function Quiz() {
         <button className="btn btn-neutral" onClick={() => navigate("/")}>
           Home
         </button>
-        <button>
-          <button className="btn btn-active" onClick={restartQuiz}>
-            Restart
-          </button>
+        <button className="btn btn-active" onClick={restartQuiz}>
+          Restart
         </button>
       </div>
       {!done ? (
@@ -117,7 +115,7 @@ export default function Quiz() {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-40 bg-base-300" />
+          <div className="h-28 bg-base-300" />
         </div>
       ) : (
         <QuizComplete

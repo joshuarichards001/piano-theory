@@ -24,7 +24,7 @@ export default function Piano({ question, nextQuestion, setScore }: Props) {
 
         dispatch(resetKeys());
         nextQuestion();
-      }, 700);
+      }, 500);
 
       return () => clearTimeout(timeout);
     }

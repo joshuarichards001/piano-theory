@@ -11,8 +11,18 @@ type Props = {
 export default function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
 
-  const handleInteraction = () => {
-    dispatch(addKey(keyIndex));
+  const handleInteraction = (
+    event:
+      | React.MouseEvent<HTMLButtonElement>
+      | React.TouchEvent<HTMLButtonElement>,
+  ) => {
+    const isMouseDevice = window.matchMedia("(hover: hover)").matches;
+
+    if (event.type === "touchstart" && !isMouseDevice) {
+      dispatch(addKey(keyIndex));
+    } else if (event.type === "mousedown" && isMouseDevice) {
+      dispatch(addKey(keyIndex));
+    }
   };
 
   return (
