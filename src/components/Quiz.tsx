@@ -80,9 +80,9 @@ export default function Quiz() {
       </div>
       {!done ? (
         <div>
-          <div className="p-6 flex gap-3 items-center">
+          <div className="flex flex-col p-6 gap-3">
             <h3
-              className={`text-3xl whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
+              className={`text-4xl w-fit whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
                 quizType,
               )} rounded-lg px-2`}
             >
