@@ -4,5 +4,15 @@ import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), VitePWA({ registerType: "autoUpdate" })],
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "autoUpdate",
+      manifest: {
+        name: "Piano Theory",
+        short_name: "Piano Theory",
+        description: "Learn piano theory",
+      },
+    }),
+  ],
 });
