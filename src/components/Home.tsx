@@ -1,7 +1,7 @@
 import { IonIcon } from "@ionic/react";
-import { downloadOutline } from "ionicons/icons";
 import { Outlet } from "react-router-dom";
 import InstallModal from "./InstallModal";
+import { logoAppleAppstore } from "ionicons/icons";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
               ).showModal();
             }}
           >
-            <IonIcon icon={downloadOutline} className="h-6 w-6" color="white" />
+            <IonIcon icon={logoAppleAppstore} className="h-8 w-8" color="white" />
           </button>
         </div>
         <p className="text-gray-500">
