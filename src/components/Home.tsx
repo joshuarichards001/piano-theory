@@ -16,7 +16,7 @@ export default function Home() {
               ).showModal();
             }}
           >
-            <IonIcon icon={logoAppleAppstore} className="h-8 w-8" color="white" />
+            <IonIcon icon={logoAppleAppstore} className="h-7 w-7" color="white" />
           </button>
         </div>
         <p className="text-gray-500">
