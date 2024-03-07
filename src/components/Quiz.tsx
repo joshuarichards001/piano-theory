@@ -82,7 +82,7 @@ export default function Quiz() {
         <div>
           <div className="flex flex-col p-6 gap-3">
             <h3
-              className={`text-4xl w-fit whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
+              className={`text-5xl w-fit whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
                 quizType,
               )} rounded-lg px-2`}
             >
@@ -90,7 +90,7 @@ export default function Quiz() {
             </h3>
             <div className="flex justify-between w-full">
               <div>
-                <h3 className="text-base capitalize font-bold">
+                <h3 className="text-lg capitalize font-bold">
                   {quizType.replaceAll("-", " ")}
                 </h3>
                 <p className="text-sm text-gray-500">
@@ -103,7 +103,7 @@ export default function Quiz() {
                 </p>
               </div>
               <div>
-                <h3 className="text-base font-bold">
+                <h3 className="text-lg font-bold">
                   {questionNumber + 1}/{quiz.length}
                 </h3>
                 <p className="text-sm text-gray-500">{formatTime(timer)}</p>
