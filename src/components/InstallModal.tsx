@@ -78,7 +78,7 @@ export default function Modal() {
                 color="white"
               />
               <p className="ml-3">
-                This is a mobile only feature, check out Album Listen List on
+                This is a mobile only feature, check out Piano Theory on
                 your phones browser!
               </p>
             </div>
