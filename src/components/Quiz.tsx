@@ -85,7 +85,7 @@ export default function Quiz() {
         <div>
           <div className="flex flex-col p-6 gap-3">
             <h3
-              className={`text-5xl w-fit whitespace-nowrap rounded-lg px-2 font-bold btn btn-lg btn-${getQuizColour(
+              className={`text-5xl w-fit whitespace-nowrap rounded-lg px-2 font-bold btn btn-lg ${getQuizColour(
                 quizType,
               )}`}
             >

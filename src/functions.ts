@@ -95,19 +95,19 @@ export const parseQuizToKeys = (quizType: QuizType) => {
 
 export const getQuizColour = (quizType: QuizType) => {
   if (quizType === "major-scale") {
-    return "primary";
+    return "btn-primary";
   } else if (quizType === "natural-minor-scale") {
-    return "secondary";
+    return "btn-secondary";
   } else if (quizType === "major-7th-chord") {
-    return "primary";
+    return "btn-primary";
   } else if (quizType === "minor-7th-chord") {
-    return "secondary";
+    return "btn-secondary";
   } else if (quizType === "dominant-7th-chord") {
-    return "accent";
+    return "btn-accent";
   } else if (quizType === "half-diminished-7th-chord") {
-    return "info";
+    return "btn-info";
   } else if (quizType === "diminished-7th-chord") {
-    return "warning";
+    return "btn-warning";
   }
 };
 
