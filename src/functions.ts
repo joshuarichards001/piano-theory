@@ -1,5 +1,7 @@
 import {
+  DIMINISHED_7TH,
   DOMINANT_7TH,
+  HALF_DIMINISHED_7TH,
   MAJOR_7TH,
   MAJOR_SCALE,
   MINOR_7TH,
@@ -84,6 +86,28 @@ export const parseQuizToKeys = (quizType: QuizType) => {
       return MINOR_7TH;
     case "dominant-7th-chord":
       return DOMINANT_7TH;
+    case "half-diminished-7th-chord":
+      return HALF_DIMINISHED_7TH;
+    case "diminished-7th-chord":
+      return DIMINISHED_7TH;
+  }
+};
+
+export const getQuizBackgroundColour = (quizType: QuizType) => {
+  if (quizType === "major-scale") {
+    return "bg-success";
+  } else if (quizType === "natural-minor-scale") {
+    return "bg-warning";
+  } else if (quizType === "major-7th-chord") {
+    return "bg-primary";
+  } else if (quizType === "minor-7th-chord") {
+    return "bg-info";
+  } else if (quizType === "dominant-7th-chord") {
+    return "bg-accent";
+  } else if (quizType === "half-diminished-7th-chord") {
+    return "bg-success";
+  } else if (quizType === "diminished-7th-chord") {
+    return "bg-warning";
   }
 };
 
@@ -129,20 +153,6 @@ export const getKeyState = (
   }
 
   return "not-pressed";
-};
-
-export const getQuizBackgroundColour = (quizType: QuizType) => {
-  if (quizType === "major-scale") {
-    return "bg-success";
-  } else if (quizType === "natural-minor-scale") {
-    return "bg-warning";
-  } else if (quizType === "major-7th-chord") {
-    return "bg-primary";
-  } else if (quizType === "minor-7th-chord") {
-    return "bg-info";
-  } else if (quizType === "dominant-7th-chord") {
-    return "bg-accent";
-  }
 };
 
 export const formatTime = (seconds: number) => {

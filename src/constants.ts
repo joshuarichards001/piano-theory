@@ -46,3 +46,5 @@ export const NATURAL_MINOR_SCALE = [0, 2, 3, 5, 7, 8, 10, 12];
 export const MAJOR_7TH = [0, 4, 7, 11];
 export const MINOR_7TH = [0, 3, 7, 10];
 export const DOMINANT_7TH = [0, 4, 7, 10];
+export const HALF_DIMINISHED_7TH = [0, 3, 6, 10];
+export const DIMINISHED_7TH = [0, 3, 6, 9];

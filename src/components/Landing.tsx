@@ -44,6 +44,18 @@ export default function Landing() {
           >
             Dominant 7th
           </button>
+          <button
+            onClick={() => navigate("half-diminished-7th-chord")}
+            className="btn btn-success"
+          >
+            Half Diminished 7th
+          </button>
+          <button
+            onClick={() => navigate("diminished-7th-chord")}
+            className="btn btn-warning"
+          >
+            Diminished 7th
+          </button>
         </div>
       </div>
     </div>
