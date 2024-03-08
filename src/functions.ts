@@ -162,3 +162,15 @@ export const formatTime = (seconds: number) => {
 
   return `${minutes}:${formattedSeconds}`;
 };
+
+export const quizFeedback = (score: number) => {
+  if (score === 12) {
+    return "Perfect score! Great job!";
+  } else if (score >= 9) {
+    return "Great job! You're getting there!";
+  } else if (score >= 6) {
+    return "Not bad! Keep practicing!";
+  } else {
+    return "Keep practicing! You'll get there!";
+  }
+};

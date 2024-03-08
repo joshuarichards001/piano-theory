@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { NOTES } from "../constants";
 import { createQuiz, formatTime, getQuizColour } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
+import { resetQuiz, setCurrentQuestionIndex } from "../redux/slices/quizSlice";
 import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
 
@@ -11,10 +12,11 @@ export default function Quiz() {
   const quizType =
     useParams<{ quizType: QuizType }>().quizType || "major-scale";
 
-  const quiz = useMemo(() => createQuiz(quizType), [quizType]);
-  const [questionNumber, setQuestionNumber] = useState(0);
-  const question = quiz[questionNumber];
-  const startNote = NOTES[question[0]];
+  const quiz = useAppSelector((state) => state.quiz.questions);
+  const currentQuestionIndex = useAppSelector(
+    (state) => state.quiz.currentQuestionIndex,
+  );
+  const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
 
   const dispatch = useAppDispatch();
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
@@ -27,8 +29,11 @@ export default function Quiz() {
   const navigate = useNavigate();
 
   const restartQuiz = () => {
+    const newQuiz = createQuiz(quizType);
+
     dispatch(resetKeys());
-    setQuestionNumber(0);
+    dispatch(resetQuiz(newQuiz));
+
     setScore(0);
     setTimer(0);
     setDone(false);
@@ -38,13 +43,13 @@ export default function Quiz() {
   useEffect(() => {
     restartQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quizType, dispatch]);
+  }, [quizType]);
 
   useEffect(() => {
-    if (questionNumber === 0 && pressedKeys.length === 1) {
+    if (currentQuestionIndex === 0 && pressedKeys.length === 1) {
       setIsTimerRunning(true);
     }
-  }, [pressedKeys, questionNumber]);
+  }, [pressedKeys, currentQuestionIndex]);
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -59,13 +64,13 @@ export default function Quiz() {
   }, [isTimerRunning]);
 
   const nextQuestion = () => {
-    if (questionNumber === quiz.length - 1) {
+    if (currentQuestionIndex === quiz.length - 1) {
       setDone(true);
       setIsTimerRunning(false);
       return;
     }
 
-    setQuestionNumber((prev) => prev + 1);
+    dispatch(setCurrentQuestionIndex(currentQuestionIndex + 1));
   };
 
   return (
@@ -89,7 +94,7 @@ export default function Quiz() {
                 quizType,
               )}`}
             >
-              {startNote.replace("3", "").replace("/", " / ")}{" "}
+              {NOTES[currentQuestion[0]]?.replace("3", "").replace("/", " / ")}{" "}
             </h3>
             <div className="flex justify-between w-full">
               <div>
@@ -99,33 +104,25 @@ export default function Quiz() {
                 <p className="text-sm text-gray-500">
                   {
                     [...new Set(pressedKeys)].filter((key) =>
-                      question.includes(key),
+                      currentQuestion.includes(key),
                     ).length
                   }
-                  /{question.length} Keys Pressed
+                  /{currentQuestion.length} Keys Pressed
                 </p>
               </div>
               <div>
                 <h3 className="text-lg font-bold">
-                  {questionNumber + 1}/{quiz.length}
+                  {currentQuestionIndex + 1}/{quiz.length}
                 </h3>
                 <p className="text-sm text-gray-500">{formatTime(timer)}</p>
               </div>
             </div>
           </div>
-          <Piano
-            question={quiz[questionNumber]}
-            nextQuestion={nextQuestion}
-            setScore={setScore}
-          />
+          <Piano nextQuestion={nextQuestion} setScore={setScore} />
           <div className="h-28 bg-base-300" />
         </div>
       ) : (
-        <QuizComplete
-          score={score}
-          timer={timer}
-          numberOfQuestions={quiz.length}
-        />
+        <QuizComplete score={score} timer={timer} />
       )}
     </div>
   );

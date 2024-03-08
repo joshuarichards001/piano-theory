@@ -6,19 +6,19 @@ import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import Key from "./Key";
 
 type Props = {
-  question: number[];
   nextQuestion: () => void;
   setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Piano({ question, nextQuestion, setScore }: Props) {
+export default function Piano({ nextQuestion, setScore }: Props) {
   const dispatch = useAppDispatch();
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
+  const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
 
   useEffect(() => {
-    if (question.every((key) => pressedKeys.includes(key))) {
+    if (currentQuestion.every((key) => pressedKeys.includes(key))) {
       const timeout = setTimeout(() => {
-        if (pressedKeys.length === question.length) {
+        if (pressedKeys.length === currentQuestion.length) {
           setScore((prev) => prev + 1);
         }
 
@@ -28,7 +28,7 @@ export default function Piano({ question, nextQuestion, setScore }: Props) {
 
       return () => clearTimeout(timeout);
     }
-  }, [pressedKeys, question, nextQuestion, setScore, dispatch]);
+  }, [pressedKeys, currentQuestion, nextQuestion, setScore, dispatch]);
 
   return (
     <div className="flex w-full max-w-xl">
@@ -37,7 +37,7 @@ export default function Piano({ question, nextQuestion, setScore }: Props) {
           key={note}
           note={note}
           keyIndex={i}
-          keyState={getKeyState(i, pressedKeys, question)}
+          keyState={getKeyState(i, pressedKeys, currentQuestion)}
         />
       ))}
     </div>
