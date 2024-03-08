@@ -4,7 +4,11 @@ import { NOTES } from "../constants";
 import { createQuiz, formatTime, getQuizColour } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
-import { resetQuiz, setCurrentQuestionIndex } from "../redux/slices/quizSlice";
+import {
+  resetQuiz,
+  setCurrentQuestionIndex,
+  setScore,
+} from "../redux/slices/quizSlice";
 import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
 
@@ -17,11 +21,10 @@ export default function Quiz() {
     (state) => state.quiz.currentQuestionIndex,
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
-
-  const dispatch = useAppDispatch();
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
 
-  const [score, setScore] = useState(0);
+  const dispatch = useAppDispatch();
+
   const [done, setDone] = useState(false);
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -33,8 +36,8 @@ export default function Quiz() {
 
     dispatch(resetKeys());
     dispatch(resetQuiz(newQuiz));
+    dispatch(setScore(0));
 
-    setScore(0);
     setTimer(0);
     setDone(false);
     setIsTimerRunning(false);
@@ -70,6 +73,7 @@ export default function Quiz() {
       return;
     }
 
+    dispatch(resetKeys());
     dispatch(setCurrentQuestionIndex(currentQuestionIndex + 1));
   };
 
@@ -118,11 +122,11 @@ export default function Quiz() {
               </div>
             </div>
           </div>
-          <Piano nextQuestion={nextQuestion} setScore={setScore} />
+          <Piano nextQuestion={nextQuestion} />
           <div className="h-28 bg-base-300" />
         </div>
       ) : (
-        <QuizComplete score={score} timer={timer} />
+        <QuizComplete timer={timer} />
       )}
     </div>
   );

@@ -2,14 +2,14 @@ import { formatTime, quizFeedback } from "../functions";
 import { useAppSelector } from "../redux/hooks";
 
 type Props = {
-  score: number;
   timer: number;
 };
 
-export default function QuizComplete({ score, timer }: Props) {
+export default function QuizComplete({ timer }: Props) {
   const numberOfQuestions = useAppSelector(
     (state) => state.quiz.questions.length,
   );
+  const score = useAppSelector((state) => state.quiz.score);
 
   return (
     <div className="p-6 mb-28">

@@ -4,6 +4,7 @@ interface QuizState {
   questions: number[][];
   currentQuestionIndex: number;
   currentQuestion: number[];
+  score: number;
 }
 
 const quizSlice = createSlice({
@@ -12,6 +13,7 @@ const quizSlice = createSlice({
     questions: [],
     currentQuestionIndex: 0,
     currentQuestion: [],
+    score: 0,
   } as QuizState,
   reducers: {
     resetQuiz(state, action: PayloadAction<number[][]>) {
@@ -23,9 +25,12 @@ const quizSlice = createSlice({
       state.currentQuestionIndex = action.payload;
       state.currentQuestion = state.questions[action.payload];
     },
+    setScore(state, action: PayloadAction<number>) {
+      state.score = action.payload;
+    },
   },
 });
 
-export const { resetQuiz, setCurrentQuestionIndex } = quizSlice.actions;
+export const { resetQuiz, setCurrentQuestionIndex, setScore } = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

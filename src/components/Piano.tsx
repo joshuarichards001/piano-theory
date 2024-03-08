@@ -2,33 +2,32 @@ import { useEffect } from "react";
 import { NOTES } from "../constants";
 import { getKeyState } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { resetKeys } from "../redux/slices/pressedKeysSlice";
+import { setScore } from "../redux/slices/quizSlice";
 import Key from "./Key";
 
 type Props = {
   nextQuestion: () => void;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export default function Piano({ nextQuestion, setScore }: Props) {
+export default function Piano({ nextQuestion }: Props) {
   const dispatch = useAppDispatch();
+
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
+  const score = useAppSelector((state) => state.quiz.score);
 
   useEffect(() => {
     if (currentQuestion.every((key) => pressedKeys.includes(key))) {
       const timeout = setTimeout(() => {
         if (pressedKeys.length === currentQuestion.length) {
-          setScore((prev) => prev + 1);
+          dispatch(setScore(score + 1));
         }
-
-        dispatch(resetKeys());
         nextQuestion();
       }, 500);
 
       return () => clearTimeout(timeout);
     }
-  }, [pressedKeys, currentQuestion, nextQuestion, setScore, dispatch]);
+  }, [pressedKeys, currentQuestion, nextQuestion, dispatch, score]);
 
   return (
     <div className="flex w-full max-w-xl">
