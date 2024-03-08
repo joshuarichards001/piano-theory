@@ -24,7 +24,7 @@ export default function QuizComplete({
   };
 
   return (
-    <div className="p-6 mb-28">
+    <div className="p-6 mb-20">
       <p className="text-base text-gray-500 mb-2">{quizFeedback()}</p>
       <p className="text-3xl">
         You scored {score} out of {numberOfQuestions} in a time of{" "}

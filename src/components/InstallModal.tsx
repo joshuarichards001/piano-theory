@@ -29,11 +29,10 @@ export default function Modal() {
         <h2 className="text-2xl font-bold mb-2">Add to Home Screen</h2>
         <p className="text-gray-500 mb-10">
           This website has app functionality. Add it to your home screen to use
-          it in fullscreen.{" "}
+          it in fullscreen.
           {getOS() === "iOS"
             ? "(make sure you're using Safari)"
             : getOS() === "Android" && "(make sure you're using Chrome)"}
-          .
         </p>
 
         {getOS() !== "Desktop" ? (
@@ -78,8 +77,8 @@ export default function Modal() {
                 color="white"
               />
               <p className="ml-3">
-                This is a mobile only feature, check out Piano Theory on
-                your phones browser!
+                This is a mobile only feature, check out Piano Theory on your
+                phones browser!
               </p>
             </div>
           </div>
