@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { NOTES } from "../constants";
-import { createQuiz, formatTime, getQuizBackgroundColour } from "../functions";
+import { createQuiz, formatTime, getQuizColour } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import Piano from "./Piano";
@@ -71,7 +71,10 @@ export default function Quiz() {
   return (
     <div className="flex flex-col justify-between h-full">
       <div className="flex justify-between p-6">
-        <button className="btn btn-sm btn-neutral" onClick={() => navigate("/")}>
+        <button
+          className="btn btn-sm btn-neutral"
+          onClick={() => navigate("/")}
+        >
           Home
         </button>
         <button className="btn btn-sm btn-active" onClick={restartQuiz}>
@@ -82,9 +85,9 @@ export default function Quiz() {
         <div>
           <div className="flex flex-col p-6 gap-3">
             <h3
-              className={`text-5xl w-fit whitespace-nowrap text-black font-bold ${getQuizBackgroundColour(
+              className={`text-5xl w-fit whitespace-nowrap rounded-lg px-2 font-bold btn btn-lg btn-${getQuizColour(
                 quizType,
-              )} rounded-lg px-2`}
+              )}`}
             >
               {startNote.replace("3", "").replace("/", " / ")}{" "}
             </h3>
@@ -115,7 +118,7 @@ export default function Quiz() {
             nextQuestion={nextQuestion}
             setScore={setScore}
           />
-          <div className="h-20 bg-base-300" />
+          <div className="h-28 bg-base-300" />
         </div>
       ) : (
         <QuizComplete

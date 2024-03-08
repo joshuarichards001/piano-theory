@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { getQuizColour } from "../functions";
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -10,13 +11,13 @@ export default function Landing() {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => navigate("major-scale")}
-            className="btn btn-success"
+            className={`btn btn-${getQuizColour("major-scale")}`}
           >
             Major
           </button>
           <button
             onClick={() => navigate("natural-minor-scale")}
-            className="btn btn-warning"
+            className={`btn btn-${getQuizColour("natural-minor-scale")}`}
           >
             Natural Minor
           </button>
@@ -28,31 +29,31 @@ export default function Landing() {
         <div className="flex flex-wrap gap-3">
           <button
             onClick={() => navigate("major-7th-chord")}
-            className="btn btn-primary"
+            className={`btn btn-${getQuizColour("major-7th-chord")}`}
           >
             Major 7th
           </button>
           <button
             onClick={() => navigate("minor-7th-chord")}
-            className="btn btn-info"
+            className={`btn btn-${getQuizColour("minor-7th-chord")}`}
           >
             Minor 7th
           </button>
           <button
             onClick={() => navigate("dominant-7th-chord")}
-            className="btn btn-accent"
+            className={`btn btn-${getQuizColour("dominant-7th-chord")}`}
           >
             Dominant 7th
           </button>
           <button
             onClick={() => navigate("half-diminished-7th-chord")}
-            className="btn btn-success"
+            className={`btn btn-${getQuizColour("half-diminished-7th-chord")}`}
           >
             Half Diminished 7th
           </button>
           <button
             onClick={() => navigate("diminished-7th-chord")}
-            className="btn btn-warning"
+            className={`btn btn-${getQuizColour("diminished-7th-chord")}`}
           >
             Diminished 7th
           </button>
