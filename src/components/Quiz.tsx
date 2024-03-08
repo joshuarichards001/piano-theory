@@ -7,6 +7,7 @@ import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
   resetQuiz,
   setCurrentQuestionIndex,
+  setIsCompleted,
   setScore,
 } from "../redux/slices/quizSlice";
 import Piano from "./Piano";
@@ -22,10 +23,10 @@ export default function Quiz() {
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
+  const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
 
   const dispatch = useAppDispatch();
 
-  const [done, setDone] = useState(false);
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
@@ -37,9 +38,9 @@ export default function Quiz() {
     dispatch(resetKeys());
     dispatch(resetQuiz(newQuiz));
     dispatch(setScore(0));
+    dispatch(setIsCompleted(false));
 
     setTimer(0);
-    setDone(false);
     setIsTimerRunning(false);
   };
 
@@ -68,7 +69,7 @@ export default function Quiz() {
 
   const nextQuestion = () => {
     if (currentQuestionIndex === quiz.length - 1) {
-      setDone(true);
+      dispatch(setIsCompleted(true));
       setIsTimerRunning(false);
       return;
     }
@@ -90,7 +91,7 @@ export default function Quiz() {
           Restart
         </button>
       </div>
-      {!done ? (
+      {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
             <h3

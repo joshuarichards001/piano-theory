@@ -5,6 +5,7 @@ interface QuizState {
   currentQuestionIndex: number;
   currentQuestion: number[];
   score: number;
+  isCompleted: boolean;
 }
 
 const quizSlice = createSlice({
@@ -14,6 +15,7 @@ const quizSlice = createSlice({
     currentQuestionIndex: 0,
     currentQuestion: [],
     score: 0,
+    isCompleted: false,
   } as QuizState,
   reducers: {
     resetQuiz(state, action: PayloadAction<number[][]>) {
@@ -28,9 +30,13 @@ const quizSlice = createSlice({
     setScore(state, action: PayloadAction<number>) {
       state.score = action.payload;
     },
+    setIsCompleted(state, action: PayloadAction<boolean>) {
+      state.isCompleted = action.payload;
+    },
   },
 });
 
-export const { resetQuiz, setCurrentQuestionIndex, setScore } = quizSlice.actions;
+export const { resetQuiz, setCurrentQuestionIndex, setScore, setIsCompleted } =
+  quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;
