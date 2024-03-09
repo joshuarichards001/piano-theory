@@ -21,7 +21,7 @@ const QuizButton = ({
       <p>
         {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
       </p>
-      {record && <p>{record.time}s</p>}
+      {record && <p className="text-xs text-gray-500">{record.time}s</p>}
     </button>
   );
 };
