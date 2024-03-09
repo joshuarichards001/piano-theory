@@ -1,5 +1,6 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getQuizColour } from "../functions";
+import { useAppSelector } from "../redux/hooks";
 
 const QuizButton = ({
   quizType,
@@ -8,6 +9,10 @@ const QuizButton = ({
   quizType: QuizType;
   navigate: NavigateFunction;
 }) => {
+  const record = useAppSelector((state) =>
+    state.records.find((record) => record.quizType === quizType),
+  );
+
   return (
     <button
       onClick={() => navigate(quizType)}
@@ -16,6 +21,7 @@ const QuizButton = ({
       <p>
         {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
       </p>
+      {record && <p>{record.time}s</p>}
     </button>
   );
 };

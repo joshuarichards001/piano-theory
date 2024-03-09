@@ -83,7 +83,10 @@ export default function Quiz() {
       <div className="flex justify-between p-6">
         <button
           className="btn btn-sm btn-neutral"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            restartQuiz();
+            navigate("/");
+          }}
         >
           Home
         </button>
