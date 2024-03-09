@@ -1,4 +1,5 @@
 type QuizType =
+  | "notes"
   | "major-scale"
   | "natural-minor-scale"
   | "major-7th-chord"
@@ -12,3 +13,8 @@ type KeyState =
   | "incorrect-pressed"
   | "failed"
   | "not-pressed";
+
+type QuizRecord = {
+  quizType: QuizType;
+  time: number;
+}

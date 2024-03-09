@@ -1,7 +1,15 @@
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { useAppDispatch } from "../redux/hooks";
 import InstallModal from "./InstallModal";
 
 export default function Home() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "fetchRecords" });
+  });
+
   return (
     <div className="h-full flex flex-col max-w-xl mx-auto">
       <div className="p-6">

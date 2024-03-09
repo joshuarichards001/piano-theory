@@ -76,6 +76,8 @@ export const getKeys = (startNote: string, intervals: number[]) => {
 
 export const parseQuizToKeys = (quizType: QuizType) => {
   switch (quizType) {
+    case "notes":
+      return [0];
     case "major-scale":
       return MAJOR_SCALE;
     case "natural-minor-scale":
@@ -94,7 +96,9 @@ export const parseQuizToKeys = (quizType: QuizType) => {
 };
 
 export const getQuizColour = (quizType: QuizType) => {
-  if (quizType === "major-scale") {
+  if (quizType === "notes") {
+    return "btn-primary";
+  } else if (quizType === "major-scale") {
     return "btn-primary";
   } else if (quizType === "natural-minor-scale") {
     return "btn-secondary";
