@@ -8,7 +8,6 @@ import {
   resetQuiz,
   setCurrentQuestionIndex,
   setIsCompleted,
-  setScore,
 } from "../redux/slices/quizSlice";
 import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
@@ -34,12 +33,8 @@ export default function Quiz() {
 
   const restartQuiz = () => {
     const newQuiz = createQuiz(quizType);
-
-    dispatch(resetKeys());
     dispatch(resetQuiz(newQuiz));
-    dispatch(setScore(0));
-    dispatch(setIsCompleted(false));
-
+    dispatch(resetKeys());
     setTimer(0);
     setIsTimerRunning(false);
   };

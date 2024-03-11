@@ -8,20 +8,24 @@ interface QuizState {
   isCompleted: boolean;
 }
 
+const initialState: QuizState = {
+  questions: [],
+  currentQuestion: [],
+  currentQuestionIndex: 0,
+  score: 0,
+  isCompleted: false,
+};
+
 const quizSlice = createSlice({
   name: "quiz",
-  initialState: {
-    questions: [],
-    currentQuestionIndex: 0,
-    currentQuestion: [],
-    score: 0,
-    isCompleted: false,
-  } as QuizState,
+  initialState,
   reducers: {
-    resetQuiz(state, action: PayloadAction<number[][]>) {
-      state.questions = action.payload;
-      state.currentQuestion = action.payload[0];
-      state.currentQuestionIndex = 0;
+    resetQuiz(_, action: PayloadAction<number[][]>) {
+      return {
+        ...initialState,
+        questions: action.payload,
+        currentQuestion: action.payload[0],
+      };
     },
     setCurrentQuestionIndex(state, action: PayloadAction<number>) {
       state.currentQuestionIndex = action.payload;
