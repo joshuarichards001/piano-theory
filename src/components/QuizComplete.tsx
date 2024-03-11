@@ -54,13 +54,13 @@ export default function QuizComplete({ timer }: Props) {
   ]);
 
   return (
-    <div className="p-6 mb-28">
-      <p className="text-base text-gray-500 mb-2">{quizFeedback(score)}</p>
+    <div className="p-6 mb-28 flex flex-col gap-2">
+      <p className="text-gray-500">{quizFeedback(score)}</p>
       <p className="text-3xl">
         You scored {score} out of {numberOfQuestions} in a time of{" "}
         {formatTime(timer)}.
       </p>
-      {isRecord && <p>New Record!!!</p>}
+      {isRecord && <p className="text-gray-500">New Record!!!</p>}
     </div>
   );
 }
