@@ -16,12 +16,16 @@ const QuizButton = ({
   return (
     <button
       onClick={() => navigate(quizType)}
-      className={`btn capitalize ${getQuizColour(quizType)}`}
+      className={`btn ${getQuizColour(quizType)}`}
     >
-      <p>
+      <p className="font-bold capitalize">
         {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
       </p>
-      {record && <p className="text-xs text-gray-500">{record.time}s</p>}
+      {record && (
+        <div className="p-1 bg-black bg-opacity-70 rounded-md">
+          <p className="text-xs font-light text-white">{record.time}s</p>
+        </div>
+      )}
     </button>
   );
 };

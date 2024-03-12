@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { NOTES } from "../constants";
-import { createQuiz, formatTime, getQuizColour } from "../functions";
+import { createQuiz, getQuizColour } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -117,7 +117,7 @@ export default function Quiz() {
                 <h3 className="text-lg font-bold">
                   {currentQuestionIndex + 1}/{quiz.length}
                 </h3>
-                <p className="text-sm text-gray-500">{formatTime(timer)}</p>
+                <p className="text-sm text-gray-500">{timer}s</p>
               </div>
             </div>
           </div>

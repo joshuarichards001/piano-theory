@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { formatTime, quizFeedback } from "../functions";
+import { quizFeedback } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addRecord, updateRecord } from "../redux/slices/recordsSlice";
 
@@ -57,8 +57,7 @@ export default function QuizComplete({ timer }: Props) {
     <div className="p-6 mb-28 flex flex-col gap-2">
       <p className="text-gray-500">{quizFeedback(score)}</p>
       <p className="text-3xl">
-        You scored {score} out of {numberOfQuestions} in a time of{" "}
-        {formatTime(timer)}.
+        You scored {score} out of {numberOfQuestions} in a time of {timer}s.
       </p>
       {isRecord && <p className="text-gray-500">New Record!!!</p>}
     </div>

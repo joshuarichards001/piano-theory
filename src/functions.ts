@@ -159,14 +159,6 @@ export const getKeyState = (
   return "not-pressed";
 };
 
-export const formatTime = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
-
-  return `${minutes}:${formattedSeconds}`;
-};
-
 export const quizFeedback = (score: number) => {
   if (score === 12) {
     return "Perfect score! Great job!";
