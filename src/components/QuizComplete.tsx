@@ -54,12 +54,16 @@ export default function QuizComplete({ timer }: Props) {
   ]);
 
   return (
-    <div className="p-6 mb-28 flex flex-col gap-2">
-      <p className="text-gray-500">{quizFeedback(score)}</p>
-      <p className="text-3xl">
-        You scored {score} out of {numberOfQuestions} in a time of {timer}s.
-      </p>
-      {isRecord && <p className="text-gray-500">New Record!!!</p>}
+    <div className="card bg-base-300 my-20 mx-6 shadow-xl">
+      <div className="card-body">
+        <p className="text-gray-600">{quizFeedback(score)}</p>
+        <p className="text-3xl font-bold mb-4">
+          You scored {score}/{numberOfQuestions} in a time of {timer}s.
+        </p>
+        {isRecord && (
+          <div className="badge badge-lg badge-warning">New Record!</div>
+        )}
+      </div>
     </div>
   );
 }
