@@ -1,3 +1,5 @@
+import { IonIcon } from "@ionic/react";
+import { ribbon } from "ionicons/icons";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { getQuizColour } from "../functions";
 import { useAppSelector } from "../redux/hooks";
@@ -22,8 +24,9 @@ const QuizButton = ({
         {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
       </p>
       {record && (
-        <div className="p-1 bg-black bg-opacity-70 rounded-md">
-          <p className="text-xs font-light text-white">{record.time}s</p>
+        <div className="badge badge-warning gap-1">
+          <p className="text-xs">{record.time}s</p>
+          <IonIcon icon={ribbon} className="h-3 w-3" />
         </div>
       )}
     </button>

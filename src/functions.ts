@@ -96,22 +96,22 @@ export const parseQuizToKeys = (quizType: QuizType) => {
 };
 
 export const getQuizColour = (quizType: QuizType) => {
-  if (quizType === "notes") {
-    return "btn-primary";
-  } else if (quizType === "major-scale") {
-    return "btn-primary";
-  } else if (quizType === "natural-minor-scale") {
-    return "btn-secondary";
-  } else if (quizType === "major-7th-chord") {
-    return "btn-primary";
-  } else if (quizType === "minor-7th-chord") {
-    return "btn-secondary";
-  } else if (quizType === "dominant-7th-chord") {
-    return "btn-accent";
-  } else if (quizType === "half-diminished-7th-chord") {
-    return "btn-info";
-  } else if (quizType === "diminished-7th-chord") {
-    return "btn-warning";
+  switch (quizType) {
+    case "notes":
+    case "major-scale":
+    case "major-7th-chord":
+      return "btn-primary";
+    case "natural-minor-scale":
+    case "minor-7th-chord":
+      return "btn-secondary";
+    case "dominant-7th-chord":
+      return "btn-accent";
+    case "half-diminished-7th-chord":
+      return "btn-info";
+    case "diminished-7th-chord":
+      return "btn-neutral";
+    default:
+      return "btn-primary";
   }
 };
 

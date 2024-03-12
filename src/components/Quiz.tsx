@@ -1,3 +1,5 @@
+import { IonIcon } from "@ionic/react";
+import { ribbon } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { NOTES } from "../constants";
@@ -23,6 +25,9 @@ export default function Quiz() {
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
   const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
+  const record = useAppSelector((state) =>
+    state.records.find((record) => record.quizType === quizType),
+  );
 
   const dispatch = useAppDispatch();
 
@@ -92,13 +97,21 @@ export default function Quiz() {
       {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
-            <h3
-              className={`text-5xl w-fit whitespace-nowrap rounded-lg px-2 font-bold btn btn-lg ${getQuizColour(
-                quizType,
-              )}`}
-            >
-              {NOTES[currentQuestion[0]]?.replace("3", "").replace("/", " / ")}{" "}
-            </h3>
+            <div className="flex justify-between items-end">
+              <div className={`btn btn-lg px-2 ${getQuizColour(quizType)}`}>
+                <h3 className="text-5xl font-bold">
+                  {NOTES[currentQuestion[0]]
+                    ?.replace("3", "")
+                    .replace("/", " / ")}{" "}
+                </h3>
+              </div>
+              {record && (
+                <div className="badge badge-warning gap-1">
+                  <p className="text-sm font-bold">{record.time}s</p>
+                  <IonIcon icon={ribbon} className="h-4 w-4" />
+                </div>
+              )}
+            </div>
             <div className="flex justify-between w-full">
               <div>
                 <h3 className="text-lg capitalize font-bold">
@@ -113,11 +126,13 @@ export default function Quiz() {
                   /{currentQuestion.length} Keys Pressed
                 </p>
               </div>
-              <div>
+              <div className="flex flex-col items-end">
                 <h3 className="text-lg font-bold">
                   {currentQuestionIndex + 1}/{quiz.length}
                 </h3>
-                <p className="text-sm text-gray-500">{timer}s</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-sm text-gray-500">{timer}s</p>
+                </div>
               </div>
             </div>
           </div>
