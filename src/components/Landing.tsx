@@ -18,14 +18,14 @@ const QuizButton = ({
   return (
     <button
       onClick={() => navigate(quizType)}
-      className={`btn ${getQuizColour(quizType)}`}
+      className={`btn shadow-md ${getQuizColour(quizType)}`}
     >
       <p className="font-bold capitalize">
         {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
       </p>
       {record && (
-        <div className="badge badge-warning gap-1">
-          <p className="text-xs">{record.time}s</p>
+        <div className="badge badge-base gap-1">
+          <p className="text-xs font-semibold">{record.time}s</p>
           <IonIcon icon={ribbon} className="h-3 w-3" />
         </div>
       )}

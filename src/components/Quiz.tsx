@@ -82,7 +82,7 @@ export default function Quiz() {
     <div className="flex flex-col justify-between h-full">
       <div className="flex justify-between p-6">
         <button
-          className="btn btn-sm btn-neutral"
+          className="btn btn-sm btn-neutral shadow-md"
           onClick={() => {
             restartQuiz();
             navigate("/");
@@ -90,7 +90,7 @@ export default function Quiz() {
         >
           Home
         </button>
-        <button className="btn btn-sm btn-active" onClick={restartQuiz}>
+        <button className="btn btn-sm btn-active shadow-md" onClick={restartQuiz}>
           Restart
         </button>
       </div>
@@ -98,7 +98,7 @@ export default function Quiz() {
         <div>
           <div className="flex flex-col p-6 gap-3">
             <div className="flex justify-between items-end">
-              <div className={`btn btn-lg px-2 ${getQuizColour(quizType)}`}>
+              <div className={`btn btn-lg shadow-md px-2 ${getQuizColour(quizType)}`}>
                 <h3 className="text-5xl font-bold">
                   {NOTES[currentQuestion[0]]
                     ?.replace("3", "")
@@ -106,9 +106,9 @@ export default function Quiz() {
                 </h3>
               </div>
               {record && (
-                <div className="badge badge-warning gap-1">
-                  <p className="text-sm font-bold">{record.time}s</p>
-                  <IonIcon icon={ribbon} className="h-4 w-4" />
+                <div className="badge badge-warning shadow-md gap-1">
+                  <p className="text-xs font-semibold">{record.time}s</p>
+                  <IonIcon icon={ribbon} className="h-3 w-3" />
                 </div>
               )}
             </div>

@@ -54,14 +54,14 @@ export default function QuizComplete({ timer }: Props) {
   ]);
 
   return (
-    <div className="card bg-base-300 my-20 mx-6 shadow-xl">
+    <div className="card bg-base-200 my-28 mx-6 shadow-md">
       <div className="card-body">
         <p className="text-gray-600">{quizFeedback(score)}</p>
         <p className="text-3xl font-bold mb-4">
           You scored {score}/{numberOfQuestions} in a time of {timer}s.
         </p>
         {isRecord && (
-          <div className="badge badge-lg badge-warning">New Record!</div>
+          <div className="badge badge-warning">New Record!</div>
         )}
       </div>
     </div>
