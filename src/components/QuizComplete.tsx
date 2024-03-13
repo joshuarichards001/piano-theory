@@ -1,3 +1,5 @@
+import { IonIcon } from "@ionic/react";
+import { ribbon } from "ionicons/icons";
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { quizFeedback } from "../functions";
@@ -61,7 +63,10 @@ export default function QuizComplete({ timer }: Props) {
           You scored {score}/{numberOfQuestions} in a time of {timer}s.
         </p>
         {isRecord && (
-          <div className="badge badge-warning">New Record!</div>
+          <div className="badge badge-warning gap-1">
+            <p className="text-xs font-semibold">New Record!</p>
+            <IonIcon icon={ribbon} className="h-3 w-3" />
+          </div>
         )}
       </div>
     </div>
