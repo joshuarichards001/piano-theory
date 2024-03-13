@@ -90,15 +90,25 @@ export default function Quiz() {
         >
           Home
         </button>
-        <button className="btn btn-sm btn-active shadow-md" onClick={restartQuiz}>
+        <button
+          className="btn btn-sm btn-active shadow-md"
+          onClick={restartQuiz}
+        >
           Restart
         </button>
       </div>
       {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
+            <p className="text-gray-500 text-xs w-20">
+              Start with the first instance
+            </p>
             <div className="flex justify-between items-end">
-              <div className={`btn btn-lg shadow-md px-2 ${getQuizColour(quizType)}`}>
+              <div
+                className={`btn btn-lg shadow-md px-2 ${getQuizColour(
+                  quizType,
+                )}`}
+              >
                 <h3 className="text-5xl font-bold">
                   {NOTES[currentQuestion[0]]
                     ?.replace("3", "")
