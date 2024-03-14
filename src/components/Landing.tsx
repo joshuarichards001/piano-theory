@@ -1,8 +1,8 @@
 import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { getQuizColour } from "../functions";
 import { useAppSelector } from "../redux/hooks";
+import { QUIZ_MAP } from "../constants";
 
 const QuizButton = ({
   quizType,
@@ -11,6 +11,7 @@ const QuizButton = ({
   quizType: QuizType;
   navigate: NavigateFunction;
 }) => {
+  const quizColour = QUIZ_MAP.get(quizType)?.colour || "bg-primary";
   const record = useAppSelector((state) =>
     state.records.find((record) => record.quizType === quizType),
   );
@@ -18,7 +19,7 @@ const QuizButton = ({
   return (
     <button
       onClick={() => navigate(quizType)}
-      className={`btn shadow-md ${getQuizColour(quizType)}`}
+      className={`btn shadow-md ${quizColour}`}
     >
       <p className="font-bold capitalize">
         {quizType.replace(/-/g, " ").replace("chord", "")}

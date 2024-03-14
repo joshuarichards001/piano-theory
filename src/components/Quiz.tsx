@@ -2,8 +2,8 @@ import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { NOTES } from "../constants";
-import { createQuiz, getQuizColour } from "../functions";
+import { NOTES, QUIZ_MAP } from "../constants";
+import { createQuiz } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -28,6 +28,12 @@ export default function Quiz() {
   const record = useAppSelector((state) =>
     state.records.find((record) => record.quizType === quizType),
   );
+
+  const quizInfo = QUIZ_MAP.get(quizType)?.info;
+  const quizColour = QUIZ_MAP.get(quizType)?.colour;
+  const quizNote = NOTES[currentQuestion[0]]
+    ?.replace("3", "")
+    .replace("/", " / ");
 
   const dispatch = useAppDispatch();
 
@@ -80,23 +86,30 @@ export default function Quiz() {
 
   return (
     <div className="flex flex-col justify-between h-full">
-      <div className="flex justify-between p-6">
-        <button
-          className="btn btn-sm btn-neutral shadow-md"
-          onClick={() => {
-            restartQuiz();
-            navigate("/");
-          }}
-        >
-          Home
-        </button>
-        <button
-          className="btn btn-sm btn-active shadow-md"
-          onClick={restartQuiz}
-        >
-          Restart
-        </button>
+      <div className="p-6">
+        <div className="flex justify-between mb-8">
+          <button
+            className="btn btn-sm btn-neutral shadow-md"
+            onClick={() => {
+              restartQuiz();
+              navigate("/");
+            }}
+          >
+            Home
+          </button>
+          <button
+            className="btn btn-sm btn-active shadow-md"
+            onClick={restartQuiz}
+          >
+            Restart
+          </button>
+        </div>
+        <h2 className="text-2xl capitalize font-bold mb-4">
+          {quizType.replaceAll("-", " ")}
+        </h2>
+        <p className="text-sm leading-6 tracking-wide">{quizInfo}</p>
       </div>
+
       {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
@@ -104,16 +117,8 @@ export default function Quiz() {
               Start in the first octave
             </p>
             <div className="flex justify-between items-end">
-              <div
-                className={`btn btn-lg shadow-md px-2 ${getQuizColour(
-                  quizType,
-                )}`}
-              >
-                <h3 className="text-5xl font-bold">
-                  {NOTES[currentQuestion[0]]
-                    ?.replace("3", "")
-                    .replace("/", " / ")}{" "}
-                </h3>
+              <div className={`btn btn-lg shadow-md px-2 ${quizColour}`}>
+                <h3 className="text-5xl font-bold">{quizNote}</h3>
               </div>
               {record && (
                 <div className="badge badge-warning shadow-md gap-1">

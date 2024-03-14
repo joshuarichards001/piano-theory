@@ -26,4 +26,5 @@ type Quiz = {
   keys: number[];
   name: string;
   info: string;
+  colour: string;
 };

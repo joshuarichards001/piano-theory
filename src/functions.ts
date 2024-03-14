@@ -75,29 +75,6 @@ export const getKeys = (startNote: string, intervals: number[]) => {
   return keys;
 };
 
-export const getQuizColour = (quizType: QuizType) => {
-  switch (quizType) {
-    case "notes":
-    case "major-scale":
-    case "major-triad":
-    case "major-7th-chord":
-      return "btn-primary";
-    case "natural-minor-scale":
-    case "minor-triad":
-    case "minor-7th-chord":
-      return "btn-secondary";
-    case "dominant-7th-chord":
-      return "btn-accent";
-    case "half-diminished-7th-chord":
-      return "btn-info";
-    case "diminished-triad":
-    case "diminished-7th-chord":
-      return "btn-neutral";
-    default:
-      return "btn-primary";
-  }
-};
-
 export const createQuiz = (quizType: QuizType) => {
   const quiz = [];
   const shuffledOctave = shuffle(OCTAVE);
