@@ -7,6 +7,7 @@ import Landing from "./components/Landing.tsx";
 import Quiz from "./components/Quiz.tsx";
 import "./index.css";
 import { store } from "./redux/store.ts";
+import { Analytics } from "@vercel/analytics/react";
 
 const router = createBrowserRouter([
   {
@@ -30,5 +31,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    <Analytics />
   </React.StrictMode>,
 );

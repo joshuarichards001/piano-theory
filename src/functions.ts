@@ -10,13 +10,24 @@ import {
   OCTAVE,
 } from "./constants";
 
-export const getKeyStyles = (note: string, keyState: KeyState) => {
+export const getKeyStyles = (
+  note: string,
+  keyState: KeyState,
+  quizType: QuizType,
+) => {
+  const isNotes = quizType === "notes";
+  const whiteHeight = isNotes ? "h-32" : "h-24";
+  const blackHeight = isNotes ? "h-20" : "h-14";
+  const offset = isNotes ? "-mx-[6%]" : "-mx-[3%]";
+
   if (!note.includes("♭")) {
-    return `grow-[3] h-24 ${whiteColor(keyState)} ${whiteBorder(note)}`;
+    return `grow-[3] ${whiteHeight} ${whiteColor(keyState)} ${whiteBorder(
+      note,
+    )}`;
   } else {
-    return `grow-[2] h-14 border-2 border-black ${blackColor(
+    return `grow-[2] ${blackHeight} border-2 border-black ${blackColor(
       keyState,
-    )} z-10 -mx-[3%]`;
+    )} z-10 ${offset}`;
   }
 };
 
