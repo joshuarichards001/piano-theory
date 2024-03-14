@@ -100,8 +100,8 @@ export default function Quiz() {
       {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
-            <p className="text-gray-500 text-xs w-24">
-              Start with the first instance of
+            <p className="text-gray-500 text-xs w-20">
+              Start in the first octave
             </p>
             <div className="flex justify-between items-end">
               <div
