@@ -1,17 +1,4 @@
-import {
-  DIMINISHED_7TH,
-  DOMINANT_7TH,
-  HALF_DIMINISHED_7TH,
-  MAJOR_7TH,
-  MAJOR_SCALE,
-  MINOR_7TH,
-  MAJOR_TRIADS,
-  MINOR_TRIADS,
-  DIMINISHED_TRIADS,
-  NATURAL_MINOR_SCALE,
-  NOTES,
-  OCTAVE,
-} from "./constants";
+import { NOTES, OCTAVE, QUIZ_MAP } from "./constants";
 
 export const getKeyStyles = (
   note: string,
@@ -88,33 +75,6 @@ export const getKeys = (startNote: string, intervals: number[]) => {
   return keys;
 };
 
-export const parseQuizToKeys = (quizType: QuizType) => {
-  switch (quizType) {
-    case "notes":
-      return [0];
-    case "major-scale":
-      return MAJOR_SCALE;
-    case "natural-minor-scale":
-      return NATURAL_MINOR_SCALE;
-    case "major-triad":
-      return MAJOR_TRIADS;
-    case "minor-triad":
-      return MINOR_TRIADS;
-    case "diminished-triad":
-      return DIMINISHED_TRIADS;
-    case "major-7th-chord":
-      return MAJOR_7TH;
-    case "minor-7th-chord":
-      return MINOR_7TH;
-    case "dominant-7th-chord":
-      return DOMINANT_7TH;
-    case "half-diminished-7th-chord":
-      return HALF_DIMINISHED_7TH;
-    case "diminished-7th-chord":
-      return DIMINISHED_7TH;
-  }
-};
-
 export const getQuizColour = (quizType: QuizType) => {
   switch (quizType) {
     case "notes":
@@ -141,9 +101,10 @@ export const getQuizColour = (quizType: QuizType) => {
 export const createQuiz = (quizType: QuizType) => {
   const quiz = [];
   const shuffledOctave = shuffle(OCTAVE);
+  const keys = QUIZ_MAP.get(quizType)?.keys || [];
 
   for (const note of shuffledOctave) {
-    quiz.push(getKeys(note + "3", parseQuizToKeys(quizType)));
+    quiz.push(getKeys(note + "3", keys));
   }
 
   return quiz;

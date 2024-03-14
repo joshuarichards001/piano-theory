@@ -21,3 +21,9 @@ type QuizRecord = {
   quizType: QuizType;
   time: number;
 };
+
+type Quiz = {
+  keys: number[];
+  name: string;
+  info: string;
+};
