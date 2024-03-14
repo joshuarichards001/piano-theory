@@ -16,7 +16,7 @@ export const getKeyStyles = (
   quizType: QuizType,
 ) => {
   const isNotes = quizType === "notes";
-  const whiteHeight = isNotes ? "h-32" : "h-24";
+  const whiteHeight = isNotes ? "h-36" : "h-24";
   const blackHeight = isNotes ? "h-20" : "h-14";
   const offset = isNotes ? "-mx-[6%]" : "-mx-[3%]";
 
