@@ -21,11 +21,11 @@ export const getKeyStyles = (
   const offset = isNotes ? "-mx-[6%]" : "-mx-[3%]";
 
   if (!note.includes("♭")) {
-    return `grow-[3] ${whiteHeight} ${whiteColor(keyState)} ${whiteBorder(
-      note,
-    )}`;
+    return `select-none grow-[3] ${whiteHeight} ${whiteColor(
+      keyState,
+    )} ${whiteBorder(note)}`;
   } else {
-    return `grow-[2] ${blackHeight} border-2 border-black ${blackColor(
+    return `select-none grow-[2] ${blackHeight} border-2 border-black ${blackColor(
       keyState,
     )} z-10 ${offset}`;
   }
