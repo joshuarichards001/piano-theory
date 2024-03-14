@@ -37,7 +37,12 @@ export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="p-6">
+    <div className="px-6">
+      <p className="text-gray-500 mb-6">
+        Dive into the world of music theory. Pick a topic, and see how quickly
+        and accurately you can hit the right notes!
+      </p>
+
       <div className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
