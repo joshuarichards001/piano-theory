@@ -107,7 +107,7 @@ export default function Quiz() {
         <h2 className="text-2xl capitalize font-bold mb-4">
           {quizType.replaceAll("-", " ")}
         </h2>
-        <p className="text-sm leading-6 tracking-wide">{quizInfo}</p>
+        <p className="text-sm">{quizInfo}</p>
       </div>
 
       {!isCompleted ? (
