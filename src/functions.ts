@@ -11,17 +11,17 @@ export const getKeyStyles = (
   const offset = isNotes ? "-mx-[6%]" : "-mx-[3%]";
 
   if (!note.includes("♭")) {
-    return `select-none grow-[3] ${whiteHeight} ${whiteColor(
+    return `select-none grow-[3] ${whiteHeight} ${whiteColour(
       keyState,
     )} ${whiteBorder(note)}`;
   } else {
-    return `select-none grow-[2] ${blackHeight} border-2 border-black ${blackColor(
+    return `select-none grow-[2] ${blackHeight} border-2 border-black ${blackColour(
       keyState,
     )} z-10 ${offset}`;
   }
 };
 
-export const whiteColor = (keyState: KeyState) => {
+export const whiteColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
     return "bg-white";
   }
@@ -35,7 +35,7 @@ export const whiteColor = (keyState: KeyState) => {
   }
 };
 
-export const blackColor = (keyState: KeyState) => {
+export const blackColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
     return "bg-black";
   }
