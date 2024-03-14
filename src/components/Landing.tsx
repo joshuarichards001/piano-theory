@@ -21,7 +21,7 @@ const QuizButton = ({
       className={`btn shadow-md ${getQuizColour(quizType)}`}
     >
       <p className="font-bold capitalize">
-        {quizType.replace(/-/g, " ").replace("chord", "").replace("scale", "")}
+        {quizType.replace(/-/g, " ").replace("chord", "")}
       </p>
       {record && (
         <div className="badge badge-warning gap-1">
