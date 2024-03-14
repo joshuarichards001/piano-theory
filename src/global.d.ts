@@ -2,6 +2,9 @@ type QuizType =
   | "notes"
   | "major-scale"
   | "natural-minor-scale"
+  | "major-triad"
+  | "minor-triad"
+  | "diminished-triad"
   | "major-7th-chord"
   | "minor-7th-chord"
   | "dominant-7th-chord"
@@ -17,4 +20,4 @@ type KeyState =
 type QuizRecord = {
   quizType: QuizType;
   time: number;
-}
+};

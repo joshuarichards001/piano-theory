@@ -5,6 +5,9 @@ import {
   MAJOR_7TH,
   MAJOR_SCALE,
   MINOR_7TH,
+  MAJOR_TRIADS,
+  MINOR_TRIADS,
+  DIMINISHED_TRIADS,
   NATURAL_MINOR_SCALE,
   NOTES,
   OCTAVE,
@@ -93,6 +96,12 @@ export const parseQuizToKeys = (quizType: QuizType) => {
       return MAJOR_SCALE;
     case "natural-minor-scale":
       return NATURAL_MINOR_SCALE;
+    case "major-triad":
+      return MAJOR_TRIADS;
+    case "minor-triad":
+      return MINOR_TRIADS;
+    case "diminished-triad":
+      return DIMINISHED_TRIADS;
     case "major-7th-chord":
       return MAJOR_7TH;
     case "minor-7th-chord":
@@ -110,15 +119,18 @@ export const getQuizColour = (quizType: QuizType) => {
   switch (quizType) {
     case "notes":
     case "major-scale":
+    case "major-triad":
     case "major-7th-chord":
       return "btn-primary";
     case "natural-minor-scale":
+    case "minor-triad":
     case "minor-7th-chord":
       return "btn-secondary";
     case "dominant-7th-chord":
       return "btn-accent";
     case "half-diminished-7th-chord":
       return "btn-info";
+    case "diminished-triad":
     case "diminished-7th-chord":
       return "btn-neutral";
     default:

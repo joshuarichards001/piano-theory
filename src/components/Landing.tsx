@@ -54,7 +54,16 @@ export default function Landing() {
       </div>
 
       <div className="mb-10">
-        <h2 className="text-2xl mb-2 font-bold">Chords</h2>
+        <h2 className="text-2xl mb-2 font-bold">Triad Chords</h2>
+        <div className="flex flex-wrap gap-3">
+          <QuizButton quizType="major-triad" navigate={navigate} />
+          <QuizButton quizType="minor-triad" navigate={navigate} />
+          <QuizButton quizType="diminished-triad" navigate={navigate} />
+        </div>
+      </div>
+
+      <div className="mb-10">
+        <h2 className="text-2xl mb-2 font-bold">7th Chords</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="major-7th-chord" navigate={navigate} />
           <QuizButton quizType="minor-7th-chord" navigate={navigate} />
