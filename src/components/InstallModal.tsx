@@ -78,13 +78,13 @@ export default function Modal() {
           ).showModal();
         }}
       >
-        <IonIcon icon={logoAppleAppstore} className="h-7 w-7" color="white" />
+        <IonIcon icon={logoAppleAppstore} className="h-7 w-7" />
       </button>
       <dialog id="install-modal" className="modal">
-        <div className="modal-box relative flex flex-col bg-background-highlight h-80">
+        <div className="modal-box relative flex flex-col h-80">
           <form method="dialog">
             <button className="absolute right-6 top-6">
-              <IonIcon icon={close} className="h-5 w-5" color="white" />
+              <IonIcon icon={close} className="h-5 w-5" />
             </button>
           </form>
           <h2 className="text-2xl font-bold mb-2">Add to Home Screen</h2>
