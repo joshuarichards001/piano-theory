@@ -12,6 +12,20 @@ export default defineConfig({
         name: "Piano Theory",
         short_name: "Piano Theory",
         description: "Learn piano theory",
+        display: "fullscreen",
+        prefer_related_applications: false,
+        icons: [
+          {
+            src: "/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+          {
+            src: "/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       },
     }),
   ],
