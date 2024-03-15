@@ -1,29 +1,27 @@
 import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { QUIZ_TYPE_MAP } from "../constants";
 import { useAppSelector } from "../redux/hooks";
-import { QUIZ_MAP } from "../constants";
 
 const QuizButton = ({
-  quizType,
+  quizTypeId,
   navigate,
 }: {
-  quizType: QuizType;
+  quizTypeId: QuizType;
   navigate: NavigateFunction;
 }) => {
-  const quizColour = QUIZ_MAP.get(quizType)?.colour || "bg-primary";
+  const quizType = QUIZ_TYPE_MAP.get(quizTypeId);
   const record = useAppSelector((state) =>
-    state.records.find((record) => record.quizType === quizType),
+    state.records.find((record) => record.quizType === quizTypeId),
   );
 
   return (
     <button
-      onClick={() => navigate(quizType)}
-      className={`btn shadow-md ${quizColour}`}
+      onClick={() => navigate(quizTypeId)}
+      className={`btn shadow-md ${quizType?.colour}`}
     >
-      <p className="font-bold capitalize">
-        {quizType.replace(/-/g, " ").replace("chord", "")}
-      </p>
+      <p className="font-bold capitalize">{quizType?.name}</p>
       {record && (
         <div className="badge badge-warning gap-1">
           <p className="font-semibold">{record.time}s</p>
@@ -47,38 +45,38 @@ export default function Landing() {
       <div className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="notes" navigate={navigate} />
+          <QuizButton quizTypeId="notes" navigate={navigate} />
         </div>
       </div>
 
       <div className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Scales</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-scale" navigate={navigate} />
-          <QuizButton quizType="natural-minor-scale" navigate={navigate} />
+          <QuizButton quizTypeId="major-scale" navigate={navigate} />
+          <QuizButton quizTypeId="natural-minor-scale" navigate={navigate} />
         </div>
       </div>
 
       <div className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Triad Chords</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-triad" navigate={navigate} />
-          <QuizButton quizType="minor-triad" navigate={navigate} />
-          <QuizButton quizType="diminished-triad" navigate={navigate} />
+          <QuizButton quizTypeId="major-triad" navigate={navigate} />
+          <QuizButton quizTypeId="minor-triad" navigate={navigate} />
+          <QuizButton quizTypeId="diminished-triad" navigate={navigate} />
         </div>
       </div>
 
       <div className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">7th Chords</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-7th-chord" navigate={navigate} />
-          <QuizButton quizType="minor-7th-chord" navigate={navigate} />
-          <QuizButton quizType="dominant-7th-chord" navigate={navigate} />
+          <QuizButton quizTypeId="major-7th-chord" navigate={navigate} />
+          <QuizButton quizTypeId="minor-7th-chord" navigate={navigate} />
+          <QuizButton quizTypeId="dominant-7th-chord" navigate={navigate} />
           <QuizButton
-            quizType="half-diminished-7th-chord"
+            quizTypeId="half-diminished-7th-chord"
             navigate={navigate}
           />
-          <QuizButton quizType="diminished-7th-chord" navigate={navigate} />
+          <QuizButton quizTypeId="diminished-7th-chord" navigate={navigate} />
         </div>
       </div>
     </div>
