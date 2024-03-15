@@ -1,3 +1,11 @@
+type Quiz = {
+  questions: number[][];
+  currentQuestion: number[];
+  currentQuestionIndex: number;
+  score: number;
+  isCompleted: boolean;
+};
+
 type QuizType =
   | "notes"
   | "major-scale"
@@ -11,20 +19,16 @@ type QuizType =
   | "half-diminished-7th-chord"
   | "diminished-7th-chord";
 
-type KeyState =
-  | "correct-pressed"
-  | "incorrect-pressed"
-  | "failed"
-  | "not-pressed";
-
-type QuizRecord = {
+type QuizTypeRecord = {
   quizType: QuizType;
   time: number;
 };
 
-type Quiz = {
+type QuizTypeData = {
   keys: number[];
   name: string;
   info: string;
   colour: string;
 };
+
+type KeyState = "correct-pressed" | "incorrect-pressed" | "not-pressed";

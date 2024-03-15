@@ -1,14 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface QuizState {
-  questions: number[][];
-  currentQuestionIndex: number;
-  currentQuestion: number[];
-  score: number;
-  isCompleted: boolean;
-}
-
-const initialState: QuizState = {
+const initialState: Quiz = {
   questions: [],
   currentQuestion: [],
   currentQuestionIndex: 0,

@@ -29,7 +29,7 @@ const setRecordMiddleware: Middleware<unknown, RootState> =
     const records = storedRecords ? JSON.parse(storedRecords) : [];
 
     let recordExists = false;
-    const updatedRecords = records.map((record: QuizRecord) => {
+    const updatedRecords = records.map((record: QuizTypeRecord) => {
       if (record.quizType === action.payload.quizType) {
         recordExists = true;
         return action.payload;
@@ -46,7 +46,7 @@ const setRecordMiddleware: Middleware<unknown, RootState> =
     return next(action);
   };
 
-function isAction(action: unknown): action is PayloadAction<QuizRecord> {
+function isAction(action: unknown): action is PayloadAction<QuizTypeRecord> {
   return (action as PayloadAction).type !== undefined;
 }
 

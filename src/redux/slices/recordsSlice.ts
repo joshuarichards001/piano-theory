@@ -2,15 +2,15 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 const recordsSlice = createSlice({
   name: "records",
-  initialState: [] as QuizRecord[],
+  initialState: [] as QuizTypeRecord[],
   reducers: {
-    setRecords(_, action: PayloadAction<QuizRecord[]>) {
+    setRecords(_, action: PayloadAction<QuizTypeRecord[]>) {
       return action.payload;
     },
-    addRecord(state, action: PayloadAction<QuizRecord>) {
+    addRecord(state, action: PayloadAction<QuizTypeRecord>) {
       state.push(action.payload);
     },
-    updateRecord(state, action: PayloadAction<QuizRecord>) {
+    updateRecord(state, action: PayloadAction<QuizTypeRecord>) {
       return state.map((record) => {
         if (record.quizType === action.payload.quizType) {
           return action.payload;

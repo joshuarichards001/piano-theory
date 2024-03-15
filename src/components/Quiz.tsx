@@ -2,7 +2,7 @@ import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { NOTES, QUIZ_TYPE_MAP } from "../constants";
+import { NOTES, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { createQuiz } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
@@ -15,9 +15,9 @@ import Piano from "./Piano";
 import QuizComplete from "./QuizComplete";
 
 export default function Quiz() {
-  const quizTypeId =
+  const quizType =
     useParams<{ quizType: QuizType }>().quizType || "major-scale";
-  const quizType = QUIZ_TYPE_MAP.get(quizTypeId);
+  const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
 
   const quiz = useAppSelector((state) => state.quiz.questions);
   const currentQuestionIndex = useAppSelector(
@@ -27,7 +27,7 @@ export default function Quiz() {
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
   const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
   const record = useAppSelector((state) =>
-    state.records.find((record) => record.quizType === quizTypeId),
+    state.records.find((record) => record.quizType === quizType),
   );
 
   const quizNote = NOTES[currentQuestion[0]]
@@ -42,7 +42,7 @@ export default function Quiz() {
   const navigate = useNavigate();
 
   const restartQuiz = () => {
-    const newQuiz = createQuiz(quizTypeId);
+    const newQuiz = createQuiz(quizType);
     dispatch(resetQuiz(newQuiz));
     dispatch(resetKeys());
     setTimer(0);
@@ -52,7 +52,7 @@ export default function Quiz() {
   useEffect(() => {
     restartQuiz();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [quizTypeId]);
+  }, [quizType]);
 
   useEffect(() => {
     if (currentQuestionIndex === 0 && pressedKeys.length === 1) {
@@ -103,8 +103,8 @@ export default function Quiz() {
             Restart
           </button>
         </div>
-        <h2 className="text-2xl capitalize font-bold mb-4">{quizType?.name}</h2>
-        <p className="text-sm">{quizType?.info}</p>
+        <h2 className="text-2xl capitalize font-bold mb-4">{quizTypeData?.name}</h2>
+        <p className="text-sm">{quizTypeData?.info}</p>
       </div>
 
       {!isCompleted ? (
@@ -114,7 +114,7 @@ export default function Quiz() {
               Start in the first octave
             </p>
             <div className="flex justify-between items-end">
-              <div className={`btn btn-lg shadow-md px-2 ${quizType?.colour}`}>
+              <div className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}>
                 <h3 className="text-5xl font-bold">{quizNote}</h3>
               </div>
               {record && (
@@ -127,7 +127,7 @@ export default function Quiz() {
             <div className="flex justify-between w-full">
               <div>
                 <h3 className="text-lg capitalize font-bold">
-                  {quizType?.name}
+                  {quizTypeData?.name}
                 </h3>
                 <p className="text-sm text-gray-500">
                   {

@@ -40,7 +40,7 @@ export const OCTAVE = [
   "B",
 ];
 
-export const QUIZ_TYPE_MAP = new Map<QuizType, Quiz>([
+export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
   [
     "notes",
     {

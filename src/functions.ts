@@ -1,4 +1,4 @@
-import { NOTES, OCTAVE, QUIZ_TYPE_MAP } from "./constants";
+import { NOTES, OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
 
 export const getKeyStyles = (
   note: string,
@@ -30,8 +30,6 @@ export const whiteColour = (keyState: KeyState) => {
     return "bg-green-400";
   } else if (keyState === "incorrect-pressed") {
     return "bg-red-400";
-  } else if (keyState === "failed") {
-    return "bg-green-200";
   }
 };
 
@@ -44,8 +42,6 @@ export const blackColour = (keyState: KeyState) => {
     return "bg-green-600";
   } else if (keyState === "incorrect-pressed") {
     return "bg-red-600";
-  } else if (keyState === "failed") {
-    return "bg-green-800";
   }
 };
 
@@ -78,7 +74,7 @@ export const getKeys = (startNote: string, intervals: number[]) => {
 export const createQuiz = (quizType: QuizType) => {
   const quiz = [];
   const shuffledOctave = shuffle(OCTAVE);
-  const keys = QUIZ_TYPE_MAP.get(quizType)?.keys || [];
+  const keys = QUIZ_TYPE_DATA_MAP.get(quizType)?.keys || [];
 
   for (const note of shuffledOctave) {
     quiz.push(getKeys(note + "3", keys));
