@@ -64,7 +64,7 @@ export default function QuizComplete({ timer }: Props) {
         </p>
         {isRecord && (
           <div className="badge badge-warning gap-1">
-            <p className="text-xs font-semibold">New Record!</p>
+            <p className="font-semibold">New Record!</p>
             <IonIcon icon={ribbon} className="h-3 w-3" />
           </div>
         )}

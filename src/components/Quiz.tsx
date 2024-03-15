@@ -122,7 +122,7 @@ export default function Quiz() {
               </div>
               {record && (
                 <div className="badge badge-warning shadow-md gap-1">
-                  <p className="text-xs font-semibold">{record.time}s</p>
+                  <p className="font-semibold">{record.time}s</p>
                   <IonIcon icon={ribbon} className="h-3 w-3" />
                 </div>
               )}

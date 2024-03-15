@@ -26,7 +26,7 @@ const QuizButton = ({
       </p>
       {record && (
         <div className="badge badge-warning gap-1">
-          <p className="text-xs font-semibold">{record.time}s</p>
+          <p className="font-semibold">{record.time}s</p>
           <IonIcon icon={ribbon} className="h-3 w-3" />
         </div>
       )}
