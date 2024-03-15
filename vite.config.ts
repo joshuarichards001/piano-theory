@@ -13,6 +13,7 @@ export default defineConfig({
         short_name: "Piano Theory",
         description: "Learn piano theory",
         display: "fullscreen",
+        theme_color: "#555555",
         prefer_related_applications: false,
         icons: [
           {
