@@ -107,14 +107,14 @@ export default function Quiz() {
           <h2 className="text-2xl capitalize font-bold mb-4">
             {quizTypeData?.name}
           </h2>
-          <p className="text-sm">{quizTypeData?.info}</p>
+          <p className="text-sm text-base-content/60">{quizTypeData?.info}</p>
         </section>
       </div>
 
       {!isCompleted ? (
         <div>
           <div className="flex flex-col p-6 gap-3">
-            <p className="text-gray-500 text-xs w-20">
+            <p className="text-base-content/60 text-xs w-20">
               Start in the first octave
             </p>
             <div className="flex justify-between items-end">
@@ -135,7 +135,7 @@ export default function Quiz() {
                 <h3 className="text-lg capitalize font-bold">
                   {quizTypeData?.name}
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-base-content/60">
                   {
                     [...new Set(pressedKeys)].filter((key) =>
                       currentQuestion.includes(key),
@@ -149,7 +149,7 @@ export default function Quiz() {
                   {currentQuestionIndex + 1}/{quiz.length}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <p className="text-sm text-gray-500">{timer}s</p>
+                  <p className="text-sm text-base-content/60">{timer}s</p>
                 </div>
               </div>
             </div>
