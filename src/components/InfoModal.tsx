@@ -5,7 +5,7 @@ export default function InfoModal() {
   return (
     <>
       <button
-        name="info-modal"
+        aria-label="Open info modal"
         onClick={() => {
           (
             document.getElementById("info-modal") as HTMLFormElement
@@ -17,7 +17,7 @@ export default function InfoModal() {
       <dialog id="info-modal" className="modal">
         <div className="modal-box relative flex flex-col h-80">
           <form method="dialog">
-            <button name="close-modal" className="absolute right-6 top-6">
+            <button aria-label="Close info modal" className="absolute right-6 top-6">
               <IonIcon icon={close} className="h-5 w-5" />
             </button>
           </form>
