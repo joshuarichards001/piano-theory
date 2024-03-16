@@ -92,7 +92,7 @@ export default function Modal() {
             </button>
           </form>
           <h2 className="text-2xl font-bold mb-2">Add to Home Screen</h2>
-          <p className="text-base-content/60 mb-10">
+          <p className="text-base-content/70 mb-10">
             This website has app functionality. Add it to your home screen to
             use it in fullscreen.
             {os === "iOS"
