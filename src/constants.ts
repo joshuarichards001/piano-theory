@@ -46,7 +46,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0],
       name: "Notes",
-      info: "Notes start at C with every white note being a new letter, ♯'s and ♭'s are the black key higher or lower than the white key respectively.",
+      info: "Notes start at C with every white note being a new letter. ♯'s and ♭'s are the black key higher or lower than the white key respectively.",
       colour: "btn-primary",
     },
   ],
