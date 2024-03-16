@@ -36,37 +36,37 @@ export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <div className="px-6 pb-16">
+    <main className="px-6 pb-16">
       <p className="text-gray-500 mb-6">
         Dive into the world of music theory. Pick a topic, and see how quickly
         and accurately you can hit the right notes!
       </p>
 
-      <div className="mb-10">
+      <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="notes" navigate={navigate} />
         </div>
-      </div>
+      </section>
 
-      <div className="mb-10">
+      <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Scales</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="major-scale" navigate={navigate} />
           <QuizButton quizType="natural-minor-scale" navigate={navigate} />
         </div>
-      </div>
+      </section>
 
-      <div className="mb-10">
+      <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Triad Chords</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="major-triad" navigate={navigate} />
           <QuizButton quizType="minor-triad" navigate={navigate} />
           <QuizButton quizType="diminished-triad" navigate={navigate} />
         </div>
-      </div>
+      </section>
 
-      <div className="mb-10">
+      <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">7th Chords</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="major-7th-chord" navigate={navigate} />
@@ -78,7 +78,7 @@ export default function Landing() {
           />
           <QuizButton quizType="diminished-7th-chord" navigate={navigate} />
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

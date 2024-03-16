@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useAppDispatch } from "../redux/hooks";
-import InstallModal from "./InstallModal";
 import InfoModal from "./InfoModal";
+import InstallModal from "./InstallModal";
 
 export default function Home() {
   const dispatch = useAppDispatch();

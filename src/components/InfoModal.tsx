@@ -1,10 +1,11 @@
 import { IonIcon } from "@ionic/react";
-import { helpCircle, close } from "ionicons/icons";
+import { close, helpCircle } from "ionicons/icons";
 
 export default function InfoModal() {
   return (
     <>
       <button
+        name="info-modal"
         onClick={() => {
           (
             document.getElementById("info-modal") as HTMLFormElement
@@ -16,7 +17,7 @@ export default function InfoModal() {
       <dialog id="info-modal" className="modal">
         <div className="modal-box relative flex flex-col h-80">
           <form method="dialog">
-            <button className="absolute right-6 top-6">
+            <button name="close-modal" className="absolute right-6 top-6">
               <IonIcon icon={close} className="h-5 w-5" />
             </button>
           </form>

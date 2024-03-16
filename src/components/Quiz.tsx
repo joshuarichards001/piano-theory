@@ -84,9 +84,9 @@ export default function Quiz() {
   };
 
   return (
-    <div className="flex flex-col justify-between h-full">
+    <main className="flex flex-col justify-between h-full">
       <div className="p-6">
-        <div className="flex justify-between mb-8">
+        <nav className="flex justify-between mb-8">
           <button
             className="btn btn-sm btn-neutral shadow-md"
             onClick={() => {
@@ -102,9 +102,13 @@ export default function Quiz() {
           >
             Restart
           </button>
-        </div>
-        <h2 className="text-2xl capitalize font-bold mb-4">{quizTypeData?.name}</h2>
-        <p className="text-sm">{quizTypeData?.info}</p>
+        </nav>
+        <section>
+          <h2 className="text-2xl capitalize font-bold mb-4">
+            {quizTypeData?.name}
+          </h2>
+          <p className="text-sm">{quizTypeData?.info}</p>
+        </section>
       </div>
 
       {!isCompleted ? (
@@ -114,7 +118,9 @@ export default function Quiz() {
               Start in the first octave
             </p>
             <div className="flex justify-between items-end">
-              <div className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}>
+              <div
+                className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
+              >
                 <h3 className="text-5xl font-bold">{quizNote}</h3>
               </div>
               {record && (
@@ -154,6 +160,6 @@ export default function Quiz() {
       ) : (
         <QuizComplete timer={timer} />
       )}
-    </div>
+    </main>
   );
 }

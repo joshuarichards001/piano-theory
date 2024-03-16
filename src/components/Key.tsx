@@ -17,13 +17,19 @@ export default function Key({ keyIndex, note, keyState }: Props) {
   const handleInteraction = (
     event:
       | React.MouseEvent<HTMLButtonElement>
-      | React.TouchEvent<HTMLButtonElement>,
+      | React.TouchEvent<HTMLButtonElement>
+      | React.KeyboardEvent<HTMLButtonElement>,
   ) => {
     const isMouseDevice = window.matchMedia("(hover: hover)").matches;
 
     if (event.type === "touchstart" && !isMouseDevice) {
       dispatch(addKey(keyIndex));
     } else if (event.type === "mousedown" && isMouseDevice) {
+      dispatch(addKey(keyIndex));
+    } else if (
+      event.type === "keydown" &&
+      (event as React.KeyboardEvent).key === "Enter"
+    ) {
       dispatch(addKey(keyIndex));
     }
   };
@@ -32,6 +38,7 @@ export default function Key({ keyIndex, note, keyState }: Props) {
     <button
       onTouchStart={handleInteraction}
       onMouseDown={handleInteraction}
+      onKeyDown={handleInteraction}
       className={getKeyStyles(note, keyState, quizType)}
     />
   );

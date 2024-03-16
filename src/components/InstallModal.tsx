@@ -72,6 +72,7 @@ export default function Modal() {
   return (
     <>
       <button
+        name="install-modal"
         onClick={() => {
           (
             document.getElementById("install-modal") as HTMLFormElement
@@ -83,7 +84,7 @@ export default function Modal() {
       <dialog id="install-modal" className="modal">
         <div className="modal-box relative flex flex-col h-80">
           <form method="dialog">
-            <button className="absolute right-6 top-6">
+            <button name="close-modal" className="absolute right-6 top-6">
               <IonIcon icon={close} className="h-5 w-5" />
             </button>
           </form>
