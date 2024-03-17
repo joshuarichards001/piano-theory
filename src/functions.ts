@@ -1,29 +1,22 @@
 import { NOTES, OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
 
-export const getKeyStyles = (
-  note: string,
-  keyState: KeyState,
-  quizType: QuizType,
-) => {
-  const isNotes = quizType === "notes";
-  const whiteHeight = isNotes ? "h-36" : "h-24";
-  const blackHeight = isNotes ? "h-20" : "h-14";
-  const offset = isNotes ? "-mx-[6%]" : "-mx-[3%]";
+export const getKeyStyles = (note: string, keyState: KeyState) => {
+  const sharedStyles = "select-none flex-shrink-0 border-black";
 
   if (!note.includes("♭")) {
-    return `select-none grow-[3] ${whiteHeight} ${whiteColour(
+    return `select-none flex-shrink-0 w-12 h-40 border-l-2 last:border-r-2 ${sharedStyles} ${whiteColour(
       keyState,
-    )} ${whiteBorder(note)}`;
+    )}`;
   } else {
-    return `select-none grow-[2] ${blackHeight} border-2 border-black ${blackColour(
+    return `select-none flex-shrink-0 w-8 h-24 shadow-black-key border-2 z-10 -mx-4 ${sharedStyles} ${blackColour(
       keyState,
-    )} z-10 ${offset}`;
+    )}`;
   }
 };
 
 export const whiteColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
-    return "bg-white";
+    return "bg-white active:bg-gray-200";
   }
 
   if (keyState === "correct-pressed") {
@@ -35,7 +28,7 @@ export const whiteColour = (keyState: KeyState) => {
 
 export const blackColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
-    return "bg-black";
+    return "bg-black active:bg-gray-700 active:shadow-none";
   }
 
   if (keyState === "correct-pressed") {
@@ -43,16 +36,6 @@ export const blackColour = (keyState: KeyState) => {
   } else if (keyState === "incorrect-pressed") {
     return "bg-red-600";
   }
-};
-
-export const whiteBorder = (fileName: string) => {
-  return `border-2 border-black ${
-    (fileName === "E3" ||
-      fileName === "B3" ||
-      fileName === "E4" ||
-      fileName === "B4") &&
-    "border-r-0"
-  } last:border-r-2`;
 };
 
 export const getRandomStartNote = () => {
