@@ -1,10 +1,10 @@
-import { NOTES, OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
+import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
 
 export const getKeyStyles = (note: string, keyState: KeyState) => {
   const sharedStyles = "select-none flex-shrink-0 border-black";
 
   if (!note.includes("♭")) {
-    return `select-none flex-shrink-0 w-12 h-40 border-l-2 last:border-r-2 ${sharedStyles} ${whiteColour(
+    return `select-none flex-shrink-0 w-12 h-40 border-l-2 border-y-2 last:border-r-2 ${sharedStyles} ${whiteColour(
       keyState,
     )}`;
   } else {
@@ -14,7 +14,7 @@ export const getKeyStyles = (note: string, keyState: KeyState) => {
   }
 };
 
-export const whiteColour = (keyState: KeyState) => {
+const whiteColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
     return "bg-white active:bg-gray-200";
   }
@@ -26,7 +26,7 @@ export const whiteColour = (keyState: KeyState) => {
   }
 };
 
-export const blackColour = (keyState: KeyState) => {
+const blackColour = (keyState: KeyState) => {
   if (keyState === "not-pressed") {
     return "bg-black active:bg-gray-700 active:shadow-none";
   }
@@ -38,35 +38,19 @@ export const blackColour = (keyState: KeyState) => {
   }
 };
 
-export const getRandomStartNote = () => {
-  return NOTES[Math.floor(Math.random() * 12)];
-};
-
-export const getKeys = (startNote: string, intervals: number[]) => {
-  const keys = [];
-
-  const startNoteIndex = NOTES.indexOf(startNote);
-
-  for (let i = 0; i < intervals.length; i++) {
-    keys.push(startNoteIndex + intervals[i]);
-  }
-
-  return keys;
-};
-
 export const createQuiz = (quizType: QuizType) => {
   const quiz = [];
-  const shuffledOctave = shuffle(OCTAVE);
+  const shuffledOctave = shuffle([...OCTAVE]);
   const keys = QUIZ_TYPE_DATA_MAP.get(quizType)?.keys || [];
 
   for (const note of shuffledOctave) {
-    quiz.push(getKeys(note + "3", keys));
+    quiz.push(getKeys(note, keys));
   }
 
   return quiz;
 };
 
-export const shuffle = (array: string[]) => {
+const shuffle = (array: string[]) => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -82,12 +66,24 @@ export const shuffle = (array: string[]) => {
   return array;
 };
 
+const getKeys = (startNote: string, intervals: number[]) => {
+  const keys = [];
+
+  const startNoteIndex = OCTAVE.indexOf(startNote);
+
+  for (let i = 0; i < intervals.length; i++) {
+    keys.push((startNoteIndex + intervals[i]) % 12);
+  }
+
+  return keys;
+};
+
 export const getKeyState = (
   keyIndex: number,
   pressedKeys: number[],
   question: number[],
 ): KeyState => {
-  const isKeyInQuestion = question.includes(keyIndex);
+  const isKeyInQuestion = question.includes(keyIndex % 12);
   const isKeyInPressedKeys = pressedKeys.includes(keyIndex);
 
   if (isKeyInPressedKeys && isKeyInQuestion) {

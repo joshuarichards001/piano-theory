@@ -2,7 +2,7 @@ import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { NOTES, QUIZ_TYPE_DATA_MAP } from "../constants";
+import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { createQuiz } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
@@ -30,9 +30,7 @@ export default function Quiz() {
     state.records.find((record) => record.quizType === quizType),
   );
 
-  const quizNote = NOTES[currentQuestion[0]]
-    ?.replace("3", "")
-    .replace("/", " / ");
+  const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
 
   const dispatch = useAppDispatch();
 
