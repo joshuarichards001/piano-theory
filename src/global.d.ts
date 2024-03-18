@@ -4,6 +4,7 @@ type Quiz = {
   currentQuestionIndex: number;
   score: number;
   isCompleted: boolean;
+  finalTime: number;
 };
 
 type QuizType =

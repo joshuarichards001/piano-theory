@@ -1,16 +1,11 @@
 import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { QUIZ_TYPE_DATA_MAP } from "../constants";
 import { useAppSelector } from "../redux/hooks";
 
-const QuizButton = ({
-  quizType,
-  navigate,
-}: {
-  quizType: QuizType;
-  navigate: NavigateFunction;
-}) => {
+const QuizButton = ({ quizType }: { quizType: QuizType }) => {
+  const navigate = useNavigate();
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
   const record = useAppSelector((state) =>
     state.records.find((record) => record.quizType === quizType),
@@ -33,8 +28,6 @@ const QuizButton = ({
 };
 
 export default function Landing() {
-  const navigate = useNavigate();
-
   return (
     <main className="px-6 pb-16">
       <p className="text-base-content/70 mb-6">
@@ -45,38 +38,35 @@ export default function Landing() {
       <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="notes" navigate={navigate} />
+          <QuizButton quizType="notes" />
         </div>
       </section>
 
       <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Scales</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-scale" navigate={navigate} />
-          <QuizButton quizType="natural-minor-scale" navigate={navigate} />
+          <QuizButton quizType="major-scale" />
+          <QuizButton quizType="natural-minor-scale" />
         </div>
       </section>
 
       <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">Triad Chords</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-triad" navigate={navigate} />
-          <QuizButton quizType="minor-triad" navigate={navigate} />
-          <QuizButton quizType="diminished-triad" navigate={navigate} />
+          <QuizButton quizType="major-triad" />
+          <QuizButton quizType="minor-triad" />
+          <QuizButton quizType="diminished-triad" />
         </div>
       </section>
 
       <section className="mb-10">
         <h2 className="text-2xl mb-2 font-bold">7th Chords</h2>
         <div className="flex flex-wrap gap-3">
-          <QuizButton quizType="major-7th-chord" navigate={navigate} />
-          <QuizButton quizType="minor-7th-chord" navigate={navigate} />
-          <QuizButton quizType="dominant-7th-chord" navigate={navigate} />
-          <QuizButton
-            quizType="half-diminished-7th-chord"
-            navigate={navigate}
-          />
-          <QuizButton quizType="diminished-7th-chord" navigate={navigate} />
+          <QuizButton quizType="major-7th-chord" />
+          <QuizButton quizType="minor-7th-chord" />
+          <QuizButton quizType="dominant-7th-chord" />
+          <QuizButton quizType="half-diminished-7th-chord" />
+          <QuizButton quizType="diminished-7th-chord" />
         </div>
       </section>
     </main>
