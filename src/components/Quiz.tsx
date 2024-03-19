@@ -20,6 +20,10 @@ export default function Quiz() {
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
+  const uniquePressedKeys = [...new Set(pressedKeys.map((k) => k % 12))];
+  const numberOfCorrectKeysPressed = uniquePressedKeys.filter((key) =>
+    currentQuestion.includes(key),
+  ).length;
 
   return (
     <div>
@@ -44,12 +48,7 @@ export default function Quiz() {
               {quizTypeData?.name}
             </h3>
             <p className="text-sm text-base-content/70">
-              {
-                [...new Set(pressedKeys)].filter((key) =>
-                  currentQuestion.includes(key),
-                ).length
-              }
-              /{currentQuestion.length} Keys Pressed
+              {numberOfCorrectKeysPressed}/{currentQuestion.length} Keys Pressed
             </p>
           </div>
           <div className="flex flex-col items-end">
