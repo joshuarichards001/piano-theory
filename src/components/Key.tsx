@@ -14,16 +14,19 @@ export default function Key({ keyIndex, note, keyState }: Props) {
   const handleInteraction = (
     event:
       | React.MouseEvent<HTMLButtonElement>
+      | React.TouchEvent<HTMLButtonElement>
       | React.KeyboardEvent<HTMLButtonElement>,
   ) => {
-    if (
-      event.type === "keydown" &&
-      (event as React.KeyboardEvent).key !== "Enter"
-    ) {
-      return;
-    }
+    const isMouseDevice = window.matchMedia("(hover: hover)").matches;
 
-    dispatch(addKey(keyIndex));
+    if (
+      (event.type === "touchstart" && !isMouseDevice) ||
+      (event.type === "mousedown" && isMouseDevice) ||
+      (event.type === "keydown" &&
+        (event as React.KeyboardEvent).key === "Enter")
+    ) {
+      dispatch(addKey(keyIndex));
+    }
   };
 
   return (

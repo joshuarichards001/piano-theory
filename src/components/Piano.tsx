@@ -28,7 +28,9 @@ export default function Piano({ pianoScrollValue }: IProps) {
   useEffect(() => {
     const pianoContainer = pianoRef.current;
     if (pianoContainer) {
-      pianoContainer.scrollLeft += pianoContainer.offsetWidth / 2;
+      const maxScrollLeft =
+        pianoContainer.scrollWidth - pianoContainer.offsetWidth;
+      pianoContainer.scrollLeft = pianoScrollValue * maxScrollLeft;
     }
   }, [pianoScrollValue]);
 
@@ -61,10 +63,26 @@ export default function Piano({ pianoScrollValue }: IProps) {
     quizLength,
   ]);
 
+  useEffect(() => {
+    const pianoContainer = pianoRef.current;
+    if (pianoContainer) {
+      pianoContainer.addEventListener("wheel", preventScroll, {
+        passive: false,
+      });
+      return () => {
+        pianoContainer.removeEventListener("wheel", preventScroll);
+      };
+    }
+  }, []);
+
+  const preventScroll = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div
       ref={pianoRef}
-      className="flex overflow-x-scroll whitespace-nowrap bg-base-300"
+      className="flex overflow-x-scroll no-scrollbar whitespace-nowrap bg-base-300"
     >
       {[0, 1].map((octaveNum) =>
         OCTAVE.map((note, i) => (
