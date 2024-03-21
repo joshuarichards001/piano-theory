@@ -75,7 +75,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
     }
   }, []);
 
-  const preventScroll = (e) => {
+  const preventScroll = (e: WheelEvent) => {
     e.preventDefault();
   };
 
