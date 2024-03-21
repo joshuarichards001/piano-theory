@@ -1,9 +1,11 @@
 import { IonIcon } from "@ionic/react";
 import { ribbon } from "ionicons/icons";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { useAppSelector } from "../redux/hooks";
 import Piano from "./Piano";
+import PianoMinimap from "./PianoMinimap";
 import Timer from "./Timer";
 
 export default function Quiz() {
@@ -24,6 +26,7 @@ export default function Quiz() {
   const numberOfCorrectKeysPressed = uniquePressedKeys.filter((key) =>
     currentQuestion.includes(key),
   ).length;
+  const [pianoScrollValue, setPianoScrollValue] = useState(0);
 
   return (
     <div>
@@ -59,7 +62,12 @@ export default function Quiz() {
           </div>
         </div>
       </div>
-      <Piano />
+      <PianoMinimap
+        setPianoScrollValue={setPianoScrollValue}
+      />
+      <Piano
+        pianoScrollValue={pianoScrollValue}
+      />
       <div className="h-28 bg-base-300" />
     </div>
   );

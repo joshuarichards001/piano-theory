@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { OCTAVE } from "../constants";
 import { getKeyState } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -10,7 +10,11 @@ import {
 } from "../redux/slices/quizSlice";
 import Key from "./Key";
 
-export default function Piano() {
+interface IProps {
+  pianoScrollValue: number;
+}
+
+export default function Piano({ pianoScrollValue }: IProps) {
   const dispatch = useAppDispatch();
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
@@ -19,6 +23,14 @@ export default function Piano() {
   );
   const quizLength = useAppSelector((state) => state.quiz.questions.length);
   const score = useAppSelector((state) => state.quiz.score);
+  const pianoRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const pianoContainer = pianoRef.current;
+    if (pianoContainer) {
+      pianoContainer.scrollLeft += pianoContainer.offsetWidth / 2;
+    }
+  }, [pianoScrollValue]);
 
   useEffect(() => {
     if (
@@ -50,7 +62,10 @@ export default function Piano() {
   ]);
 
   return (
-    <div className="flex overflow-x-scroll whitespace-nowrap">
+    <div
+      ref={pianoRef}
+      className="flex overflow-x-scroll whitespace-nowrap bg-base-300"
+    >
       {[0, 1].map((octaveNum) =>
         OCTAVE.map((note, i) => (
           <Key
