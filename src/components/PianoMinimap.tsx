@@ -6,46 +6,42 @@ interface IProps {
 
 export default function PianoMinimap({ setPianoScrollValue }: IProps) {
   const [dragging, setDragging] = useState(false);
-  const [objectPos, setObjectPos] = useState(0);
+  const [objectX, setObjectX] = useState(0);
   const [objectWidth, setObjectWidth] = useState(0);
-  const mousePos = useRef(0);
+  const [offsetX, setOffsetX] = useState(0);
   const targetRef = useRef<HTMLDivElement>(null);
   const childRef = useRef<HTMLDivElement>(null);
 
   const pressDown = useCallback(
-    (e: MouseEvent | TouchEvent) => {
+    (
+      e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
+    ) => {
       setDragging(true);
-      const isTouch = e instanceof TouchEvent;
-      const clientX = isTouch ? e.touches[0].clientX : e.clientX;
-      mousePos.current = clientX;
+      const isTouch = "touches" in e.nativeEvent;
+      const userX = isTouch
+        ? (e as React.TouchEvent<HTMLDivElement>).touches[0].clientX
+        : (e as React.MouseEvent<HTMLDivElement>).clientX;
+
+      setOffsetX(userX - objectX);
     },
-    [setDragging],
+    [setDragging, objectX],
   );
 
   const pressMove = useCallback(
     (e: MouseEvent | TouchEvent) => {
       if (dragging && targetRef.current && childRef.current) {
-        const isTouch = e instanceof TouchEvent;
-        const clientX = isTouch ? e.touches[0].clientX : e.clientX;
-        const dx = clientX - mousePos.current;
-        const x = Math.max(
-          0,
-          Math.min(
-            targetRef.current?.offsetWidth - childRef.current.offsetWidth,
-            objectPos + dx,
-          ),
-        );
-        setObjectPos(x);
-        mousePos.current = clientX;
-
-        // Calculate the percentage
-        const maxPos =
+        const isTouch = "touches" in e;
+        const userX = isTouch ? e.touches[0].clientX : e.clientX;
+        const maxX =
           targetRef.current.offsetWidth - childRef.current.offsetWidth;
-        const percentage = x / maxPos;
+        const newX = Math.min(Math.max(userX - offsetX, 0), maxX);
+        setObjectX(newX);
+
+        const percentage = newX / maxX;
         setPianoScrollValue(percentage);
       }
     },
-    [dragging, objectPos, setPianoScrollValue],
+    [dragging, offsetX, setPianoScrollValue],
   );
 
   const pressUp = useCallback(() => {
@@ -53,18 +49,14 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
   }, [setDragging]);
 
   useEffect(() => {
-    window.addEventListener("mousedown", pressDown);
     window.addEventListener("mousemove", pressMove);
     window.addEventListener("mouseup", pressUp);
-    window.addEventListener("touchstart", pressDown);
     window.addEventListener("touchmove", pressMove);
     window.addEventListener("touchend", pressUp);
 
     return () => {
-      window.removeEventListener("mousedown", pressDown);
       window.removeEventListener("mousemove", pressMove);
       window.removeEventListener("mouseup", pressUp);
-      window.removeEventListener("touchstart", pressDown);
       window.removeEventListener("touchmove", pressMove);
       window.removeEventListener("touchend", pressUp);
     };
@@ -76,7 +68,6 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
       const quizWidth = Math.min(window.innerWidth, pianoWidth);
       setObjectWidth((quizWidth / pianoWidth) * quizWidth);
     };
-
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -87,7 +78,7 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
     <div className="h-10 w-full bg-gray-500 relative" ref={targetRef}>
       <div
         className="h-10 bg-black p-1 absolute cursor-move"
-        style={{ left: `${objectPos}px`, width: `${objectWidth}px` }}
+        style={{ left: `${objectX}px`, width: `${objectWidth}px` }}
         onMouseDown={pressDown}
         onTouchStart={pressDown}
         ref={childRef}

@@ -32,7 +32,8 @@ export default function Key({ keyIndex, note, keyState }: Props) {
   return (
     <button
       aria-label={`Piano key ${note}`}
-      onClick={handleInteraction}
+      onTouchStart={handleInteraction}
+      onMouseDown={handleInteraction}
       onKeyDown={handleInteraction}
       className={getKeyStyles(note, keyState)}
     />

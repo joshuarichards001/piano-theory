@@ -69,13 +69,17 @@ export default function Piano({ pianoScrollValue }: IProps) {
       pianoContainer.addEventListener("wheel", preventScroll, {
         passive: false,
       });
+      pianoContainer.addEventListener("touchmove", preventScroll, {
+        passive: false,
+      });
       return () => {
         pianoContainer.removeEventListener("wheel", preventScroll);
+        pianoContainer.removeEventListener("touchmove", preventScroll);
       };
     }
   }, []);
 
-  const preventScroll = (e: WheelEvent) => {
+  const preventScroll = (e: WheelEvent | TouchEvent) => {
     e.preventDefault();
   };
 
