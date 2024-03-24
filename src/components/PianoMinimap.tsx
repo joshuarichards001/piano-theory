@@ -1,3 +1,5 @@
+import { IonIcon } from "@ionic/react";
+import { reorderFour } from "ionicons/icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface IProps {
@@ -29,6 +31,7 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
 
   const pressMove = useCallback(
     (e: MouseEvent | TouchEvent) => {
+      e.preventDefault();
       if (dragging && targetRef.current && childRef.current) {
         const isTouch = "touches" in e;
         const userX = isTouch ? e.touches[0].clientX : e.clientX;
@@ -51,8 +54,8 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
   useEffect(() => {
     window.addEventListener("mousemove", pressMove);
     window.addEventListener("mouseup", pressUp);
-    window.addEventListener("touchmove", pressMove);
-    window.addEventListener("touchend", pressUp);
+    window.addEventListener("touchmove", pressMove, { passive: false });
+    window.addEventListener("touchend", pressUp, { passive: false });
 
     return () => {
       window.removeEventListener("mousemove", pressMove);
@@ -75,14 +78,22 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
   }, []);
 
   return (
-    <div className="h-10 w-full bg-gray-500 relative" ref={targetRef}>
+    <div
+      className="h-10 w-full bg-base-300 relative overflow-hidden"
+      ref={targetRef}
+    >
       <div
-        className="h-10 bg-black p-1 absolute cursor-move"
+        className={`h-10 absolute flex items-center justify-between cursor-move px-2 shadow-draggable ${
+          dragging ? "bg-neutral/70" : "bg-neutral"
+        }`}
         style={{ left: `${objectX}px`, width: `${objectWidth}px` }}
         onMouseDown={pressDown}
         onTouchStart={pressDown}
         ref={childRef}
-      />
+      >
+        <IonIcon icon={reorderFour} className="h-8 w-8 text-base-300" />
+        <IonIcon icon={reorderFour} className="h-8 w-8 text-base-300" />
+      </div>
     </div>
   );
 }
