@@ -31,8 +31,8 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
 
   const pressMove = useCallback(
     (e: MouseEvent | TouchEvent) => {
-      e.preventDefault();
       if (dragging && targetRef.current && childRef.current) {
+        e.preventDefault();
         const isTouch = "touches" in e;
         const userX = isTouch ? e.touches[0].clientX : e.clientX;
         const maxX =
