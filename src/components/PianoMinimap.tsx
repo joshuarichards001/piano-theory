@@ -1,5 +1,3 @@
-import { IonIcon } from "@ionic/react";
-import { reorderFour } from "ionicons/icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface IProps {
@@ -83,7 +81,7 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
       ref={targetRef}
     >
       <div
-        className={`h-10 absolute flex items-center justify-between cursor-move px-2 shadow-draggable ${
+        className={`h-10 absolute flex items-center justify-between cursor-move px-1 shadow-draggable ${
           dragging ? "bg-neutral/70" : "bg-neutral"
         }`}
         style={{ left: `${objectX}px`, width: `${objectWidth}px` }}
@@ -91,8 +89,22 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
         onTouchStart={pressDown}
         ref={childRef}
       >
-        <IonIcon icon={reorderFour} className="h-8 w-8 text-base-300" />
-        <IonIcon icon={reorderFour} className="h-8 w-8 text-base-300" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          id="draggable-dots"
+          className="h-7 w-7 text-base-300"
+        >
+          <path d="M8.5 17c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7-10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-7 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-7-14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          id="draggable-dots"
+          className="h-7 w-7 text-base-300"
+        >
+          <path d="M8.5 17c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7-10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-7 3c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm7 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 7c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-7-14c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
+        </svg>
       </div>
     </div>
   );
