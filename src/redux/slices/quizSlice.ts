@@ -6,6 +6,7 @@ const initialState: Quiz = {
   currentQuestionIndex: 0,
   score: 0,
   isCompleted: false,
+  finalTime: 0,
 };
 
 const quizSlice = createSlice({
@@ -29,10 +30,18 @@ const quizSlice = createSlice({
     setIsCompleted(state, action: PayloadAction<boolean>) {
       state.isCompleted = action.payload;
     },
+    setFinalTime(state, action: PayloadAction<number>) {
+      state.finalTime = action.payload;
+    },
   },
 });
 
-export const { resetQuiz, setCurrentQuestionIndex, setScore, setIsCompleted } =
-  quizSlice.actions;
+export const {
+  resetQuiz,
+  setCurrentQuestionIndex,
+  setScore,
+  setIsCompleted,
+  setFinalTime,
+} = quizSlice.actions;
 
 export const quizReducer = quizSlice.reducer;

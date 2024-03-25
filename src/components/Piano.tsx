@@ -1,53 +1,106 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { NOTES } from "../constants";
-import { getKeyState } from "../functions";
+import { useEffect, useRef } from "react";
+import { OCTAVE } from "../constants";
+import { getKeyState, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setScore } from "../redux/slices/quizSlice";
+import { resetKeys } from "../redux/slices/pressedKeysSlice";
+import {
+  setCurrentQuestionIndex,
+  setIsCompleted,
+  setScore,
+} from "../redux/slices/quizSlice";
 import Key from "./Key";
 
-type Props = {
-  nextQuestion: () => void;
-};
+interface IProps {
+  pianoScrollValue: number;
+}
 
-export default function Piano({ nextQuestion }: Props) {
+export default function Piano({ pianoScrollValue }: IProps) {
   const dispatch = useAppDispatch();
-  const quizType =
-    useParams<{ quizType: QuizType }>().quizType || "major-scale";
-
   const pressedKeys = useAppSelector((state) => state.pressedKeys);
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
+  const currentQuestionIndex = useAppSelector(
+    (state) => state.quiz.currentQuestionIndex,
+  );
+  const quizLength = useAppSelector((state) => state.quiz.questions.length);
   const score = useAppSelector((state) => state.quiz.score);
+  const pianoRef = useRef<HTMLDivElement>(null);
 
+  // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {
-    if (currentQuestion.every((key) => pressedKeys.includes(key))) {
+    const pianoContainer = pianoRef.current;
+    if (pianoContainer) {
+      const maxScrollLeft =
+        pianoContainer.scrollWidth - pianoContainer.offsetWidth;
+      pianoContainer.scrollLeft = pianoScrollValue * maxScrollLeft;
+    }
+  }, [pianoScrollValue]);
+
+  // Runs when you finish the current question.
+  useEffect(() => {
+    if (isFinishedQuestion(currentQuestion, pressedKeys)) {
       const timeout = setTimeout(() => {
         if (pressedKeys.length === currentQuestion.length) {
           dispatch(setScore(score + 1));
         }
-        nextQuestion();
+        if (currentQuestionIndex === quizLength - 1) {
+          dispatch(setIsCompleted(true));
+          return;
+        }
+        dispatch(resetKeys());
+        dispatch(setCurrentQuestionIndex(currentQuestionIndex + 1));
       }, 500);
 
       return () => clearTimeout(timeout);
     }
-  }, [pressedKeys, currentQuestion, nextQuestion, dispatch, score]);
+  }, [
+    pressedKeys,
+    currentQuestion,
+    dispatch,
+    score,
+    currentQuestionIndex,
+    quizLength,
+  ]);
 
-  const Keys = () => {
-    const keys = quizType === "notes" ? NOTES.slice(0, 12) : NOTES;
+  // Prevent scrolling on the piano because navigation is determined by the piano minimap.
+  useEffect(() => {
+    const pianoContainer = pianoRef.current;
+    if (pianoContainer) {
+      pianoContainer.addEventListener("wheel", preventScroll, {
+        passive: false,
+      });
+      pianoContainer.addEventListener("touchmove", preventScroll, {
+        passive: false,
+      });
+      return () => {
+        pianoContainer.removeEventListener("wheel", preventScroll);
+        pianoContainer.removeEventListener("touchmove", preventScroll);
+      };
+    }
+  }, []);
 
-    return keys.map((note, i) => (
-      <Key
-        key={note}
-        note={note}
-        keyIndex={i}
-        keyState={getKeyState(i, pressedKeys, currentQuestion)}
-      />
-    ));
+  const preventScroll = (e: WheelEvent | TouchEvent) => {
+    e.preventDefault();
   };
 
   return (
-    <div className="flex w-full max-w-xl">
-      <Keys />
+    <div
+      ref={pianoRef}
+      className="flex overflow-x-scroll no-scrollbar whitespace-nowrap bg-base-300"
+    >
+      {[0, 1].map((octaveNum) =>
+        OCTAVE.map((note, i) => (
+          <Key
+            key={octaveNum * OCTAVE.length + i}
+            note={note}
+            keyIndex={octaveNum * OCTAVE.length + i}
+            keyState={getKeyState(
+              octaveNum * OCTAVE.length + i,
+              pressedKeys,
+              currentQuestion,
+            )}
+          />
+        )),
+      )}
     </div>
   );
 }
