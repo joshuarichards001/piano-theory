@@ -2,7 +2,7 @@
 
 A frontend web app to help students learn piano theory using a virtual keyboard.
 
-![Piano theory landing and quiz](https://github.com/joshuarichards001/piano-theory/blob/main/public/pianotheory.png?raw=true)
+![Piano theory landing and quiz](public/pianotheory.png)
 
 It's built using:
 
