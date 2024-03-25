@@ -49,6 +49,7 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
     setDragging(false);
   }, [setDragging]);
 
+  // Event listeners for dragging the minimap bar.
   useEffect(() => {
     window.addEventListener("mousemove", pressMove);
     window.addEventListener("mouseup", pressUp);
@@ -63,6 +64,7 @@ export default function PianoMinimap({ setPianoScrollValue }: IProps) {
     };
   }, [dragging, pressDown, pressMove, pressUp]);
 
+  // Resize the minimap when the window resizes.
   useEffect(() => {
     const handleResize = () => {
       const pianoWidth = 672;

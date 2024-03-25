@@ -98,13 +98,43 @@ export const getKeyState = (
 };
 
 export const quizFeedback = (score: number) => {
-  if (score === 12) {
-    return "Perfect score! Great job!";
-  } else if (score >= 9) {
-    return "Great job! You're getting there!";
-  } else if (score >= 6) {
-    return "Not bad! Keep practicing!";
-  } else {
-    return "Keep practicing! You'll get there!";
+  switch (true) {
+    case score === 12:
+      return "Perfect score! Great job!";
+    case score >= 9:
+      return "Great job! You're getting there!";
+    case score >= 6:
+      return "Not bad! Keep practicing!";
+    default:
+      return "Keep practicing! You'll get there!";
   }
+};
+
+export const isFinishedQuestion = (
+  currentQuestion: number[],
+  pressedKeys: number[],
+) => {
+  const currentQuestionFrequency: { [key: number]: number } = {};
+  const pressedKeysFrequency: { [key: number]: number } = {};
+
+  currentQuestion.forEach((key) => {
+    currentQuestionFrequency[key] = (currentQuestionFrequency[key] || 0) + 1;
+  });
+
+  pressedKeys
+    .map((k) => k % 12)
+    .forEach((key) => {
+      pressedKeysFrequency[key] = (pressedKeysFrequency[key] || 0) + 1;
+    });
+
+  for (const key in currentQuestionFrequency) {
+    if (
+      !pressedKeysFrequency[key] ||
+      currentQuestionFrequency[key] > pressedKeysFrequency[key]
+    ) {
+      return false;
+    }
+  }
+
+  return true;
 };

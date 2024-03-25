@@ -12,6 +12,7 @@ export default function Timer() {
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
+  // Increment the timer every second.
   useEffect(() => {
     let timer: NodeJS.Timeout;
     if (isTimerRunning) {
@@ -20,15 +21,9 @@ export default function Timer() {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isTimerRunning, setTimer]);
+  }, [isTimerRunning, setTimer])
 
-  useEffect(() => {
-    if (isCompleted) {
-      dispatch(setFinalTime(timer));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, isCompleted]);
-
+  // Start the timer when the first key is pressed.
   useEffect(() => {
     if (currentQuestionIndex === 0 && pressedKeys.length === 0) {
       setIsTimerRunning(false);
@@ -38,11 +33,13 @@ export default function Timer() {
     }
   }, [pressedKeys, currentQuestionIndex]);
 
+  // If quiz is completed, stop the timer and set the final time.
   useEffect(() => {
     if (isCompleted) {
       setIsTimerRunning(false);
+      dispatch(setFinalTime(timer));
     }
-  }, [isCompleted]);
+  }, [dispatch, isCompleted, timer]);
 
   return <p className="text-sm text-base-content/70">{timer}s</p>;
 }

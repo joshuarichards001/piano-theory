@@ -26,7 +26,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
   [
     "major-scale",
     {
-      keys: [0, 2, 4, 5, 7, 9, 11],
+      keys: [0, 2, 4, 5, 7, 9, 11, 12],
       name: "Major Scale",
       info: "Major scales follow the formula of whole and half steps: W-W-H-W-W-W-H.",
       colour: "btn-primary",
@@ -35,7 +35,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
   [
     "natural-minor-scale",
     {
-      keys: [0, 2, 3, 5, 7, 8, 10],
+      keys: [0, 2, 3, 5, 7, 8, 10, 12],
       name: "Natural Minor Scale",
       info: "Natural Minor scales follow the formula of whole and half steps: W-H-W-W-H-W-W.",
       colour: "btn-secondary",

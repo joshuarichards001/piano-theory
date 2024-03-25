@@ -19,6 +19,7 @@ export default function QuizComplete() {
   const isComplete = useAppSelector((state) => state.quiz.isCompleted);
   const [isRecord, setIsRecord] = useState(false);
 
+  // Check if the user has set a new record. If so, add or update the record.
   useEffect(() => {
     if (!isComplete || score < numberOfQuestions) {
       return;

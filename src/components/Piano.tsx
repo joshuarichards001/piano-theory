@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { OCTAVE } from "../constants";
-import { getKeyState } from "../functions";
+import { getKeyState, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -25,6 +25,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
 
+  // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {
     const pianoContainer = pianoRef.current;
     if (pianoContainer) {
@@ -34,12 +35,9 @@ export default function Piano({ pianoScrollValue }: IProps) {
     }
   }, [pianoScrollValue]);
 
+  // Runs when you finish the current question.
   useEffect(() => {
-    if (
-      currentQuestion.every((key) =>
-        pressedKeys.map((k) => k % 12).includes(key),
-      )
-    ) {
+    if (isFinishedQuestion(currentQuestion, pressedKeys)) {
       const timeout = setTimeout(() => {
         if (pressedKeys.length === currentQuestion.length) {
           dispatch(setScore(score + 1));
@@ -63,6 +61,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
     quizLength,
   ]);
 
+  // Prevent scrolling on the piano because navigation is determined by the piano minimap.
   useEffect(() => {
     const pianoContainer = pianoRef.current;
     if (pianoContainer) {

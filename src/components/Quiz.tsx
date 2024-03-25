@@ -22,7 +22,7 @@ export default function Quiz() {
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
-  const uniquePressedKeys = [...new Set(pressedKeys.map((k) => k % 12))];
+  const uniquePressedKeys = pressedKeys.map((k) => k % 12);
   const numberOfCorrectKeysPressed = uniquePressedKeys.filter((key) =>
     currentQuestion.includes(key),
   ).length;
@@ -62,12 +62,8 @@ export default function Quiz() {
           </div>
         </div>
       </div>
-      <PianoMinimap
-        setPianoScrollValue={setPianoScrollValue}
-      />
-      <Piano
-        pianoScrollValue={pianoScrollValue}
-      />
+      <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
+      <Piano pianoScrollValue={pianoScrollValue} />
       <div className="h-28 bg-base-300" />
     </div>
   );
