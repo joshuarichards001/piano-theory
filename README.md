@@ -2,6 +2,8 @@
 
 A frontend web app to help students learn piano theory using a virtual keyboard.
 
+![Piano theory landing and quiz](public/pianotheory.png)
+
 It's built using:
 
 - React
