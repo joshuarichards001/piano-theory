@@ -3,11 +3,13 @@ import { rootCustomMiddleware } from "./middleware";
 import { pressedKeysReducer } from "./slices/pressedKeysSlice";
 import { quizReducer } from "./slices/quizSlice";
 import { recordsReducer } from "./slices/recordsSlice";
+import { muteReducer } from "./slices/muteSlice";
 
 const rootReducer = combineReducers({
   pressedKeys: pressedKeysReducer,
   quiz: quizReducer,
   records: recordsReducer,
+  mute: muteReducer,
 });
 
 export const store = configureStore({
