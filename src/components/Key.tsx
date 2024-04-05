@@ -11,7 +11,11 @@ type Props = {
 
 export default function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
-  const audio = useMemo(() => new Audio(`${keyIndex}.mp3`), [keyIndex]);
+  const audio = useMemo(() => {
+    const a = new Audio(`${keyIndex}.mp3`);
+    a.preload = "auto";
+    return a;
+  }, [keyIndex]);
   const audioRef = useRef<HTMLAudioElement>(audio);
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
