@@ -15,7 +15,7 @@ export default function InfoModal() {
         <IonIcon icon={helpCircle} className="h-8 w-8" />
       </button>
       <dialog id="info-modal" className="modal">
-        <div className="modal-box relative flex flex-col h-80">
+        <div className="modal-box relative flex flex-col">
           <form method="dialog">
             <button
               aria-label="Close info modal"
@@ -32,19 +32,28 @@ export default function InfoModal() {
             theory apps that use a virtual keyboard to input your answers. To
             address this I built Piano Theory!
           </p>
-          <div>
-            <p>
-              Built by{" "}
-              <a
-                className="link link-primary"
-                href="https://josh.work"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Josh Richards
-              </a>
-            </p>
-          </div>
+          <p className="mb-4">
+            Built by{" "}
+            <a
+              className="link link-primary"
+              href="https://josh.work"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Josh Richards
+            </a>
+          </p>
+          <p>
+            Love Piano Theory?{" "}
+            <a
+              className="link link-primary"
+              href="https://www.buymeacoffee.com/joshuarichards"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Support the Project
+            </a>
+          </p>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>

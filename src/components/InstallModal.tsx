@@ -82,7 +82,7 @@ export default function Modal() {
         <IonIcon icon={logoAppleAppstore} className="h-7 w-7" />
       </button>
       <dialog id="install-modal" className="modal">
-        <div className="modal-box relative flex flex-col h-80">
+        <div className="modal-box relative flex flex-col">
           <form method="dialog">
             <button
               aria-label="Close install modal"
