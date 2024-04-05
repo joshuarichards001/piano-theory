@@ -114,27 +114,59 @@ export const isFinishedQuestion = (
   currentQuestion: number[],
   pressedKeys: number[],
 ) => {
-  const currentQuestionFrequency: { [key: number]: number } = {};
-  const pressedKeysFrequency: { [key: number]: number } = {};
+  const currentQuestionFrequency = new Map<number, number>();
+  const pressedKeysFrequency = new Map<number, number>();
 
   currentQuestion.forEach((key) => {
-    currentQuestionFrequency[key] = (currentQuestionFrequency[key] || 0) + 1;
+    const count = currentQuestionFrequency.get(key) || 0;
+    currentQuestionFrequency.set(key, count + 1);
   });
 
   pressedKeys
     .map((k) => k % 12)
     .forEach((key) => {
-      pressedKeysFrequency[key] = (pressedKeysFrequency[key] || 0) + 1;
+      const count = pressedKeysFrequency.get(key) || 0;
+      pressedKeysFrequency.set(key, count + 1);
     });
 
-  for (const key in currentQuestionFrequency) {
+  for (const [key, value] of currentQuestionFrequency) {
     if (
-      !pressedKeysFrequency[key] ||
-      currentQuestionFrequency[key] > pressedKeysFrequency[key]
+      !pressedKeysFrequency.has(key) ||
+      value > (pressedKeysFrequency.get(key) || 0)
     ) {
       return false;
     }
   }
 
   return true;
+};
+
+export const numberOfCorrectKeys = (
+  currentQuestion: number[],
+  pressedKeys: number[],
+) => {
+  const currentQuestionFrequency = new Map<number, number>();
+  const pressedKeysFrequency = new Map<number, number>();
+
+  currentQuestion.forEach((key) => {
+    const count = currentQuestionFrequency.get(key) || 0;
+    currentQuestionFrequency.set(key, count + 1);
+  });
+
+  pressedKeys
+    .map((k) => k % 12)
+    .forEach((key) => {
+      const count = pressedKeysFrequency.get(key) || 0;
+      pressedKeysFrequency.set(key, count + 1);
+    });
+
+  let correctKeys = 0;
+
+  for (const [key, value] of currentQuestionFrequency) {
+    if (pressedKeysFrequency.has(key)) {
+      correctKeys += Math.min(value, pressedKeysFrequency.get(key) as number);
+    }
+  }
+
+  return correctKeys;
 };

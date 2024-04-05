@@ -3,6 +3,7 @@ import { ribbon } from "ionicons/icons";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
+import { numberOfCorrectKeys } from "../functions";
 import { useAppSelector } from "../redux/hooks";
 import Piano from "./Piano";
 import PianoMinimap from "./PianoMinimap";
@@ -22,10 +23,10 @@ export default function Quiz() {
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
-  const uniquePressedKeys = pressedKeys.map((k) => k % 12);
-  const numberOfCorrectKeysPressed = uniquePressedKeys.filter((key) =>
-    currentQuestion.includes(key),
-  ).length;
+  const numberOfCorrectKeysPressed = numberOfCorrectKeys(
+    currentQuestion,
+    pressedKeys,
+  );
   const [pianoScrollValue, setPianoScrollValue] = useState(0);
 
   return (
