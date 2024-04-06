@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import { getKeyStyles } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addKey } from "../redux/slices/pressedKeysSlice";
@@ -9,14 +9,10 @@ type Props = {
   keyState: KeyState;
 };
 
-export default function Key({ keyIndex, note, keyState }: Props) {
+function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
-  const audio = useMemo(() => {
-    const a = new Audio(`${keyIndex}.mp3`);
-    a.preload = "auto";
-    return a;
-  }, [keyIndex]);
-  const audioRef = useRef<HTMLAudioElement>(audio);
+  const audioRef = useRef<HTMLAudioElement>(new Audio(`${keyIndex}.mp3`));
+  audioRef.current.preload = "auto";
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
 
@@ -65,3 +61,6 @@ export default function Key({ keyIndex, note, keyState }: Props) {
     />
   );
 }
+
+const MemoizedKey = React.memo(Key);
+export default MemoizedKey;
