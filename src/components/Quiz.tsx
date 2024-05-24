@@ -1,10 +1,9 @@
-import { IonIcon } from "@ionic/react";
-import { ribbon } from "ionicons/icons";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { numberOfCorrectKeys } from "../functions";
 import { useAppSelector } from "../redux/hooks";
+import { RibbonIcon } from "./Icons";
 import Piano from "./Piano";
 import PianoMinimap from "./PianoMinimap";
 import Timer from "./Timer";
@@ -42,7 +41,7 @@ export default function Quiz() {
           {record && (
             <div className="badge badge-warning shadow-md gap-1">
               <p className="font-semibold">{record.time}s</p>
-              <IonIcon icon={ribbon} className="h-3 w-3" />
+              <RibbonIcon />
             </div>
           )}
         </div>

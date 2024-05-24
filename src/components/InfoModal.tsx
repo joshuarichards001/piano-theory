@@ -1,5 +1,4 @@
-import { IonIcon } from "@ionic/react";
-import { close, helpCircle } from "ionicons/icons";
+import { CloseIcon, InfoIcon } from "./Icons";
 
 export default function InfoModal() {
   return (
@@ -12,7 +11,7 @@ export default function InfoModal() {
           ).showModal();
         }}
       >
-        <IonIcon icon={helpCircle} className="h-8 w-8" />
+        <InfoIcon />
       </button>
       <dialog id="info-modal" className="modal">
         <div className="modal-box relative flex flex-col">
@@ -21,7 +20,7 @@ export default function InfoModal() {
               aria-label="Close info modal"
               className="absolute right-6 top-6"
             >
-              <IonIcon icon={close} className="h-5 w-5" />
+              <CloseIcon />
             </button>
           </form>
           <h2 className="text-2xl font-bold mb-4">

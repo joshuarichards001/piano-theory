@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { rootCustomMiddleware } from "./middleware";
+import { muteReducer } from "./slices/muteSlice";
 import { pressedKeysReducer } from "./slices/pressedKeysSlice";
 import { quizReducer } from "./slices/quizSlice";
 import { recordsReducer } from "./slices/recordsSlice";
-import { muteReducer } from "./slices/muteSlice";
 
 const rootReducer = combineReducers({
   pressedKeys: pressedKeysReducer,

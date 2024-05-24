@@ -1,12 +1,11 @@
-import { IonIcon } from "@ionic/react";
 import {
-  addCircle,
-  close,
-  ellipsisVertical,
-  logoAppleAppstore,
-  phonePortraitOutline,
-  shareOutline,
-} from "ionicons/icons";
+  AddIcon,
+  AppStoreIcon,
+  CloseIcon,
+  EllipsisIcon,
+  PhoneIcon,
+  ShareIcon,
+} from "./Icons";
 
 const getOS = () => {
   if (/android/i.test(navigator.userAgent)) {
@@ -23,13 +22,13 @@ const Instructions = ({ os }: { os: "Android" | "iOS" | "Desktop" }) => {
     return (
       <>
         <div className="flex items-center justify-start mb-6">
-          <IonIcon icon={shareOutline} className="h-8 w-8" color="white" />
+          <ShareIcon />
           <p className="ml-3">
             1) Press the 'Share' button below on your browser
           </p>
         </div>
         <div className="flex items-center justify-start">
-          <IonIcon icon={addCircle} className="h-8 w-8" color="white" />
+          <AddIcon />
           <p className="ml-3">2) Press 'Add to Home Screen'</p>
         </div>
       </>
@@ -38,13 +37,13 @@ const Instructions = ({ os }: { os: "Android" | "iOS" | "Desktop" }) => {
     return (
       <>
         <div className="flex items-center justify-start mb-6">
-          <IonIcon icon={ellipsisVertical} className="h-8 w-8" color="white" />
+          <EllipsisIcon />
           <p className="ml-3">
             1) Press the 'Options' button at the top on your browser
           </p>
         </div>
         <div className="flex items-center justify-start">
-          <IonIcon icon={addCircle} className="h-8 w-8" color="white" />
+          <AddIcon />
           <p className="ml-3">2) Press 'Add to Home Screen'</p>
         </div>
       </>
@@ -52,11 +51,7 @@ const Instructions = ({ os }: { os: "Android" | "iOS" | "Desktop" }) => {
   } else {
     return (
       <div className="flex items-center justify-start mb-6">
-        <IonIcon
-          icon={phonePortraitOutline}
-          className="h-10 w-10"
-          color="white"
-        />
+        <PhoneIcon />
         <p className="ml-3">
           This is a mobile only feature, check out Piano Theory on your phones
           browser!
@@ -79,7 +74,7 @@ export default function Modal() {
           ).showModal();
         }}
       >
-        <IonIcon icon={logoAppleAppstore} className="h-7 w-7" />
+        <AppStoreIcon />
       </button>
       <dialog id="install-modal" className="modal">
         <div className="modal-box relative flex flex-col">
@@ -88,16 +83,17 @@ export default function Modal() {
               aria-label="Close install modal"
               className="absolute right-6 top-6"
             >
-              <IonIcon icon={close} className="h-5 w-5" />
+              <CloseIcon />
             </button>
           </form>
           <h2 className="text-2xl font-bold mb-2">Add to Home Screen</h2>
           <p className="text-base-content/70 mb-10">
             This website has app functionality. Add it to your home screen to
-            use it in fullscreen.
+            use it in fullscreen
             {os === "iOS"
-              ? "(make sure you're using Safari)"
-              : os === "Android" && "(make sure you're using Chrome)"}
+              ? " (and make sure you're on the home page and using Safari)."
+              : os === "Android" &&
+                " (and make sure you're on the home page and using Chrome)."}
           </p>
 
           <Instructions os={os} />

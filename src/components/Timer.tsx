@@ -14,14 +14,14 @@ export default function Timer() {
 
   // Increment the timer every second.
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: number | undefined;
     if (isTimerRunning) {
       timer = setInterval(() => {
         setTimer((prevTime) => prevTime + 1);
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isTimerRunning, setTimer])
+  }, [isTimerRunning, setTimer]);
 
   // Start the timer when the first key is pressed.
   useEffect(() => {

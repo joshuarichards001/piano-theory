@@ -1,9 +1,8 @@
-import { IonIcon } from "@ionic/react";
-import { volumeHigh, volumeMute } from "ionicons/icons";
 import { useCallback, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setMute } from "../redux/slices/muteSlice";
+import { VolumeHighIcon, VolumeMuteIcon } from "./Icons";
 import InfoModal from "./InfoModal";
 import InstallModal from "./InstallModal";
 
@@ -26,11 +25,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold">Piano Theory</h1>
         <div className="flex gap-4">
           <button onClick={handleMute} aria-label="Toggle mute">
-            {mute ? (
-              <IonIcon icon={volumeMute} className="h-7 w-7" />
-            ) : (
-              <IonIcon icon={volumeHigh} className="h-7 w-7" />
-            )}
+            {mute ? <VolumeMuteIcon /> : <VolumeHighIcon />}
           </button>
           <InfoModal />
           <InstallModal />

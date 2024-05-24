@@ -1,10 +1,9 @@
-import { IonIcon } from "@ionic/react";
-import { ribbon } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { quizFeedback } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addRecord, updateRecord } from "../redux/slices/recordsSlice";
+import { RibbonIcon } from "./Icons";
 
 export default function QuizComplete() {
   const dispatch = useAppDispatch();
@@ -55,7 +54,7 @@ export default function QuizComplete() {
         {isRecord && (
           <div className="badge badge-warning gap-1">
             <p className="font-semibold">New Record!</p>
-            <IonIcon icon={ribbon} className="h-3 w-3" />
+            <RibbonIcon />
           </div>
         )}
       </div>

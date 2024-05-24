@@ -1,8 +1,7 @@
-import { IonIcon } from "@ionic/react";
-import { ribbon } from "ionicons/icons";
 import { useNavigate } from "react-router-dom";
 import { QUIZ_TYPE_DATA_MAP } from "../constants";
 import { useAppSelector } from "../redux/hooks";
+import { RibbonIcon } from "./Icons";
 
 const QuizButton = ({ quizType }: { quizType: QuizType }) => {
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const QuizButton = ({ quizType }: { quizType: QuizType }) => {
       {record && (
         <div className="badge badge-warning gap-1">
           <p className="font-semibold">{record.time}s</p>
-          <IonIcon icon={ribbon} className="h-3 w-3" />
+          <RibbonIcon />
         </div>
       )}
     </button>
