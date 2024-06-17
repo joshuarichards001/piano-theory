@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import { Howl } from "howler";
+import React from "react";
 import { getKeyStyles } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addKey } from "../redux/slices/pressedKeysSlice";
@@ -11,8 +12,9 @@ type Props = {
 
 function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
-  const audioRef = useRef<HTMLAudioElement>(new Audio(`${keyIndex}.mp3`));
-  audioRef.current.preload = "auto";
+  const sound = new Howl({
+    src: [`${keyIndex}.mp3`],
+  });
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
 
@@ -29,23 +31,16 @@ function Key({ keyIndex, note, keyState }: Props) {
         (event as React.KeyboardEvent).key === "Enter")
     ) {
       dispatch(addKey(keyIndex));
-      if (!mute) audioRef.current?.play();
+      if (!mute) sound.play();
     }
   };
 
   const handleInteractionEnd = () => {
     if (mute) return;
 
-    const fadeOutInterval = setInterval(() => {
-      if (audioRef.current.volume > 0.1) {
-        audioRef.current.volume -= 0.1;
-      } else {
-        clearInterval(fadeOutInterval);
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-        audioRef.current.volume = 1.0;
-      }
-    }, 60);
+    sound.fade(1, 0, 100);
+    sound.pause();
+    sound.volume(1);
   };
 
   return (
