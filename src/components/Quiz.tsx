@@ -30,7 +30,7 @@ export default function Quiz() {
 
   return (
     <div>
-      <div className="flex flex-col p-6 gap-3">
+      <div className="flex flex-col p-4 gap-3">
         <p className="text-base-content/70 text-xs w-20">
           Start in the first octave
         </p>
