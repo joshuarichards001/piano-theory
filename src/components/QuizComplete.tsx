@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
 import { useParams } from "react-router-dom";
 import { quizFeedback } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -55,6 +56,7 @@ export default function QuizComplete() {
           <div className="badge badge-warning gap-1">
             <p className="font-semibold">New Record!</p>
             <RibbonIcon />
+            <Fireworks autorun={{ speed: 3, duration: 2000 }} />
           </div>
         )}
       </div>
