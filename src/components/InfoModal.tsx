@@ -26,15 +26,15 @@ export default function InfoModal() {
           <h2 className="text-2xl font-bold mb-4">
             Thanks for checking out Piano Theory!
           </h2>
-          <p className="mb-10 text-base-content/70">
-            After doing some searching I found there wasn't many good piano
-            theory apps that use a virtual keyboard to input your answers. To
+          <p className="mb-10 tracking-wide text-base-content/70">
+            After doing some searching I found there wasn't many good music
+            theory quiz apps that use a virtual keyboard to input your answers. To
             address this I built Piano Theory!
           </p>
           <p className="mb-4">
             Built by{" "}
             <a
-              className="link link-primary"
+              className="link link-secondary"
               href="https://josh.work"
               target="_blank"
               rel="noreferrer"
@@ -45,7 +45,7 @@ export default function InfoModal() {
           <p>
             Love Piano Theory?{" "}
             <a
-              className="link link-primary"
+              className="link link-secondary"
               href="https://www.buymeacoffee.com/joshuarichards"
               target="_blank"
               rel="noreferrer"

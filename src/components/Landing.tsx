@@ -31,7 +31,7 @@ export default function Landing() {
     <main className="p-4 pt-6 pb-16">
       {window.innerWidth > 750 && (
         <div role="alert" className="alert mb-6">
-          <svg viewBox="0 0 24 24" className="stroke-info w-6 h-6">
+          <svg viewBox="0 0 24 24" fill="none" className="stroke-info w-6 h-6">
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
