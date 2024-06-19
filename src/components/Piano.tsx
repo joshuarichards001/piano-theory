@@ -63,8 +63,12 @@ export default function Piano({ pianoScrollValue }: IProps) {
     quizLength,
   ]);
 
+  // Unblocks audio on iOS devices.
   useEffect(() => {
-    if (hasUnblockedAudio) return;
+    if (hasUnblockedAudio) {
+      return;
+    }
+
     setHasUnblockedAudio(true);
     const audio = document.createElement("audio");
     audio.setAttribute("x-webkit-airplay", "deny");
