@@ -21,9 +21,9 @@ export default function Home() {
 
   return (
     <div className="h-full flex flex-col max-w-2xl mx-auto">
-      <header className="sticky top-0 bg-base-100 shadow-lg flex justify-between items-baseline p-4">
+      <header className="sticky top-0 bg-base-100 shadow-xl flex justify-between p-4">
         <h1 className="text-2xl font-bold">Piano Theory</h1>
-        <div className="flex gap-4">
+        <div className="flex gap-6">
           <button onClick={handleMute} aria-label="Toggle mute">
             {mute ? <VolumeMuteIcon /> : <VolumeHighIcon />}
           </button>

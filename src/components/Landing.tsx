@@ -28,7 +28,7 @@ const QuizButton = ({ quizType }: { quizType: QuizType }) => {
 
 export default function Landing() {
   return (
-    <main className="p-4 pb-16">
+    <main className="p-4 pt-6 pb-16">
       <p className="text-base-content/70 mb-10 tracking-wide">
         Dive into the world of music theory. Pick a topic, and see how quickly
         and accurately you can hit the right notes!
