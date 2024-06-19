@@ -29,7 +29,20 @@ const QuizButton = ({ quizType }: { quizType: QuizType }) => {
 export default function Landing() {
   return (
     <main className="p-4 pt-6 pb-16">
-      <p className="text-base-content/70 mb-10 tracking-wide">
+      {window.innerWidth > 750 && (
+        <div role="alert" className="alert mb-6">
+          <svg viewBox="0 0 24 24" className="stroke-info w-6 h-6">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <span>Piano Theory is best experienced on mobile.</span>
+        </div>
+      )}
+      <p className="text-base-content/70 mb-6 tracking-wide">
         Dive into the world of music theory. Pick a topic, and see how quickly
         and accurately you can hit the right notes!
       </p>
