@@ -282,7 +282,7 @@ export default function unmute(
     "keyup",
   ];
   /** Tracks if a media playback event has occurred */
-  const hasMediaPlaybackEventOccurred = false;
+  let hasMediaPlaybackEventOccurred = false;
   /**
    * Handles events that can begin media playback.
    */
