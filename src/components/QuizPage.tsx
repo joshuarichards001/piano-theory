@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import unmuteAudio from "unmute-ios-audio";
 import { QUIZ_TYPE_DATA_MAP } from "../constants";
 import { createQuiz } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -26,6 +27,10 @@ export default function QuizPage() {
   useEffect(() => {
     restartQuiz();
   }, [quizType, restartQuiz]);
+
+  useEffect(() => {
+    unmuteAudio();
+  }, []);
 
   return (
     <main className="flex flex-col justify-between h-full">
