@@ -1,5 +1,4 @@
-import { Howl } from "howler";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { getKeyStyles } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addKey } from "../redux/slices/pressedKeysSlice";
@@ -12,11 +11,37 @@ type Props = {
 
 function Key({ keyIndex, note, keyState }: Props) {
   const dispatch = useAppDispatch();
-  const sound = new Howl({
-    src: [`${keyIndex}.mp3`],
-  });
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
+
+  const audioContext = useRef<AudioContext | null>(null);
+  const audioBuffer = useRef<AudioBuffer | null>(null);
+  const source = useRef<AudioBufferSourceNode | null>(null);
+  const gainNode = useRef<GainNode | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      audioContext.current = new AudioContext();
+      gainNode.current = audioContext.current.createGain();
+      gainNode.current.connect(audioContext.current.destination);
+
+      const response = await fetch(`/${keyIndex}.mp3`);
+      const arrayBuffer = await response.arrayBuffer();
+      const decodedAudioBuffer = await audioContext.current.decodeAudioData(
+        arrayBuffer,
+      );
+
+      if (decodedAudioBuffer) {
+        audioBuffer.current = decodedAudioBuffer;
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      audioContext.current?.close();
+    };
+  }, [keyIndex]);
 
   const handleInteraction = (
     event:
@@ -31,16 +56,40 @@ function Key({ keyIndex, note, keyState }: Props) {
         (event as React.KeyboardEvent).key === "Enter")
     ) {
       dispatch(addKey(keyIndex));
-      if (!mute) sound.play();
+      if (!mute) startSound();
     }
   };
 
   const handleInteractionEnd = () => {
-    if (mute) return;
+    if (!mute) endSound();
+  };
 
-    sound.fade(1, 0, 100);
-    sound.pause();
-    sound.volume(1);
+  const startSound = () => {
+    if (!audioContext.current) {
+      return;
+    }
+
+    source.current = audioContext.current.createBufferSource();
+    source.current.buffer = audioBuffer.current;
+
+    if (gainNode.current) {
+      source.current.connect(gainNode.current);
+    }
+
+    source.current.start(0);
+    gainNode.current?.gain.setValueAtTime(1, audioContext.current.currentTime);
+  };
+
+  const endSound = () => {
+    const fadeOutDuration = 0.5;
+    gainNode.current?.gain.setValueAtTime(1, audioContext.current!.currentTime);
+    gainNode.current?.gain.linearRampToValueAtTime(
+      0,
+      audioContext.current!.currentTime + fadeOutDuration,
+    );
+    setTimeout(() => {
+      source.current?.disconnect();
+    }, fadeOutDuration * 1000);
   };
 
   return (
