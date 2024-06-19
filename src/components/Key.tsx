@@ -21,7 +21,7 @@ function Key({ keyIndex, note, keyState }: Props) {
 
   useEffect(() => {
     const fetchData = async () => {
-      audioContext.current = new (window.AudioContext || window.webkitAudioContext)();
+      audioContext.current = new AudioContext();
       gainNode.current = audioContext.current.createGain();
       gainNode.current.connect(audioContext.current.destination);
 
