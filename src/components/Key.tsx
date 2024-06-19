@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { getKeyStyles } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addKey } from "../redux/slices/pressedKeysSlice";
+import unmute from "../unmute";
 
 type Props = {
   keyIndex: number;
@@ -34,6 +35,8 @@ function Key({ keyIndex, note, keyState }: Props) {
       if (decodedAudioBuffer) {
         audioBuffer.current = decodedAudioBuffer;
       }
+
+      unmute(audioContext.current);
     };
 
     if (!mute) {
