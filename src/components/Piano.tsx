@@ -24,6 +24,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const quizLength = useAppSelector((state) => state.quiz.questions.length);
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
+  const audioContext = new AudioContext();
 
   // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {
@@ -98,6 +99,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
               pressedKeys,
               currentQuestion,
             )}
+            audioContext={audioContext}
           />
         )),
       )}

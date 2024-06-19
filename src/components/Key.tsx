@@ -7,42 +7,38 @@ type Props = {
   keyIndex: number;
   note: string;
   keyState: KeyState;
+  audioContext: AudioContext;
 };
 
-function Key({ keyIndex, note, keyState }: Props) {
+function Key({ keyIndex, note, keyState, audioContext }: Props) {
   const dispatch = useAppDispatch();
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
 
-  const audioContext = useRef<AudioContext | null>(null);
-  const audioBuffer = useRef<AudioBuffer | null>(null);
-  const source = useRef<AudioBufferSourceNode | null>(null);
-  const gainNode = useRef<GainNode | null>(null);
+  const audioContextRef = useRef<AudioContext>(audioContext);
+  const audioBufferRef = useRef<AudioBuffer | null>(null);
+  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const gainNodeRef = useRef<GainNode | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      audioContext.current = new AudioContext();
-      gainNode.current = audioContext.current.createGain();
-      gainNode.current.connect(audioContext.current.destination);
+      gainNodeRef.current = audioContextRef.current.createGain();
+      gainNodeRef.current.connect(audioContextRef.current.destination);
 
       const response = await fetch(`/${keyIndex}.mp3`);
       const arrayBuffer = await response.arrayBuffer();
-      const decodedAudioBuffer = await audioContext.current.decodeAudioData(
+      const decodedAudioBuffer = await audioContextRef.current.decodeAudioData(
         arrayBuffer,
       );
 
       if (decodedAudioBuffer) {
-        audioBuffer.current = decodedAudioBuffer;
+        audioBufferRef.current = decodedAudioBuffer;
       }
     };
 
     if (!mute) {
       fetchData();
     }
-
-    return () => {
-      audioContext.current?.close();
-    };
   }, [keyIndex, mute]);
 
   const handleInteraction = (
@@ -72,30 +68,36 @@ function Key({ keyIndex, note, keyState }: Props) {
   };
 
   const startSound = () => {
-    if (!audioContext.current) {
+    if (!audioContextRef.current) {
       return;
     }
 
-    source.current = audioContext.current.createBufferSource();
-    source.current.buffer = audioBuffer.current;
+    sourceRef.current = audioContextRef.current.createBufferSource();
+    sourceRef.current.buffer = audioBufferRef.current;
 
-    if (gainNode.current) {
-      source.current.connect(gainNode.current);
+    if (gainNodeRef.current) {
+      sourceRef.current.connect(gainNodeRef.current);
     }
 
-    source.current.start(0);
-    gainNode.current?.gain.setValueAtTime(1, audioContext.current.currentTime);
+    sourceRef.current.start(0);
+    gainNodeRef.current?.gain.setValueAtTime(
+      1,
+      audioContextRef.current.currentTime,
+    );
   };
 
   const endSound = () => {
     const fadeOutDuration = 0.5;
-    gainNode.current?.gain.setValueAtTime(1, audioContext.current!.currentTime);
-    gainNode.current?.gain.linearRampToValueAtTime(
+    gainNodeRef.current?.gain.setValueAtTime(
+      1,
+      audioContextRef.current!.currentTime,
+    );
+    gainNodeRef.current?.gain.linearRampToValueAtTime(
       0,
-      audioContext.current!.currentTime + fadeOutDuration,
+      audioContextRef.current!.currentTime + fadeOutDuration,
     );
     setTimeout(() => {
-      source.current?.disconnect();
+      sourceRef.current?.disconnect();
     }, fadeOutDuration * 1000);
   };
 
