@@ -1,8 +1,8 @@
 import {
   AddIcon,
-  AppStoreIcon,
   CloseIcon,
   EllipsisIcon,
+  InstallIcon,
   PhoneIcon,
   ShareIcon,
 } from "./Icons";
@@ -74,7 +74,7 @@ export default function Modal() {
           ).showModal();
         }}
       >
-        <AppStoreIcon />
+        <InstallIcon />
       </button>
       <dialog id="install-modal" className="modal">
         <div className="modal-box relative flex flex-col">
