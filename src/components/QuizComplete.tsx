@@ -56,7 +56,7 @@ export default function QuizComplete() {
           <div className="badge badge-warning gap-1">
             <p className="font-semibold">New Record!</p>
             <RibbonIcon />
-            <Fireworks autorun={{ speed: 3, duration: 2000 }} />
+            <Fireworks autorun={{ speed: 2, duration: 500 }} />
           </div>
         )}
       </div>
