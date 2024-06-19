@@ -54,7 +54,7 @@ const fetchMuteMiddleware: Middleware<unknown, RootState> =
     }
 
     const storedMute = localStorage.getItem("mute");
-    const mute = storedMute ? JSON.parse(storedMute) : true;
+    const mute = storedMute ? JSON.parse(storedMute) : false;
 
     next(setMute(mute));
 

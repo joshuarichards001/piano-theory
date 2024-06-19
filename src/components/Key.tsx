@@ -36,12 +36,14 @@ function Key({ keyIndex, note, keyState }: Props) {
       }
     };
 
-    fetchData();
+    if (!mute) {
+      fetchData();
+    }
 
     return () => {
       audioContext.current?.close();
     };
-  }, [keyIndex]);
+  }, [keyIndex, mute]);
 
   const handleInteraction = (
     event:
@@ -56,12 +58,17 @@ function Key({ keyIndex, note, keyState }: Props) {
         (event as React.KeyboardEvent).key === "Enter")
     ) {
       dispatch(addKey(keyIndex));
-      if (!mute) startSound();
+
+      if (!mute) {
+        startSound();
+      }
     }
   };
 
   const handleInteractionEnd = () => {
-    if (!mute) endSound();
+    if (!mute) {
+      endSound();
+    }
   };
 
   const startSound = () => {

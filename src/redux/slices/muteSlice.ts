@@ -2,7 +2,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 const muteSlice = createSlice({
   name: "mute",
-  initialState: true,
+  initialState: false,
   reducers: {
     setMute(_, action: PayloadAction<boolean>) {
       return action.payload;
