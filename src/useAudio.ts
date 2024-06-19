@@ -7,14 +7,12 @@ export function useAudio(
 ) {
   const audioContextRef = useRef<AudioContext>(audioContext);
   const audioBufferRef = useRef<AudioBuffer | null>(null);
-  const sourceRef = useRef<AudioBufferSourceNode | null>(null);
-  const gainNodeRef = useRef<GainNode | null>(null);
+  const audioControllersRef = useRef<
+    { sourceNode: AudioBufferSourceNode; gainNode: GainNode }[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      gainNodeRef.current = audioContextRef.current.createGain();
-      gainNodeRef.current.connect(audioContextRef.current.destination);
-
       const response = await fetch(`/${keyIndex}.mp3`);
       const arrayBuffer = await response.arrayBuffer();
       const decodedAudioBuffer = await audioContextRef.current.decodeAudioData(
@@ -36,33 +34,33 @@ export function useAudio(
       return;
     }
 
-    sourceRef.current = audioContextRef.current.createBufferSource();
-    sourceRef.current.buffer = audioBufferRef.current;
+    const sourceNode = audioContextRef.current.createBufferSource();
+    sourceNode.buffer = audioBufferRef.current;
 
-    if (gainNodeRef.current) {
-      sourceRef.current.connect(gainNodeRef.current);
-    }
+    const gainNode = audioContextRef.current.createGain();
+    gainNode.connect(audioContextRef.current.destination);
+    sourceNode.connect(gainNode);
 
-    sourceRef.current.start(0);
-    gainNodeRef.current?.gain.setValueAtTime(
-      1,
-      audioContextRef.current.currentTime,
-    );
+    audioControllersRef.current.push({ sourceNode, gainNode });
+
+    sourceNode.start(0);
+    gainNode.gain.setValueAtTime(1, audioContextRef.current.currentTime);
   };
 
   const endSound = () => {
     const fadeOutDuration = 0.5;
-    gainNodeRef.current?.gain.setValueAtTime(
-      1,
-      audioContextRef.current!.currentTime,
-    );
-    gainNodeRef.current?.gain.linearRampToValueAtTime(
-      0,
-      audioContextRef.current!.currentTime + fadeOutDuration,
-    );
-    setTimeout(() => {
-      sourceRef.current?.disconnect();
-    }, fadeOutDuration * 1000);
+    audioControllersRef.current.forEach(({ sourceNode, gainNode }) => {
+      gainNode.gain.setValueAtTime(1, audioContextRef.current!.currentTime);
+      gainNode.gain.linearRampToValueAtTime(
+        0,
+        audioContextRef.current!.currentTime + fadeOutDuration,
+      );
+      setTimeout(() => {
+        sourceNode.disconnect();
+        gainNode.disconnect();
+      }, fadeOutDuration * 1000);
+    });
+    audioControllersRef.current = [];
   };
 
   return { startSound, endSound };
