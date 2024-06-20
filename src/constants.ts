@@ -46,7 +46,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 4, 7],
       name: "Major Triad",
-      info: "Major Triads are constructed with a root, a major third and a perfect fifth.",
+      info: "Major Triads are constructed with a root, a major third (4 half steps above the root) and a perfect fifth (7 half steps above the root). For example, D major triad: D (root), F♯ (major third), A (perfect fifth).",
       colour: "btn-primary",
     },
   ],
@@ -55,7 +55,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 3, 7],
       name: "Minor Triad",
-      info: "Minor Triads are constructed with a root, a minor third and a perfect fifth.",
+      info: "Minor Triads are constructed with a root, a minor third (3 half steps above the root) and a perfect fifth (7 half steps above the root). For example, D minor triad: D (root), F (minor third), A (perfect fifth).",
       colour: "btn-secondary",
     },
   ],
@@ -64,7 +64,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 3, 6],
       name: "Diminished Triad",
-      info: "Diminished Triads are constructed with a root, a minor third and a flattened fifth.",
+      info: "Diminished Triads are constructed with a root, a minor third (3 half steps above the root) and a flattened fifth (6 half steps above the root). For example, D diminished triad: D (root), F (minor third), G♯ (flattened fifth).",
       colour: "btn-neutral",
     },
   ],
