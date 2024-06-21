@@ -11,6 +11,7 @@ type QuizType =
   | "notes"
   | "major-scale"
   | "natural-minor-scale"
+  | "harmonic-minor-scale"
   | "major-triad"
   | "minor-triad"
   | "diminished-triad"

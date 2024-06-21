@@ -42,6 +42,15 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     },
   ],
   [
+    "harmonic-minor-scale",
+    {
+      keys: [0, 2, 3, 5, 7, 8, 11, 12],
+      name: "Harmonic Minor Scale",
+      info: "Harmonic Minor Scales follow the same formula as a natural minor scale but raises the 7th note a half step (e.g. D-E-F-G-A-B♭-C♯-D).",
+      colour: "btn-accent",
+    },
+  ],
+  [
     "major-triad",
     {
       keys: [0, 4, 7],

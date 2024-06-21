@@ -59,6 +59,7 @@ export default function Landing() {
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="major-scale" />
           <QuizButton quizType="natural-minor-scale" />
+          <QuizButton quizType="harmonic-minor-scale" />
         </div>
       </section>
 
