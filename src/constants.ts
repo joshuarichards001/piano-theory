@@ -73,7 +73,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 4, 7, 11],
       name: "Major 7th",
-      info: "Major 7th chords are constructed with a root, a major third (4 half steps above the root), a perfect fifth (7 half steps above the root) and a major seventh (11 half steps above the root). For example, D major 7th: D (root), F♯ (major third), A (perfect fifth), C♯ (major seventh).",
+      info: "A major 7th chord is a major triad with an added major seventh (11 half steps above the root). For example, D major 7th: D (root), F♯ (major third), A (perfect fifth), C♯ (major seventh).",
       colour: "btn-primary",
     },
   ],
@@ -82,7 +82,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 3, 7, 10],
       name: "Minor 7th",
-      info: "Minor 7th chords are constructed with a root, a minor third (3 half steps above the root), a perfect fifth (7 half steps above the root) and a minor seventh (10 half steps above the root). For example, D minor 7th: D (root), F (minor third), A (perfect fifth), C (minor seventh).",
+      info: "A minor 7th chord is a minor triad with an added minor seventh (10 half steps above the root). For example, D minor 7th: D (root), F (minor third), A (perfect fifth), C (minor seventh).",
       colour: "btn-secondary",
     },
   ],
@@ -91,7 +91,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 4, 7, 10],
       name: "Dominant 7th",
-      info: "Dominant 7th chord is constructed with a root, a major third, a perfect fifth and a minor seventh.",
+      info: "A dominant 7th chord is a major triad with an added minor seventh (10 half steps above the root). For example, D dominant 7th: D (root), F♯ (major third), A (perfect fifth), C (minor seventh).",
       colour: "btn-accent",
     },
   ],
@@ -99,8 +99,8 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     "half-diminished-7th-chord",
     {
       keys: [0, 3, 6, 10],
-      name: "Half Diminished 7th",
-      info: "Half Diminished 7th chords are constructed with a root, a minor third (3 half steps above the root), a diminished fifth (6 half steps above the root) and a minor seventh (10 half steps above the root). For example, D half diminished 7th: D (root), F (minor third), G♯ (diminished fifth), C (minor seventh).",
+      name: "Half-Diminished 7th",
+      info: "A half-diminished 7th chord is a diminished triad with an added minor seventh (10 half steps above the root). For example, D half-diminished 7th: D (root), F (minor third), G♯ (diminished fifth), C (minor seventh).",
       colour: "btn-info",
     },
   ],
@@ -109,7 +109,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0, 3, 6, 9],
       name: "Diminished 7th",
-      info: "Diminished 7th chord is constructed with a root, a minor third (3 half steps above the root), a diminished fifth (6 half steps above the root) and a diminished seventh (9 half steps above the root). For example, D diminished 7th: D (root), F (minor third), G♯ (diminished fifth), B (diminished seventh).",
+      info: "A diminished 7th chord is a diminished triad with an added diminished seventh (9 half steps above the root). For example, D diminished 7th: D (root), F (minor third), G♯ (diminished fifth), B (diminished seventh).",
       colour: "btn-neutral",
     },
   ],
