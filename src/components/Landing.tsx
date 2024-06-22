@@ -82,6 +82,17 @@ export default function Landing() {
           <QuizButton quizType="diminished-7th-chord" />
         </div>
       </section>
+
+      <section className="mb-10">
+        <h2 className="text-2xl mb-2 font-bold">Modes</h2>
+        <div className="flex flex-wrap gap-3">
+          <QuizButton quizType="dorian-mode" />
+          <QuizButton quizType="phrygian-mode" />
+          <QuizButton quizType="lydian-mode" />
+          <QuizButton quizType="mixolydian-mode" />
+          <QuizButton quizType="locrian-mode" />
+        </div>
+      </section>
     </main>
   );
 }

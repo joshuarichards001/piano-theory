@@ -51,6 +51,51 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     },
   ],
   [
+    "dorian-mode",
+    {
+      keys: [0, 2, 3, 5, 7, 9, 10, 12],
+      name: "Dorian Mode",
+      info: "The Dorian mode is a scale that starts on the second note of a major scale. It follows a pattern of whole and half steps: W-H-W-W-W-H-W. In D Dorian, this would be D-E-F-G-A-B-C-D.",
+      colour: "btn-primary",
+    },
+  ],
+  [
+    "phrygian-mode",
+    {
+      keys: [0, 1, 3, 5, 7, 8, 10, 12],
+      name: "Phrygian Mode",
+      info: "The Phrygian mode is a scale that starts on the third note of a major scale. It follows a pattern of whole and half steps: H-W-W-W-H-W-W. In D Phrygian, this would be D-E♭-F-G-A-B♭-C-D.",
+      colour: "btn-secondary",
+    },
+  ],
+  [
+    "lydian-mode",
+    {
+      keys: [0, 2, 4, 6, 7, 9, 11, 12],
+      name: "Lydian Mode",
+      info: "The Lydian mode is a scale that starts on the fourth note of a major scale. It follows a pattern of whole and half steps: W-W-W-H-W-W-H. In D Lydian, this would be D-E-F#-G#-A-B-C#-D.",
+      colour: "btn-accent",
+    },
+  ],
+  [
+    "mixolydian-mode",
+    {
+      keys: [0, 2, 4, 5, 7, 9, 10, 12],
+      name: "Mixolydian Mode",
+      info: "The Mixolydian mode is a scale that starts on the fifth note of a major scale. It follows a pattern of whole and half steps: W-W-H-W-W-H-W. In D Mixolydian, this would be D-E-F#-G-A-B-C-D.",
+      colour: "btn-info",
+    },
+  ],
+  [
+    "locrian-mode",
+    {
+      keys: [0, 1, 3, 5, 6, 8, 10, 12],
+      name: "Locrian Mode",
+      info: "The Locrian mode is a scale that starts on the seventh note of a major scale. It follows a pattern of whole and half steps: H-W-W-H-W-W-W. In D Locrian, this would be D-E♭-F-G-A♭-B♭-C-D.",
+      colour: "btn-neutral",
+    },
+  ],
+  [
     "major-triad",
     {
       keys: [0, 4, 7],
