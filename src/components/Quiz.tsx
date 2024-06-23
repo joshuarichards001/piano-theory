@@ -64,7 +64,7 @@ export default function Quiz() {
       </div>
       <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
       <Piano pianoScrollValue={pianoScrollValue} />
-      <div className="h-28 bg-base-300" />
+      <div className="h-20 bg-base-300" />
     </div>
   );
 }
