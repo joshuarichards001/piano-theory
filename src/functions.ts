@@ -170,3 +170,7 @@ export const numberOfCorrectKeys = (
 
   return correctKeys;
 };
+
+export const isDeviceiOS = () => {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent);
+};

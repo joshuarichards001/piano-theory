@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { OCTAVE } from "../constants";
-import { getKeyState, isFinishedQuestion } from "../functions";
+import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -65,7 +65,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
 
   // Unblocks audio on iOS devices.
   useEffect(() => {
-    if (hasUnblockedAudio) {
+    if (hasUnblockedAudio || !isDeviceiOS()) {
       return;
     }
 
