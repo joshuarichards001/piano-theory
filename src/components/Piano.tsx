@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { OCTAVE } from "../constants";
 import { getKeyState, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -22,9 +22,11 @@ export default function Piano({ pianoScrollValue }: IProps) {
     (state) => state.quiz.currentQuestionIndex,
   );
   const quizLength = useAppSelector((state) => state.quiz.questions.length);
+  const quizStatus = useAppSelector((state) => state.quiz.status);
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
   const audioContext = new AudioContext();
+  const [hasUnblockedAudio, setHasUnblockedAudio] = useState(false);
 
   // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {
@@ -61,6 +63,23 @@ export default function Piano({ pianoScrollValue }: IProps) {
     currentQuestionIndex,
     quizLength,
   ]);
+
+  // Unblocks audio on iOS devices.
+  useEffect(() => {
+    if (hasUnblockedAudio || quizStatus !== "running") {
+      return;
+    }
+
+    setHasUnblockedAudio(true);
+    const audio = document.createElement("audio");
+    audio.setAttribute("x-webkit-airplay", "deny");
+    audio.preload = "auto";
+    audio.loop = true;
+    audio.src = "250-milliseconds-of-silence.mp3";
+    audio.play();
+    console.log(audio);
+    
+  }, [hasUnblockedAudio, quizStatus]);
 
   // Prevent scrolling on the piano because navigation is determined by the piano minimap.
   useEffect(() => {
