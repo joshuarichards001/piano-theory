@@ -3,7 +3,7 @@ type Quiz = {
   currentQuestion: number[];
   currentQuestionIndex: number;
   score: number;
-  isCompleted: boolean;
+  status: "stopped" | "running" | "completed";
   finalTime: number;
 };
 
