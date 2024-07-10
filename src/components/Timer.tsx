@@ -4,11 +4,7 @@ import { setFinalTime } from "../redux/slices/quizSlice";
 
 export default function Timer() {
   const dispatch = useAppDispatch();
-  const pressedKeys = useAppSelector((state) => state.pressedKeys);
-  const currentQuestionIndex = useAppSelector(
-    (state) => state.quiz.currentQuestionIndex,
-  );
-  const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
+  const quizStatus = useAppSelector((state) => state.quiz.status);
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
@@ -23,23 +19,21 @@ export default function Timer() {
     return () => clearInterval(timer);
   }, [isTimerRunning, setTimer]);
 
-  // Start the timer when the first key is pressed.
   useEffect(() => {
-    if (currentQuestionIndex === 0 && pressedKeys.length === 0) {
-      setIsTimerRunning(false);
-      setTimer(0);
-    } else if (currentQuestionIndex === 0 && pressedKeys.length === 1) {
-      setIsTimerRunning(true);
+    switch (quizStatus) {
+      case "stopped":
+        setIsTimerRunning(false);
+        setTimer(0);
+        break;
+      case "running":
+        setIsTimerRunning(true);
+        break;
+      case "completed":
+        setIsTimerRunning(false);
+        dispatch(setFinalTime(timer));
+        break;
     }
-  }, [pressedKeys, currentQuestionIndex]);
-
-  // If quiz is completed, stop the timer and set the final time.
-  useEffect(() => {
-    if (isCompleted) {
-      setIsTimerRunning(false);
-      dispatch(setFinalTime(timer));
-    }
-  }, [dispatch, isCompleted, timer]);
+  }, [dispatch, quizStatus, timer]);
 
   return <p className="text-sm text-base-content/70">{timer}s</p>;
 }

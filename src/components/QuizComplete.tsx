@@ -16,12 +16,12 @@ export default function QuizComplete() {
   const score = useAppSelector((state) => state.quiz.score);
   const records = useAppSelector((state) => state.records);
   const finalTime = useAppSelector((state) => state.quiz.finalTime);
-  const isComplete = useAppSelector((state) => state.quiz.isCompleted);
+  const quizStatus = useAppSelector((state) => state.quiz.status);
   const [isRecord, setIsRecord] = useState(false);
 
-  // Check if the user has set a new record. If so, add or update the record.
+  // Check if the quiz is complete and that they got a perfect score. If so, add or update the record.
   useEffect(() => {
-    if (!isComplete || score < numberOfQuestions) {
+    if (quizStatus !== "completed" || score < numberOfQuestions) {
       return;
     }
     const record = records.find((record) => record.quizType === quizType);
@@ -42,7 +42,7 @@ export default function QuizComplete() {
     records,
     quizType,
     finalTime,
-    isComplete,
+    quizStatus,
   ]);
 
   return (
