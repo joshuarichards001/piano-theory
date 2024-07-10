@@ -5,7 +5,7 @@ const initialState: Quiz = {
   currentQuestion: [],
   currentQuestionIndex: 0,
   score: 0,
-  status: "stopped",
+  isCompleted: false,
   finalTime: 0,
 };
 
@@ -27,8 +27,8 @@ const quizSlice = createSlice({
     setScore(state, action: PayloadAction<number>) {
       state.score = action.payload;
     },
-    setStatus(state, action: PayloadAction<Quiz["status"]>) {
-      state.status = action.payload;
+    setIsCompleted(state, action: PayloadAction<boolean>) {
+      state.isCompleted = action.payload;
     },
     setFinalTime(state, action: PayloadAction<number>) {
       state.finalTime = action.payload;
@@ -40,7 +40,7 @@ export const {
   resetQuiz,
   setCurrentQuestionIndex,
   setScore,
-  setStatus,
+  setIsCompleted,
   setFinalTime,
 } = quizSlice.actions;
 

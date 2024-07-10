@@ -15,17 +15,12 @@ function Key({ keyIndex, note, keyState, audioContext }: Props) {
   const dispatch = useAppDispatch();
   const isMouseDevice = window.matchMedia("(hover: hover)").matches;
   const mute = useAppSelector((state) => state.mute);
-  const quizStatus = useAppSelector((state) => state.quiz.status);
 
   const { startSound, endSound } = useAudio(keyIndex, mute, audioContext);
 
   const handleTouchStart = () => {
     if (!isMouseDevice) {
-      
-      if (quizStatus === "running") {
-        dispatch(addKey(keyIndex));
-      }
-      
+      dispatch(addKey(keyIndex));
       if (!mute) {
         startSound();
       }
@@ -34,10 +29,7 @@ function Key({ keyIndex, note, keyState, audioContext }: Props) {
 
   const handleMouseDown = () => {
     if (isMouseDevice) {
-      if (quizStatus === "running") {
-        dispatch(addKey(keyIndex));
-      }
-
+      dispatch(addKey(keyIndex));
       if (!mute) {
         startSound();
       }
@@ -46,10 +38,7 @@ function Key({ keyIndex, note, keyState, audioContext }: Props) {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     if (event.key === "Enter") {
-      if (quizStatus === "running") {
-        dispatch(addKey(keyIndex));
-      }
-
+      dispatch(addKey(keyIndex));
       if (!mute) {
         startSound();
       }
