@@ -2,13 +2,15 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { numberOfCorrectKeys } from "../functions";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setStatus } from "../redux/slices/quizSlice";
 import { RibbonIcon } from "./Icons";
 import Piano from "./Piano";
 import PianoMinimap from "./PianoMinimap";
 import Timer from "./Timer";
 
 export default function Quiz() {
+  const dispatch = useAppDispatch();
   const quizType =
     useParams<{ quizType: QuizType }>().quizType || "major-scale";
   const quiz = useAppSelector((state) => state.quiz.questions);
@@ -20,6 +22,7 @@ export default function Quiz() {
     state.records.find((record) => record.quizType === quizType),
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
+  const quizStatus = useAppSelector((state) => state.quiz.status);
   const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
   const numberOfCorrectKeysPressed = numberOfCorrectKeys(
@@ -32,12 +35,25 @@ export default function Quiz() {
     <div>
       <div className="flex flex-col p-4 gap-3">
         <p className="text-base-content/70 text-xs w-20">
-          Start in the first octave
+          {quizStatus === "stopped"
+            ? "Click 'Start' to begin"
+            : "Start in the first octave"}
         </p>
         <div className="flex justify-between items-end">
-          <div className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}>
-            <h3 className="text-5xl font-bold">{quizNote}</h3>
-          </div>
+          {quizStatus === "stopped" ? (
+            <button
+              className="btn btn-lg shadow-md px-2 btn-warning"
+              onClick={() => dispatch(setStatus("running"))}
+            >
+              <h3 className="text-5xl font-bold">Start</h3>
+            </button>
+          ) : (
+            <div
+              className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
+            >
+              <h3 className="text-5xl font-bold">{quizNote}</h3>
+            </div>
+          )}
           {record && (
             <div className="badge badge-warning shadow-md gap-1">
               <p className="font-semibold">{record.time}s</p>
