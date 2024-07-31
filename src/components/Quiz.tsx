@@ -7,6 +7,7 @@ import { RibbonIcon } from "./Icons";
 import Piano from "./Piano";
 import PianoMinimap from "./PianoMinimap";
 import Timer from "./Timer";
+import MusicNotation from "./MusicNotation";
 
 export default function Quiz() {
   const quizType =
@@ -50,6 +51,7 @@ export default function Quiz() {
             <h3 className="text-lg capitalize font-bold">
               {quizTypeData?.name}
             </h3>
+            <MusicNotation note="A4" />
             <p className="text-sm text-base-content/70">
               {numberOfCorrectKeysPressed}/{currentQuestion.length} Keys Pressed
             </p>
