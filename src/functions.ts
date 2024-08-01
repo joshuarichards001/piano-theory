@@ -3,7 +3,7 @@ import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
 export const getKeyStyles = (note: string, keyState: KeyState) => {
   const sharedStyles = "select-none flex-shrink-0 border-black rounded-b";
 
-  if (!note.includes("♭")) {
+  if (!note.includes("b") && !note.includes("#")) {
     return `w-12 h-40 shadow-white-key border-l-2 border-y-2 last:border-r-2 ${sharedStyles} ${whiteColour(
       keyState,
     )}`;
@@ -52,7 +52,7 @@ export const createQuiz = (quizType: QuizType) => {
   return quiz;
 };
 
-const shuffle = (array: string[]) => {
+const shuffle = (array: string[][]) => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -68,7 +68,7 @@ const shuffle = (array: string[]) => {
   return array;
 };
 
-const getKeys = (startNote: string, intervals: number[]) => {
+const getKeys = (startNote: string[], intervals: number[]) => {
   const keys = [];
 
   const startNoteIndex = OCTAVE.indexOf(startNote);
@@ -173,4 +173,17 @@ export const numberOfCorrectKeys = (
 
 export const isDeviceiOS = () => {
   return /iPad|iPhone|iPod/.test(navigator.userAgent);
+};
+
+export const randomZeroOrOne = () => {
+  return Math.floor(Math.random() * 2);
+};
+
+/**
+Pass in the note which can be either a single note in an array ["C"] or a double note in an array ["C#", "Db"].
+- If the note is a single note, it will just return that note.
+- If the note is a double note, it will randomly return either the sharp or the flat.
+*/
+export const getKey = (octaveNote: string[]) => {
+  return octaveNote.length > 1 ? octaveNote[randomZeroOrOne()] : octaveNote[0];
 };

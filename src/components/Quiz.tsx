@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
-import { numberOfCorrectKeys } from "../functions";
+import { getKey, numberOfCorrectKeys } from "../functions";
 import { useAppSelector } from "../redux/hooks";
 import { RibbonIcon } from "./Icons";
+import MusicNotation from "./MusicNotation";
 import Piano from "./Piano";
 import PianoMinimap from "./PianoMinimap";
 import Timer from "./Timer";
-import MusicNotation from "./MusicNotation";
 
 export default function Quiz() {
   const quizType =
@@ -21,13 +21,16 @@ export default function Quiz() {
     state.records.find((record) => record.quizType === quizType),
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
-  const quizNote = OCTAVE[currentQuestion[0]]?.replace("/", " / ");
+  const quizNote = useMemo(() => {
+    return getKey(OCTAVE[currentQuestion[0]]);
+  }, [currentQuestion]);
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
   const numberOfCorrectKeysPressed = numberOfCorrectKeys(
     currentQuestion,
     pressedKeys,
   );
   const [pianoScrollValue, setPianoScrollValue] = useState(0);
+  const userPreferenceNotation = quizType === "notes";
 
   return (
     <div>
@@ -36,9 +39,17 @@ export default function Quiz() {
           Start in the first octave
         </p>
         <div className="flex justify-between items-end">
-          <div className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}>
-            <h3 className="text-5xl font-bold">{quizNote}</h3>
-          </div>
+          {userPreferenceNotation ? (
+            <div className="bg-primary px-4 rounded-xl h-24 w-32">
+              <MusicNotation note={quizNote} />
+            </div>
+          ) : (
+            <div
+              className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
+            >
+              <h3 className="text-5xl font-bold">{quizNote}</h3>
+            </div>
+          )}
           {record && (
             <div className="badge badge-warning shadow-md gap-1">
               <p className="font-semibold">{record.time}s</p>
@@ -51,7 +62,6 @@ export default function Quiz() {
             <h3 className="text-lg capitalize font-bold">
               {quizTypeData?.name}
             </h3>
-            <MusicNotation note="A4" />
             <p className="text-sm text-base-content/70">
               {numberOfCorrectKeysPressed}/{currentQuestion.length} Keys Pressed
             </p>

@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { OCTAVE } from "../constants";
-import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
+import { OCTAVE, OCTAVE_LENGTH } from "../constants";
+import {
+  getKey,
+  getKeyState,
+  isDeviceiOS,
+  isFinishedQuestion,
+} from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -107,11 +112,11 @@ export default function Piano({ pianoScrollValue }: IProps) {
       {[0, 1].map((octaveNum) =>
         OCTAVE.map((note, i) => (
           <Key
-            key={octaveNum * OCTAVE.length + i}
-            note={note}
-            keyIndex={octaveNum * OCTAVE.length + i}
+            key={octaveNum * OCTAVE_LENGTH + i}
+            note={getKey(note)}
+            keyIndex={octaveNum * OCTAVE_LENGTH + i}
             keyState={getKeyState(
-              octaveNum * OCTAVE.length + i,
+              octaveNum * OCTAVE_LENGTH + i,
               pressedKeys,
               currentQuestion,
             )}

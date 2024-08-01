@@ -1,12 +1,28 @@
-import React, { useEffect, useRef } from 'react';
-import Vex from 'vexflow';
+import React, { useEffect, useRef } from "react";
+import Vex from "vexflow";
 
 const MusicNotation: React.FC<{ note: string }> = ({ note }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const randomNotePosition = (): {
+    octave: number;
+    clef: "treble" | "bass";
+  } => {
+    const clef = Math.random() < 0.5 ? "treble" : "bass";
+
+    let octave = 0;
+    if (clef === "treble") {
+      octave = Math.random() < 0.5 ? 4 : 5;
+    } else {
+      octave = 3;
+    }
+
+    return { octave, clef };
+  };
+
   useEffect(() => {
     if (containerRef.current) {
-      containerRef.current.innerHTML = '';
+      containerRef.current.innerHTML = "";
       const uniqueId = `vexflow-container-${Math.random().toString(36).substr(2, 9)}`;
       containerRef.current.id = uniqueId;
 
@@ -18,20 +34,18 @@ const MusicNotation: React.FC<{ note: string }> = ({ note }) => {
       const score = vf.EasyScore();
       const system = vf.System();
 
+      const { octave, clef } = randomNotePosition();
+
       system
         .addStave({
-          voices: [
-            score.voice(score.notes(`${note}/w`)),
-          ],
+          voices: [score.voice(score.notes(`${note}${octave}/w`, { clef}))],
+          options: { fill_style: "#000000", left_bar: true, space_above_staff_ln: 2 }
         })
-        .addClef('treble')
-      
-      const context = vf.getContext();
-      
-      const isDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      context.setFillStyle(isDarkTheme ? '#FFFFFF' : '#000000');
-      context.setStrokeStyle(isDarkTheme ? '#FFFFFF' : '#000000');
+        .addClef(clef);
 
+      const context = vf.getContext();
+      context.setFillStyle("#000000");
+      
       vf.draw();
     }
   }, [note]);

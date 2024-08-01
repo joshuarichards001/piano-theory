@@ -15,6 +15,7 @@ export default function QuizPage() {
     useParams<{ quizType: QuizType }>().quizType || "major-scale";
   const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
   const finalTime = useAppSelector((state) => state.quiz.finalTime);
+  const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
 
   const restartQuiz = useCallback(() => {
@@ -54,7 +55,9 @@ export default function QuizPage() {
           <p className="text-sm text-base-content/70">{quizTypeData?.info}</p>
         </section>
       </div>
-      {isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />}
+      {currentQuestion.length > 0 && (
+        isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />
+      )}
     </main>
   );
 }
