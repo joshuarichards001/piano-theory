@@ -4,11 +4,11 @@ export const getKeyStyles = (note: string, keyState: KeyState) => {
   const sharedStyles = "select-none flex-shrink-0 border-black rounded-b";
 
   if (!note.includes("b") && !note.includes("#")) {
-    return `w-12 h-40 shadow-white-key border-l-2 border-y-2 last:border-r-2 ${sharedStyles} ${whiteColour(
+    return `w-14 h-48 shadow-white-key border-l-2 border-y-2 last:border-r-2 ${sharedStyles} ${whiteColour(
       keyState,
     )}`;
   } else {
-    return `w-8 h-24 shadow-black-key border-2 z-10 -mx-4 ${sharedStyles} ${blackColour(
+    return `w-10 h-28 shadow-black-key border-2 z-10 -mx-5 ${sharedStyles} ${blackColour(
       keyState,
     )}`;
   }

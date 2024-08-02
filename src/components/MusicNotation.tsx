@@ -1,13 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Vex from "vexflow";
 
-const MusicNotation: React.FC<{ note: string }> = ({ note }) => {
+const MusicNotation = ({ note }: { note: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const randomNotePosition = (): {
-    octave: number;
-    clef: "treble" | "bass";
-  } => {
+  const randomNotePosition = () => {
     const clef = Math.random() < 0.5 ? "treble" : "bass";
 
     let octave = 0;
@@ -38,14 +35,18 @@ const MusicNotation: React.FC<{ note: string }> = ({ note }) => {
 
       system
         .addStave({
-          voices: [score.voice(score.notes(`${note}${octave}/w`, { clef}))],
-          options: { fill_style: "#000000", left_bar: true, space_above_staff_ln: 2 }
+          voices: [score.voice(score.notes(`${note}${octave}/w`, { clef }))],
+          options: {
+            fill_style: "#000000",
+            left_bar: true,
+            space_above_staff_ln: 2,
+          },
         })
         .addClef(clef);
 
       const context = vf.getContext();
       context.setFillStyle("#000000");
-      
+
       vf.draw();
     }
   }, [note]);
