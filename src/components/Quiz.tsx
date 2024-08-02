@@ -46,7 +46,7 @@ export default function Quiz() {
             <div
               className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
             >
-              <h3 className="text-5xl font-bold">{quizNote}</h3>
+              <h3 className="text-5xl font-bold">{quizNote.replace("b", "♭").replace("#", "♯")}</h3>
             </div>
           )}
           {record && (
