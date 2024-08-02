@@ -9,6 +9,7 @@ type Quiz = {
 
 type QuizType =
   | "notes"
+  | "notes-notation"
   | "major-scale"
   | "natural-minor-scale"
   | "harmonic-minor-scale"

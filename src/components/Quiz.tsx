@@ -30,7 +30,6 @@ export default function Quiz() {
     pressedKeys,
   );
   const [pianoScrollValue, setPianoScrollValue] = useState(0);
-  const userPreferenceNotation = quizType === "notes";
 
   return (
     <div>
@@ -39,7 +38,7 @@ export default function Quiz() {
           Start in the first octave
         </p>
         <div className="flex justify-between items-end">
-          {userPreferenceNotation ? (
+          {quizType === "notes-notation" ? (
             <div className="bg-primary px-4 rounded-xl h-24 w-32">
               <MusicNotation note={quizNote} />
             </div>

@@ -21,7 +21,16 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0],
       name: "Notes",
-      info: "White keys are notes from A to G, repeating in cycles. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively. E♯ is the same as F, and C♭ is the same as B.",
+      info: "White keys are notes from A to G, repeating in cycles. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively.",
+      colour: "btn-primary",
+    },
+  ],
+  [
+    "notes-notation",
+    {
+      keys: [0],
+      name: "Notes (Notation)",
+      info: "White keys are notes from A to G, repeating in cycles. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively.",
       colour: "btn-primary",
     },
   ],
