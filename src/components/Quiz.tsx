@@ -35,7 +35,7 @@ export default function Quiz() {
 
   return (
     <div>
-      <div className="flex flex-col m-4 gap-3 pb-quiz-safe-bottom">
+      <div className="flex flex-col m-4 gap-3">
         <p className="text-base-content/70 text-xs w-28">
           {quizType === "notes-notation" || quizType === "notes"
             ? "Don't worry about the octave."
