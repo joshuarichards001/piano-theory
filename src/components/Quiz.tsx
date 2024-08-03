@@ -36,7 +36,7 @@ export default function Quiz() {
   return (
     <div>
       <div className="flex flex-col m-4 gap-3">
-        <p className="text-base-content/70 text-xs w-28">
+        <p className="text-base-content/70 text-xs w-20">
           {!quizType.includes("notes") && "Start in the first octave."}
         </p>
         <div className="flex justify-between items-end">
