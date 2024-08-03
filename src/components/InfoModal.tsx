@@ -28,8 +28,8 @@ export default function InfoModal() {
           </h2>
           <p className="mb-10 tracking-wide text-base-content/70">
             After doing some searching I found there wasn't many good music
-            theory quiz apps that use a virtual keyboard to input your answers. To
-            address this I built Piano Theory!
+            theory quiz apps that use a virtual keyboard to input your answers.
+            To address this I built Piano Theory!
           </p>
           <p className="mb-4">
             Built by{" "}

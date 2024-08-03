@@ -55,9 +55,8 @@ export default function QuizPage() {
           <p className="text-sm text-base-content/70">{quizTypeData?.info}</p>
         </section>
       </div>
-      {currentQuestion.length > 0 && (
-        isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />
-      )}
+      {currentQuestion.length > 0 &&
+        (isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />)}
     </main>
   );
 }

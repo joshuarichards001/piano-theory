@@ -1,10 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { OCTAVE, OCTAVE_LENGTH } from "../constants";
-import {
-  getKeyState,
-  isDeviceiOS,
-  isFinishedQuestion,
-} from "../functions";
+import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
