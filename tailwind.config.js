@@ -10,6 +10,9 @@ export default {
           "-1px 0 0 rgba(255,255,255,0.5) inset, 0 0 5px rgba(200, 200, 200, 0.5) inset, 0 0 3px rgba(0,0,0,0.2)",
         draggable: "0 0 5px rgba(0,0,0,0.8)",
       },
+      padding: {
+        safe: "env(safe-area-inset-bottom)",
+      },
     },
   },
   // eslint-disable-next-line no-undef
