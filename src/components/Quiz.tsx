@@ -34,7 +34,7 @@ export default function Quiz() {
   );
 
   return (
-    <>
+    <div>
       <div className="flex flex-col m-4 gap-3 pb-quiz-safe-bottom">
         <p className="text-base-content/70 text-xs w-28">
           {quizType === "notes-notation" || quizType === "notes"
@@ -80,6 +80,6 @@ export default function Quiz() {
         </div>
       </div>
       <PianoContainer />
-    </>
+    </div>
   );
 }
