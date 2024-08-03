@@ -12,7 +12,7 @@ export default {
       },
       padding: {
         "header-safe-top": "max(env(safe-area-inset-top), 16px)",
-        "landing-safe-top": "max(env(safe-area-inset-top), 80px)",
+        "landing-safe-top": "max(env(safe-area-inset-top), 100px)",
         "safe-bottom": "env(safe-area-inset-bottom)",
       },
     },
