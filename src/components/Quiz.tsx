@@ -36,7 +36,7 @@ export default function Quiz() {
   return (
     <div>
       <div className="flex flex-col p-4 gap-3">
-        <p className="text-base-content/70 text-xs w-[96px]">
+        <p className="text-base-content/70 text-xs w-28">
           {quizType === "notes-notation" || quizType === "notes"
             ? "Don't worry about the octave."
             : "Start in the first octave."}
@@ -50,7 +50,7 @@ export default function Quiz() {
             <div
               className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
             >
-              <h3 className="text-5xl font-bold">
+              <h3 className="text-6xl font-bold">
                 {quizNote.replace("b", "♭").replace("#", "♯")}
               </h3>
             </div>
