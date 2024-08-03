@@ -13,7 +13,7 @@ export default {
       padding: {
         "header-safe-top": "max(env(safe-area-inset-top), 16px)",
         "body-safe-top": "calc(env(safe-area-inset-top) + 80px)",
-        "quiz-safe-bottom": "env(safe-area-inset-bottom)",
+        "quiz-safe-bottom": "calc(env(safe-area-inset-bottom) + 32px)",
       },
     },
   },

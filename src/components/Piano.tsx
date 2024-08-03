@@ -105,18 +105,19 @@ export default function Piano({ pianoScrollValue }: IProps) {
 
   return (
     <div
-      ref={pianoRef}
-      className="flex overflow-x-scroll no-scrollbar whitespace-nowrap bg-base-300"
+      className={`flex justify-center pb-quiz-safe-bottom ${quizType.includes("notes") && "pt-8 bg-base-300 border-t border-black"}`}
     >
-      {Array.from({ length: octaveCount * OCTAVE_LENGTH }, (_, i) => (
-        <Key
-          key={i}
-          note={OCTAVE[i % OCTAVE_LENGTH][0]}
-          keyIndex={i}
-          keyState={getKeyState(i, pressedKeys, currentQuestion)}
-          audioContext={audioContext}
-        />
-      ))}
+      <div ref={pianoRef} className="flex overflow-x-scroll no-scrollbar">
+        {Array.from({ length: octaveCount * OCTAVE_LENGTH }, (_, i) => (
+          <Key
+            key={i}
+            note={OCTAVE[i % OCTAVE_LENGTH][0]}
+            keyIndex={i}
+            keyState={getKeyState(i, pressedKeys, currentQuestion)}
+            audioContext={audioContext}
+          />
+        ))}
+      </div>
     </div>
   );
 }

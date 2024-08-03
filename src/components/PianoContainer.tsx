@@ -11,9 +11,7 @@ export default function PianoContainer() {
 
   return (
     <div className="sticky bottom-0 z-50">
-      {quizType.includes("notes") ? (
-        <div className="h-6 bg-base-300 border-t border-black" />
-      ) : (
+      {!quizType.includes("notes") && (
         <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
       )}
       <Piano pianoScrollValue={pianoScrollValue} />
