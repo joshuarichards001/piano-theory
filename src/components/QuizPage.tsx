@@ -29,7 +29,7 @@ export default function QuizPage() {
   }, [quizType, restartQuiz]);
 
   return (
-    <main className="flex flex-col justify-between h-full mt-24">
+    <main className="flex flex-col justify-between h-full pt-body-safe-top">
       <div className="mx-4 mb-4">
         <nav className="flex justify-between mb-6">
           <button

@@ -12,8 +12,9 @@ export default {
       },
       padding: {
         "header-safe-top": "max(env(safe-area-inset-top), 16px)",
-        "landing-safe-top": "calc(env(safe-area-inset-top) + 80px)",
-        "safe-bottom": "env(safe-area-inset-bottom)",
+        "body-safe-top": "calc(env(safe-area-inset-top) + 80px)",
+        "piano-safe-bottom": "env(safe-area-inset-bottom)",
+        "quiz-safe-bottom": "calc(env(safe-area-inset-bottom) + 220px)",
       },
     },
   },
