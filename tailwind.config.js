@@ -11,8 +11,9 @@ export default {
         draggable: "0 0 5px rgba(0,0,0,0.8)",
       },
       padding: {
-        "safe-bottom": "max(env(safe-area-inset-bottom), 20px)",
-        "safe-top": "max(env(safe-area-inset-top), 20px)",
+        "header-safe-top": "max(env(safe-area-inset-top), 16px)",
+        "landing-safe-top": "max(env(safe-area-inset-top), 80px)",
+        "safe-bottom": "env(safe-area-inset-bottom)",
       },
     },
   },
