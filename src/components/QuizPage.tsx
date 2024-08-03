@@ -29,9 +29,9 @@ export default function QuizPage() {
   }, [quizType, restartQuiz]);
 
   return (
-    <main className="flex flex-col justify-between h-full pt-24">
-      <div className="px-4">
-        <nav className="flex justify-between mb-10">
+    <main className="flex flex-col justify-between h-full mt-24">
+      <div className="mx-4 mb-4">
+        <nav className="flex justify-between mb-6">
           <button
             className="btn btn-sm btn-neutral shadow-md"
             onClick={() => {

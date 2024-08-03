@@ -46,6 +46,7 @@ const MusicNotation = ({ note }: { note: string }) => {
 
       const context = vf.getContext();
       context.setFillStyle("#000000");
+      context.scale(1.2, 1.2);
 
       vf.draw();
     }
