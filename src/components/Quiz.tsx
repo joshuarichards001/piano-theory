@@ -37,9 +37,7 @@ export default function Quiz() {
     <div>
       <div className="flex flex-col m-4 gap-3">
         <p className="text-base-content/70 text-xs w-28">
-          {quizType === "notes-notation" || quizType === "notes"
-            ? "Don't worry about the octave."
-            : "Start in the first octave."}
+          {!quizType.includes("notes") && "Start in the first octave."}
         </p>
         <div className="flex justify-between items-end">
           {quizType === "notes-notation" ? (
