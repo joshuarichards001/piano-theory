@@ -179,11 +179,20 @@ export const randomZeroOrOne = () => {
   return Math.floor(Math.random() * 2);
 };
 
-/**
-Pass in the note which can be either a single note in an array ["C"] or a double note in an array ["C#", "Db"].
-- If the note is a single note, it will just return that note.
-- If the note is a double note, it will randomly return either the sharp or the flat.
-*/
-export const getKey = (octaveNote: string[]) => {
-  return octaveNote.length > 1 ? octaveNote[randomZeroOrOne()] : octaveNote[0];
+export const getKey = (
+  octaveNote: string[],
+  noteQuality: NoteQuality | undefined,
+) => {
+  switch (noteQuality) {
+    case "sharp":
+      return octaveNote[0];
+    case "flat":
+      return octaveNote[1];
+    case "natural":
+      return octaveNote[0];
+    case "random":
+      return octaveNote[randomZeroOrOne()];
+    default:
+      return octaveNote[0];
+  }
 };

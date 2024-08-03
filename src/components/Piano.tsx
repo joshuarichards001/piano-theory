@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { OCTAVE, OCTAVE_LENGTH } from "../constants";
 import {
-  getKey,
   getKeyState,
   isDeviceiOS,
   isFinishedQuestion,
@@ -113,7 +112,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
         OCTAVE.map((note, i) => (
           <Key
             key={octaveNum * OCTAVE_LENGTH + i}
-            note={getKey(note)}
+            note={note[0]}
             keyIndex={octaveNum * OCTAVE_LENGTH + i}
             keyState={getKeyState(
               octaveNum * OCTAVE_LENGTH + i,

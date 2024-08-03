@@ -11,7 +11,7 @@ const MusicNotation = ({ note }: { note: string }) => {
     if (clef === "treble") {
       octave = Math.random() < 0.5 ? 4 : 5;
     } else {
-      octave = 3;
+      octave = Math.random() < 0.5 ? 2 : 3;
     }
 
     return { octave, clef };

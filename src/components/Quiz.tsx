@@ -1,12 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "../constants";
 import { getKey, numberOfCorrectKeys } from "../functions";
 import { useAppSelector } from "../redux/hooks";
 import { RibbonIcon } from "./Icons";
 import MusicNotation from "./MusicNotation";
-import Piano from "./Piano";
-import PianoMinimap from "./PianoMinimap";
+import PianoContainer from "./PianoContainer";
 import Timer from "./Timer";
 
 export default function Quiz() {
@@ -21,15 +20,15 @@ export default function Quiz() {
     state.records.find((record) => record.quizType === quizType),
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
-  const quizNote = useMemo(() => {
-    return getKey(OCTAVE[currentQuestion[0]]);
-  }, [currentQuestion]);
+  const firstQuestionIndexInOctave = currentQuestion[0]
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
+  const quizNote = useMemo(() => {
+    return getKey(OCTAVE[firstQuestionIndexInOctave], quizTypeData?.noteQualities[firstQuestionIndexInOctave]);
+  }, [firstQuestionIndexInOctave, quizTypeData?.noteQualities]);
   const numberOfCorrectKeysPressed = numberOfCorrectKeys(
     currentQuestion,
     pressedKeys,
   );
-  const [pianoScrollValue, setPianoScrollValue] = useState(0);
 
   return (
     <div>
@@ -39,7 +38,7 @@ export default function Quiz() {
         </p>
         <div className="flex justify-between items-end">
           {quizType === "notes-notation" ? (
-            <div className="bg-primary px-4 rounded-xl h-24 w-32">
+            <div className="bg-primary px-4 rounded-xl h-28 w-32">
               <MusicNotation note={quizNote} />
             </div>
           ) : (
@@ -73,8 +72,7 @@ export default function Quiz() {
           </div>
         </div>
       </div>
-      <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
-      <Piano pianoScrollValue={pianoScrollValue} />
+      <PianoContainer />
       <div className="h-20 bg-base-300" />
     </div>
   );
