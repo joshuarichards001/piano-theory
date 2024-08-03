@@ -105,7 +105,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
 
   return (
     <div
-      className={`flex justify-center pb-8 ${quizType.includes("notes") && "pt-6"}`}
+      className={`flex justify-center pb-8 ${quizType.includes("notes") && "pt-6 bg-base-100 border-t border-base-300"}`}
     >
       <div ref={pianoRef} className="flex overflow-x-scroll no-scrollbar">
         {Array.from({ length: octaveCount * OCTAVE_LENGTH }, (_, i) => (
