@@ -9,7 +9,7 @@ export default function PianoContainer() {
     <div className="fixed bottom-0 left-0 right-0 z-50">
       <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
       <Piano pianoScrollValue={pianoScrollValue} />
-      <div className="h-20 bg-base-300" />
+      <div className="h-16 bg-base-300" />
     </div>
   );
 }
