@@ -6,7 +6,7 @@ export default function PianoContainer() {
   const [pianoScrollValue, setPianoScrollValue] = useState(0);
 
   return (
-    <div className="fixed bottom-0 z-50 max-w-2xl mx-auto md:bottom-40">
+    <div className="sticky bottom-0 z-50">
       <PianoMinimap setPianoScrollValue={setPianoScrollValue} />
       <Piano pianoScrollValue={pianoScrollValue} />
     </div>
