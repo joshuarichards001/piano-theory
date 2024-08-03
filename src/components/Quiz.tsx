@@ -20,10 +20,13 @@ export default function Quiz() {
     state.records.find((record) => record.quizType === quizType),
   );
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
-  const firstQuestionIndexInOctave = currentQuestion[0]
+  const firstQuestionIndexInOctave = currentQuestion[0];
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
   const quizNote = useMemo(() => {
-    return getKey(OCTAVE[firstQuestionIndexInOctave], quizTypeData?.noteQualities[firstQuestionIndexInOctave]);
+    return getKey(
+      OCTAVE[firstQuestionIndexInOctave],
+      quizTypeData?.noteQualities[firstQuestionIndexInOctave],
+    );
   }, [firstQuestionIndexInOctave, quizTypeData?.noteQualities]);
   const numberOfCorrectKeysPressed = numberOfCorrectKeys(
     currentQuestion,
@@ -33,8 +36,10 @@ export default function Quiz() {
   return (
     <div>
       <div className="flex flex-col p-4 gap-3">
-        <p className="text-base-content/70 text-xs w-20">
-          Start in the first octave
+        <p className="text-base-content/70 text-xs w-[96px]">
+          {quizType === "notes-notation" || quizType === "notes"
+            ? "Don't worry about the octave."
+            : "Start in the first octave."}
         </p>
         <div className="flex justify-between items-end">
           {quizType === "notes-notation" ? (
@@ -45,7 +50,9 @@ export default function Quiz() {
             <div
               className={`btn btn-lg shadow-md px-2 ${quizTypeData?.colour}`}
             >
-              <h3 className="text-5xl font-bold">{quizNote.replace("b", "♭").replace("#", "♯")}</h3>
+              <h3 className="text-5xl font-bold">
+                {quizNote.replace("b", "♭").replace("#", "♯")}
+              </h3>
             </div>
           )}
           {record && (
