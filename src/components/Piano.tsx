@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { OCTAVE } from "../constants";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { OCTAVE, OCTAVE_LENGTH } from "../constants";
 import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
@@ -24,7 +24,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const quizLength = useAppSelector((state) => state.quiz.questions.length);
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
-  const audioContext = new AudioContext();
+  const audioContext = useMemo(() => new AudioContext(), []);
   const [hasUnblockedAudio, setHasUnblockedAudio] = useState(false);
 
   // Scroll the piano to the correct position when the piano minimap position changes.
@@ -107,11 +107,11 @@ export default function Piano({ pianoScrollValue }: IProps) {
       {[0, 1].map((octaveNum) =>
         OCTAVE.map((note, i) => (
           <Key
-            key={octaveNum * OCTAVE.length + i}
-            note={note}
-            keyIndex={octaveNum * OCTAVE.length + i}
+            key={octaveNum * OCTAVE_LENGTH + i}
+            note={note[0]}
+            keyIndex={octaveNum * OCTAVE_LENGTH + i}
             keyState={getKeyState(
-              octaveNum * OCTAVE.length + i,
+              octaveNum * OCTAVE_LENGTH + i,
               pressedKeys,
               currentQuestion,
             )}

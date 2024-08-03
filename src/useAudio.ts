@@ -15,9 +15,8 @@ export function useAudio(
     const fetchData = async () => {
       const response = await fetch(`/${keyIndex}.mp3`);
       const arrayBuffer = await response.arrayBuffer();
-      const decodedAudioBuffer = await audioContextRef.current.decodeAudioData(
-        arrayBuffer,
-      );
+      const decodedAudioBuffer =
+        await audioContextRef.current.decodeAudioData(arrayBuffer);
 
       if (decodedAudioBuffer) {
         audioBufferRef.current = decodedAudioBuffer;

@@ -9,6 +9,7 @@ type Quiz = {
 
 type QuizType =
   | "notes"
+  | "notes-notation"
   | "major-scale"
   | "natural-minor-scale"
   | "harmonic-minor-scale"
@@ -38,6 +39,9 @@ type QuizTypeData = {
   name: string;
   info: string;
   colour: string;
+  noteQualities: NoteQuality[];
 };
 
 type KeyState = "correct-pressed" | "incorrect-pressed" | "not-pressed";
+
+type NoteQuality = "sharp" | "flat" | "natural" | "random";

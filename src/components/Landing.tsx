@@ -28,7 +28,7 @@ const QuizButton = ({ quizType }: { quizType: QuizType }) => {
 
 export default function Landing() {
   return (
-    <main className="p-4 pt-6 pb-16">
+    <main className="mx-4 mt-24 pb-16">
       {window.innerWidth > 750 && (
         <div role="alert" className="alert mb-6">
           <svg viewBox="0 0 24 24" fill="none" className="stroke-info w-6 h-6">
@@ -51,6 +51,7 @@ export default function Landing() {
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="notes" />
+          <QuizButton quizType="notes-notation" />
         </div>
       </section>
 

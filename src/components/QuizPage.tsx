@@ -15,6 +15,7 @@ export default function QuizPage() {
     useParams<{ quizType: QuizType }>().quizType || "major-scale";
   const isCompleted = useAppSelector((state) => state.quiz.isCompleted);
   const finalTime = useAppSelector((state) => state.quiz.finalTime);
+  const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
 
   const restartQuiz = useCallback(() => {
@@ -28,9 +29,9 @@ export default function QuizPage() {
   }, [quizType, restartQuiz]);
 
   return (
-    <main className="flex flex-col justify-between h-full">
-      <div className="p-4 pt-6">
-        <nav className="flex justify-between mb-10">
+    <main className="flex flex-col justify-between h-full mt-24">
+      <div className="mx-4 mb-4">
+        <nav className="flex justify-between mb-6">
           <button
             className="btn btn-sm btn-neutral shadow-md"
             onClick={() => {
@@ -54,7 +55,8 @@ export default function QuizPage() {
           <p className="text-sm text-base-content/70">{quizTypeData?.info}</p>
         </section>
       </div>
-      {isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />}
+      {currentQuestion.length > 0 &&
+        (isCompleted && finalTime !== 0 ? <QuizComplete /> : <Quiz />)}
     </main>
   );
 }

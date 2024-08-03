@@ -3,7 +3,7 @@ import { OCTAVE, QUIZ_TYPE_DATA_MAP } from "./constants";
 export const getKeyStyles = (note: string, keyState: KeyState) => {
   const sharedStyles = "select-none flex-shrink-0 border-black rounded-b";
 
-  if (!note.includes("♭")) {
+  if (!note.includes("b") && !note.includes("#")) {
     return `w-12 h-40 shadow-white-key border-l-2 border-y-2 last:border-r-2 ${sharedStyles} ${whiteColour(
       keyState,
     )}`;
@@ -52,7 +52,7 @@ export const createQuiz = (quizType: QuizType) => {
   return quiz;
 };
 
-const shuffle = (array: string[]) => {
+const shuffle = (array: string[][]) => {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
@@ -68,7 +68,7 @@ const shuffle = (array: string[]) => {
   return array;
 };
 
-const getKeys = (startNote: string, intervals: number[]) => {
+const getKeys = (startNote: string[], intervals: number[]) => {
   const keys = [];
 
   const startNoteIndex = OCTAVE.indexOf(startNote);
@@ -173,4 +173,26 @@ export const numberOfCorrectKeys = (
 
 export const isDeviceiOS = () => {
   return /iPad|iPhone|iPod/.test(navigator.userAgent);
+};
+
+export const randomZeroOrOne = () => {
+  return Math.floor(Math.random() * 2);
+};
+
+export const getKey = (
+  octaveNote: string[],
+  noteQuality: NoteQuality | undefined,
+) => {
+  switch (noteQuality) {
+    case "sharp":
+      return octaveNote[0];
+    case "flat":
+      return octaveNote[1];
+    case "natural":
+      return octaveNote[0];
+    case "random":
+      return octaveNote[randomZeroOrOne()];
+    default:
+      return octaveNote[0];
+  }
 };
