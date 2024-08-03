@@ -28,7 +28,7 @@ const QuizButton = ({ quizType }: { quizType: QuizType }) => {
 
 export default function Landing() {
   return (
-    <main className="mx-4 mt-24 pb-16">
+    <main className="mx-4 pt-safe-top pb-16">
       {window.innerWidth > 750 && (
         <div role="alert" className="alert mb-6">
           <svg viewBox="0 0 24 24" fill="none" className="stroke-info w-6 h-6">
