@@ -51,7 +51,9 @@ export default function Landing() {
         <h2 className="text-2xl mb-2 font-bold">Notes</h2>
         <div className="flex flex-wrap gap-3">
           <QuizButton quizType="notes" />
-          <QuizButton quizType="notes-notation" />
+          <QuizButton quizType="notes-notation-treble" />
+          <QuizButton quizType="notes-notation-bass" />
+          <QuizButton quizType="notes-notation-both" />
         </div>
       </section>
 

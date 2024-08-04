@@ -40,7 +40,7 @@ export default function Quiz() {
           {!quizType.includes("notes") && "Start in the first octave."}
         </p>
         <div className="flex justify-between items-end">
-          {quizType === "notes-notation" ? (
+          {quizType.includes("notation") ? (
             <div className="bg-primary rounded-xl">
               <MusicNotation note={quizNote} />
             </div>

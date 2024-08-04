@@ -1,11 +1,30 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
 import Vex from "vexflow";
 
 const MusicNotation = ({ note }: { note: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const quizType =
+    useParams<{ quizType: QuizType }>().quizType || "notes-notation-both";
 
-  const randomNotePosition = () => {
-    const clef = Math.random() < 0.5 ? "treble" : "bass";
+  const getClef = (quizType: QuizType) => {
+    if (quizType === "notes-notation-treble") {
+      return "treble";
+    } else if (quizType === "notes-notation-bass") {
+      return "bass";
+    } else {
+      return "both";
+    }
+  };
+
+  const randomNotePosition = useCallback(() => {
+    let clef = "";
+    const clefPreference = getClef(quizType);
+    if (clefPreference === "both") {
+      clef = Math.random() < 0.5 ? "treble" : "bass";
+    } else {
+      clef = clefPreference;
+    }
 
     let octave = 0;
     if (clef === "treble") {
@@ -15,7 +34,7 @@ const MusicNotation = ({ note }: { note: string }) => {
     }
 
     return { octave, clef };
-  };
+  }, [quizType]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -50,7 +69,7 @@ const MusicNotation = ({ note }: { note: string }) => {
 
       vf.draw();
     }
-  }, [note]);
+  }, [note, randomNotePosition]);
 
   return <div ref={containerRef} />;
 };
