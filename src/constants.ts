@@ -81,7 +81,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0],
       name: "Notes (Treble Clef)",
-      info: "White keys are notes from A to G, repeating. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively.",
+      info: "On a treble clef staff, the notes on the lines from bottom to top are E, G, B, D, F. The notes in between the lines (spaces) are F, A, C, E. Middle C is the first line below the staff.",
       colour: "btn-primary",
       noteQualities: NOTE_NOTE_QUALITIES,
     },
@@ -91,7 +91,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0],
       name: "Notes (Bass Clef)",
-      info: "White keys are notes from A to G, repeating. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively.",
+      info: "On a bass clef staff, the notes on the lines from bottom to top are G, B, D, F, A. The notes in between the lines (spaces) are A, C, E, F. Middle C is the first line above the staff.",
       colour: "btn-primary",
       noteQualities: NOTE_NOTE_QUALITIES,
     },
@@ -101,7 +101,7 @@ export const QUIZ_TYPE_DATA_MAP = new Map<QuizType, QuizTypeData>([
     {
       keys: [0],
       name: "Notes (Both Clefs)",
-      info: "White keys are notes from A to G, repeating. The piano below starts at C. Sharps (♯) and flats (♭) are the black key above or below the white key respectively.",
+      info: "This quiz brings together your knowledge of both treble and bass clefs. Try your best to identify the notes from both staves.",
       colour: "btn-primary",
       noteQualities: NOTE_NOTE_QUALITIES,
     },
