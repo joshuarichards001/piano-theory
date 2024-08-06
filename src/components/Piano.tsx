@@ -77,9 +77,9 @@ export default function Piano({ pianoScrollValue }: IProps) {
     const audio = document.createElement("audio");
     audio.setAttribute("x-webkit-airplay", "deny");
     audio.preload = "auto";
-    audio.loop = true;
     audio.src = "250-milliseconds-of-silence.mp3";
-    audio.play().then(() => audio.pause());
+    audio.volume = 0;
+    audio.play();
   }, [hasUnblockedAudio]);
 
   // Prevent scrolling on the piano because navigation is determined by the piano minimap.
