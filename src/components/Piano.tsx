@@ -29,6 +29,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
   const audioContext = useMemo(() => new AudioContext(), []);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [hasUnblockedAudio, setHasUnblockedAudio] = useState(false);
 
   // Scroll the piano to the correct position when the piano minimap position changes.
@@ -77,9 +78,26 @@ export default function Piano({ pianoScrollValue }: IProps) {
     const audio = document.createElement("audio");
     audio.setAttribute("x-webkit-airplay", "deny");
     audio.preload = "auto";
-    audio.src = "250-milliseconds-of-silence.mp3";
+    audio.src = "1-minute-of-silence.mp3";
+    audio.loop = true;
     audio.play();
+    audioRef.current = audio;
   }, [hasUnblockedAudio]);
+  
+  // Pause audio when the tab is not visible.
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+  
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
   // Prevent scrolling on the piano because navigation is determined by the piano minimap.
   useEffect(() => {
