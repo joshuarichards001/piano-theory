@@ -89,6 +89,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
     const handleVisibilityChange = () => {
       if (document.hidden && audioRef.current) {
         audioRef.current.pause();
+        setHasUnblockedAudio(false);
       }
     };
   
