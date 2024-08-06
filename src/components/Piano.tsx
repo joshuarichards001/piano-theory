@@ -82,13 +82,6 @@ export default function Piano({ pianoScrollValue }: IProps) {
     audio.loop = true;
     audio.play();
     audioRef.current = audio;
-
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
   }, [hasUnblockedAudio]);
 
   // Pause audio when the tab is not visible.
