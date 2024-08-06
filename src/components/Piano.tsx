@@ -80,9 +80,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
     audio.preload = "auto";
     audio.src = "1-minute-of-silence.mp3";
     audio.loop = true;
-    audio.play().catch((error) => {
-      console.error("Error playing audio:", error);
-    });
+    audio.play();
     audioRef.current = audio;
 
     return () => {
