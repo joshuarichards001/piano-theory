@@ -5,9 +5,9 @@ import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
-  setCurrentQuestionIndex,
-  setIsCompleted,
-  setScore,
+    setCurrentQuestionIndex,
+    setIsCompleted,
+    setScore,
 } from "../redux/slices/quizSlice";
 import Key from "./Key";
 
@@ -79,7 +79,7 @@ export default function Piano({ pianoScrollValue }: IProps) {
     audio.preload = "auto";
     audio.loop = true;
     audio.src = "250-milliseconds-of-silence.mp3";
-    audio.play();
+    audio.play().then(() => audio.pause());
   }, [hasUnblockedAudio]);
 
   // Prevent scrolling on the piano because navigation is determined by the piano minimap.
