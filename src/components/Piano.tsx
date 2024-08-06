@@ -98,10 +98,6 @@ export default function Piano({ pianoScrollValue }: IProps) {
     const handleVisibilityChange = () => {
       if (document.hidden && audioRef.current) {
         audioRef.current.pause();
-      } else if (audioRef.current && isDeviceiOS()) {
-        audioRef.current.play().catch((error) => {
-          console.error("Error playing audio:", error);
-        });
       }
     };
 
