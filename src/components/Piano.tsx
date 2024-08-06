@@ -78,7 +78,6 @@ export default function Piano({ pianoScrollValue }: IProps) {
     audio.setAttribute("x-webkit-airplay", "deny");
     audio.preload = "auto";
     audio.src = "250-milliseconds-of-silence.mp3";
-    audio.volume = 0;
     audio.play();
   }, [hasUnblockedAudio]);
 
