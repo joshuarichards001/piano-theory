@@ -75,11 +75,12 @@ export default function Piano({ pianoScrollValue }: IProps) {
     }
 
     setHasUnblockedAudio(true);
-    const audio = new Audio("1-minute-of-silence.mp3");
+    const audio = document.createElement("audio");
     audio.setAttribute("x-webkit-airplay", "deny");
     audio.preload = "auto";
+    audio.src = "1-minute-of-silence.mp3";
     audio.loop = true;
-    audio.play().catch(error => {
+    audio.play().catch((error) => {
       console.error("Error playing audio:", error);
     });
     audioRef.current = audio;
@@ -95,16 +96,12 @@ export default function Piano({ pianoScrollValue }: IProps) {
   // Pause audio when the tab is not visible.
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        if (audioRef.current) {
-          audioRef.current.pause();
-        }
-      } else {
-        if (audioRef.current && isDeviceiOS()) {
-          audioRef.current.play().catch(error => {
-            console.error("Error playing audio:", error);
-          });
-        }
+      if (document.hidden && audioRef.current) {
+        audioRef.current.pause();
+      } else if (audioRef.current && isDeviceiOS()) {
+        audioRef.current.play().catch((error) => {
+          console.error("Error playing audio:", error);
+        });
       }
     };
 
