@@ -5,9 +5,9 @@ import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
-    setCurrentQuestionIndex,
-    setIsCompleted,
-    setScore,
+  setCurrentQuestionIndex,
+  setIsCompleted,
+  setScore,
 } from "../redux/slices/quizSlice";
 import Key from "./Key";
 
@@ -75,26 +75,41 @@ export default function Piano({ pianoScrollValue }: IProps) {
     }
 
     setHasUnblockedAudio(true);
-    const audio = document.createElement("audio");
+    const audio = new Audio("1-minute-of-silence.mp3");
     audio.setAttribute("x-webkit-airplay", "deny");
     audio.preload = "auto";
-    audio.src = "1-minute-of-silence.mp3";
     audio.loop = true;
-    audio.play();
+    audio.play().catch(error => {
+      console.error("Error playing audio:", error);
+    });
     audioRef.current = audio;
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
   }, [hasUnblockedAudio]);
-  
+
   // Pause audio when the tab is not visible.
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden && audioRef.current) {
-        audioRef.current.pause();
-        setHasUnblockedAudio(false);
+      if (document.hidden) {
+        if (audioRef.current) {
+          audioRef.current.pause();
+        }
+      } else {
+        if (audioRef.current && isDeviceiOS()) {
+          audioRef.current.play().catch(error => {
+            console.error("Error playing audio:", error);
+          });
+        }
       }
     };
-  
+
     document.addEventListener("visibilitychange", handleVisibilityChange);
-  
+
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
