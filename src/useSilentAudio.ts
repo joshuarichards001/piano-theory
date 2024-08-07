@@ -21,6 +21,7 @@ export function useSilentAudio() {
       if (document.hidden) {
         audio.pause();
       } else {
+        // TODO: this doesn't work for some unknown reason
         audio.play();
       }
     };
