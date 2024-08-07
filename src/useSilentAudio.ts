@@ -9,19 +9,25 @@ export function useSilentAudio() {
       return;
     }
 
-    hasRunRef.current = true;
-    const audio = document.createElement("audio");
-    audio.setAttribute("x-webkit-airplay", "deny");
-    audio.preload = "auto";
-    audio.src = "1-minute-of-silence.mp3";
-    audio.loop = true;
-    audio.play();
+    let audio: HTMLAudioElement | null = null;
+
+    const setupAudio = () => {
+      hasRunRef.current = true;
+      audio = document.createElement("audio");
+      audio.setAttribute("x-webkit-airplay", "deny");
+      audio.preload = "auto";
+      audio.src = "1-minute-of-silence.mp3";
+      audio.loop = true;
+      audio.play();
+    };
 
     const handleVisibilityChange = () => {
-      if (document.hidden) {
+      if (document.hidden && audio) {
         audio.pause();
+        audio.remove();
+        audio = null;
       } else {
-        audio.play();
+        setupAudio();
       }
     };
 
