@@ -10,7 +10,6 @@ import {
   setScore,
 } from "../redux/slices/quizSlice";
 import Key from "./Key";
-import { useSilentAudio } from "../useSilentAudio";
 
 interface IProps {
   pianoScrollValue: number;
@@ -30,9 +29,6 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
   const audioContext = useMemo(() => new AudioContext(), []);
-  
-  // Handles silent audio to enable audio for iOS.
-  useSilentAudio();
 
   // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {

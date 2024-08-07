@@ -7,6 +7,7 @@ import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import { resetQuiz } from "../redux/slices/quizSlice";
 import Quiz from "./Quiz";
 import QuizComplete from "./QuizComplete";
+import { useSilentAudio } from "../useSilentAudio";
 
 export default function QuizPage() {
   const dispatch = useAppDispatch();
@@ -17,6 +18,9 @@ export default function QuizPage() {
   const finalTime = useAppSelector((state) => state.quiz.finalTime);
   const currentQuestion = useAppSelector((state) => state.quiz.currentQuestion);
   const quizTypeData = QUIZ_TYPE_DATA_MAP.get(quizType);
+  
+  // Handles silent audio to enable audio for iOS.
+  useSilentAudio();
 
   const restartQuiz = useCallback(() => {
     const newQuiz = createQuiz(quizType);
