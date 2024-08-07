@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { OCTAVE, OCTAVE_LENGTH } from "../constants";
-import { getKeyState, isDeviceiOS, isFinishedQuestion } from "../functions";
+import { getKeyState, isFinishedQuestion } from "../functions";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { resetKeys } from "../redux/slices/pressedKeysSlice";
 import {
@@ -10,6 +10,7 @@ import {
   setScore,
 } from "../redux/slices/quizSlice";
 import Key from "./Key";
+import { useSilentAudio } from "../useSilentAudio";
 
 interface IProps {
   pianoScrollValue: number;
@@ -29,8 +30,9 @@ export default function Piano({ pianoScrollValue }: IProps) {
   const score = useAppSelector((state) => state.quiz.score);
   const pianoRef = useRef<HTMLDivElement>(null);
   const audioContext = useMemo(() => new AudioContext(), []);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [hasUnblockedAudio, setHasUnblockedAudio] = useState(false);
+  
+  // Handles silent audio to enable audio for iOS.
+  useSilentAudio();
 
   // Scroll the piano to the correct position when the piano minimap position changes.
   useEffect(() => {
@@ -67,37 +69,6 @@ export default function Piano({ pianoScrollValue }: IProps) {
     currentQuestionIndex,
     quizLength,
   ]);
-
-  // Unblocks audio on iOS devices.
-  useEffect(() => {
-    if (hasUnblockedAudio || !isDeviceiOS()) {
-      return;
-    }
-
-    setHasUnblockedAudio(true);
-    const audio = document.createElement("audio");
-    audio.setAttribute("x-webkit-airplay", "deny");
-    audio.preload = "auto";
-    audio.src = "1-minute-of-silence.mp3";
-    audio.loop = true;
-    audio.play();
-    audioRef.current = audio;
-  }, [hasUnblockedAudio]);
-
-  // Pause audio when the tab is not visible.
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden && audioRef.current) {
-        audioRef.current.pause();
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
 
   // Prevent scrolling on the piano because navigation is determined by the piano minimap.
   useEffect(() => {
