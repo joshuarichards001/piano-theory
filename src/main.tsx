@@ -17,8 +17,8 @@ Sentry.init({
   ],
   tracesSampleRate: 1.0,
   tracePropagationTargets: ["localhost", "https://pianotheory.app/"],
-  replaysSessionSampleRate: 0.1,
-  replaysOnErrorSampleRate: 1.0,
+  replaysSessionSampleRate: 0,
+  replaysOnErrorSampleRate: 0,
 });
 
 const router = createBrowserRouter([
