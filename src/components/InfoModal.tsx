@@ -53,6 +53,17 @@ export default function InfoModal() {
               Support the Project
             </a>
           </p>
+          <p className="mb-4">
+            Keep posted about{" "}
+            <a
+              className="link link-secondary"
+              href="https://new.pianotheory.app"
+              target="_blank"
+              rel="noreferrer"
+            >
+              New Piano App
+            </a>
+          </p>
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
