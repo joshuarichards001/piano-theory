@@ -42,7 +42,7 @@ export default function InfoModal() {
               Josh Richards
             </a>
           </p>
-          <p>
+          <p className="mb-4">
             Love Piano Theory?{" "}
             <a
               className="link link-secondary"
@@ -53,7 +53,7 @@ export default function InfoModal() {
               Support the Project
             </a>
           </p>
-          <p className="mb-4">
+          <p>
             Keep posted about{" "}
             <a
               className="link link-secondary"
