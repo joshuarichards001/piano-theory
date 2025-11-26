@@ -45,6 +45,20 @@ export default function QuizComplete() {
     isComplete,
   ]);
 
+  // Send analytics event to plausible.io
+  useEffect(() => {
+    if (window.plausible) {
+      window.plausible("Quiz Complete", {
+        props: {
+          quizType,
+          score,
+          numberOfQuestions,
+          finalTime,
+        },
+      });
+    }
+  }, [quizType, score, numberOfQuestions, finalTime]);
+
   return (
     <div className="card bg-base-200 my-28 mx-6 shadow-md">
       <div className="card-body">

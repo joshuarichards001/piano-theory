@@ -47,3 +47,15 @@ type QuizTypeData = {
 type KeyState = "correct-pressed" | "incorrect-pressed" | "not-pressed";
 
 type NoteQuality = "sharp" | "flat" | "natural" | "random";
+
+interface Window {
+  plausible: (
+    eventName: string,
+    options?: {
+      callback?: () => void;
+      props?: { [key: string]: string | number | boolean };
+      revenue?: { [key: string]: string | number | boolean };
+      interactive?: boolean;
+    },
+  ) => void;
+}
