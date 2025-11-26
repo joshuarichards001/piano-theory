@@ -48,14 +48,7 @@ export default function QuizComplete() {
   // Send analytics event to plausible.io
   useEffect(() => {
     if (window.plausible) {
-      window.plausible("Quiz Complete", {
-        props: {
-          quizType,
-          score,
-          numberOfQuestions,
-          finalTime,
-        },
-      });
+      window.plausible("Quiz Complete");
     }
   }, [quizType, score, numberOfQuestions, finalTime]);
 
