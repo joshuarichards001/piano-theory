@@ -1,4 +1,5 @@
 import * as Sentry from "@sentry/react";
+import { createClient } from "@supabase/supabase-js";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -20,6 +21,11 @@ Sentry.init({
   replaysSessionSampleRate: 0,
   replaysOnErrorSampleRate: 0,
 });
+
+export const supabase = createClient(
+  "https://tlaozeqydidueitmmxki.supabase.co",
+  "sb_publishable_K80nnNi6F52nPBW6hoOQ3g_utLTtme1",
+);
 
 const router = createBrowserRouter([
   {

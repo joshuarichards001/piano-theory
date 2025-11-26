@@ -5,6 +5,7 @@ import { setMute } from "../redux/slices/muteSlice";
 import { VolumeHighIcon, VolumeMuteIcon } from "./Icons";
 import InfoModal from "./InfoModal";
 import InstallModal from "./InstallModal";
+import QuestionModal from "./QuestionModal";
 
 export default function Home() {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ export default function Home() {
           </button>
           <InfoModal />
           <InstallModal />
+          <QuestionModal />
         </div>
       </header>
       <Outlet />
