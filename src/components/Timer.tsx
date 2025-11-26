@@ -14,7 +14,7 @@ export default function Timer() {
 
   // Increment the timer every second.
   useEffect(() => {
-    let timer: number | undefined;
+    let timer: ReturnType<typeof setInterval> | undefined;
     if (isTimerRunning) {
       timer = setInterval(() => {
         setTimer((prevTime) => prevTime + 1);
