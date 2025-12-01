@@ -1,4 +1,5 @@
 import { CloseIcon, InfoIcon } from "./Icons";
+import EmailSignupForm from "./EmailSignupForm";
 
 export default function InfoModal() {
   return (
@@ -53,17 +54,13 @@ export default function InfoModal() {
               Support the Project
             </a>
           </p>
-          <p>
-            Keep posted about{" "}
-            <a
-              className="link link-secondary"
-              href="https://new.pianotheory.app"
-              target="_blank"
-              rel="noreferrer"
-            >
-              New Piano App
-            </a>
+          <div className="divider"></div>
+          <h3 className="text-lg font-bold mb-2">Join the Piano Theory Native App Waitlist</h3>
+          <p className="mb-2 text-base-content/70">
+            Sign up to get notified about the new app!
           </p>
+          <a href="https://new.pianotheory.app" className="link link-secondary mb-4" target="_blank" rel="noopener noreferrer">Or check out the website here</a>
+          <EmailSignupForm />
         </div>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
